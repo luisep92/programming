@@ -32,6 +32,13 @@ namespace Exercises
                 return double.NaN;
             return b * h;
         }
-      //  public static double VectorDistance()
+        public static double VectorDistance(Vector3 a, Vector3 b)
+        {
+            double distX = a.x - b.x;
+            double distY = a.y - b.y;
+            double distZ = a.z - b.z;
+
+            return Math.Sqrt(distX*distX + distY*distY + distZ*distZ);
+        }
     }
 }

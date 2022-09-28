@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.GetAreaCircle(6));
+            Console.WriteLine(Convert.ToDouble(Exercises.VectorDistance(new Vector3(1, 1, 1), new Vector3(2, 2, 2))));
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Exercises
 {
     internal class Vector3
     {
-        double x;
-        double y;
-        double z;
+        public double x;
+        public double y;
+        public double z;
 
         public Vector3(double a, double b, double c)
         {
