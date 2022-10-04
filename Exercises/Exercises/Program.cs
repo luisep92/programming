@@ -10,8 +10,7 @@ namespace Exercises
         
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.IsEmail("rg@a.f.f"));
-                
+            Console.WriteLine(Exercises.SumDigits(1322323523));
         }
     }
     
