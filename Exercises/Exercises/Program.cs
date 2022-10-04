@@ -1,5 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Net.Mail;
+using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
+using System.Security.Cryptography;
 
 namespace Exercises
 {
@@ -8,10 +10,8 @@ namespace Exercises
         
         static void Main(string[] args)
         {
-            if (Exercises.isBetweenChars('f', 'z', 'b'))
-                Console.WriteLine("T");
-            else
-                Console.WriteLine("F");
+            Console.WriteLine(Exercises.IsEmail("rg@a.f.f"));
+                
         }
     }
     

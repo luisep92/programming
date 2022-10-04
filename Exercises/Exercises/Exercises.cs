@@ -72,12 +72,88 @@ namespace Exercises
             return a;
         }
 
+        //Comprobar que la letra este entre 2 valores ASCII
         public static bool isBetweenChars(char a, char b, char c)
         {
-            if (a >= Math.Min(b,c) && a <= Math.Max(b,c))
-                return true;
+            return a >= Math.Min(b, c) && a <= Math.Max(b, c);
+        }
+        //Devuelve el numero de caracteres (c) que tiene un texto
+        public static int GetNumberOf(string text, char c)
+        {
+            int counter = 0;
+
+            for(int i = 0; i < text.Length; i++)
+            {
+                if (text[i] == c)
+                    counter++;
+            }
+            return counter;
+        }
+        //Comprueba el caso de .., @., .@
+        public static bool ContainsBadSyntax(string text)
+        {
+            return text.Contains("..") || 
+                   text.Contains("@.") ||
+                   text.Contains(".@");
+        }
+        //Comprueba caracteres especiales excepto numeros, "_", "." y "@"
+        public static bool ContainsNotValidCharacters(string text)
+        {
+            for(int i = 0; i < text.Length; i++)
+            {
+                if (!isBetweenChars(text[i],'a', 'z') && 
+                    !isBetweenChars(text[i],'0','9') &&
+                    !isBetweenChars(text[i],'A','Z') &&
+                     text[i] != '@' && text[i] != '.' && text[i] != '_')
+                {
+                    return true;
+                }
+            }
             return false;
         }
+        //comprueba que no empiece o acabe con un caracter en concreto (c)
+        public static bool StartOrEndWith(string text, char c)
+        {
+            return text[0] == c || text[text.Length - 1] == c;
+        }
 
+        //comprueba que despues de la @ hay un punto
+        public static bool HaveDotAfterAtSign(string text)
+        {
+            bool gotAtSign = false;
+
+            for(int i = 0; i < text.Length; i++)
+            {
+                if (text[i] == '@')
+                    gotAtSign = true;
+
+                if (gotAtSign && text[i] == '.')
+                    return true;
+            }
+            return false;
+        }
+        //comprueba que no es demasiado largo
+        public static bool IsTooLarge(string text, int quantity)
+        {
+            return text.Length >= quantity;
+        }
+        //la vaina
+        public static bool IsEmail(string mail)
+        {
+            if (GetNumberOf(mail, '@') != 1)
+                return false;
+            if (ContainsBadSyntax(mail))
+                return false;
+            if (ContainsNotValidCharacters(mail))
+                return false;
+            if (StartOrEndWith(mail, '@') || StartOrEndWith(mail, '.'))
+                return false;
+            if (!HaveDotAfterAtSign(mail))
+                return false;
+            if (IsTooLarge(mail, 80))
+                return false;
+
+            return true;
+        }
     }
 }
