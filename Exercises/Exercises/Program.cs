@@ -8,7 +8,7 @@ namespace Exercises
         
         static void Main(string[] args)
         {
-            if (Exercises.isBetweenChars('a', 'z', 'b'))
+            if (Exercises.isBetweenChars('f', 'z', 'b'))
                 Console.WriteLine("T");
             else
                 Console.WriteLine("F");

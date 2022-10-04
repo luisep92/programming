@@ -76,8 +76,8 @@ namespace Exercises
         {
             if (a >= Math.Min(b,c) && a <= Math.Max(b,c))
                 return true;
-            else 
-                return false;
+            return false;
         }
+
     }
 }
