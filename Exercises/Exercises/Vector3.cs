@@ -28,5 +28,9 @@ namespace Exercises
 
             return Math.Sqrt(distX * distX + distY * distY + distZ * distZ);
         }
+        public static double Magnitude(Vector3 a)
+        {
+            return Math.Sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+        }
     }
 }

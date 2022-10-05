@@ -7,11 +7,8 @@ namespace Exercises
 {
     internal class Program
     {
-        
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.SumDigits(1322323523));
         }
     }
-    
 }
