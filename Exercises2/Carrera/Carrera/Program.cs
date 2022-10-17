@@ -4,7 +4,15 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Racer winner = null;
+            List<Racer> list = Race.generateRacers();
+
+            while(winner == null)
+            {
+                Race.MoveRacers(list);
+                winner = Race.CheckWinner(list);
+            }
+            Console.WriteLine(winner.name + " es el ganador");
         }
     }
 }

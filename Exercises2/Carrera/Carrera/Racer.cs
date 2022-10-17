@@ -11,13 +11,9 @@ namespace Carrera
         public string name;
         public double position;
 
-        public void Move(int quantity)
+        public void Move()
         {
-            Random r = new Random();
-            position += quantity + r.Next(0,3) * Race.RandomNegativeOrPositive();
+            position +=  10;
         }
-
-
-        
     }
 }

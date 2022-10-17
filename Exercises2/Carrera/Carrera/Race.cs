@@ -8,25 +8,40 @@ namespace Carrera
 {
     internal class Race
     {
-        public static List<Racer> generateRacers(int n)
+        public static List<Racer> generateRacers()
         {
             List<Racer> list = new List<Racer> ();
-            
-           // n Racer racer1
 
+            
+            list.Add(NewRacer("Pepe"));
+            list.Add(NewRacer("Antonio"));
+            list.Add(NewRacer("Jose"));
 
             return list;
         }
 
-
-
-        public static int RandomNegativeOrPositive()
+        public static Racer NewRacer(string name)
         {
-            Random r = new Random();
-
-            if (r.Next(0, 1) == 0)
-                return -1;
-            return 1;
+            Racer r = new Racer();
+            r.name = name;
+            r.position = 0;
+            return r;
+        }
+        public static Racer CheckWinner(List<Racer> list)
+        {
+            foreach (Racer r in list)
+            {
+                if (r.position >= 1000)
+                    return r;
+            }
+            return null;
+        }
+        public static void MoveRacers(List<Racer> list)
+        {
+            foreach(Racer r in list)
+            {
+                r.Move();
+            }
         }
     }
 }
