@@ -11,20 +11,22 @@ namespace Carrera
         public static List<Racer> generateRacers()
         {
             List<Racer> list = new List<Racer> ();
-
             
-            list.Add(NewRacer("Pepe"));
-            list.Add(NewRacer("Antonio"));
-            list.Add(NewRacer("Jose"));
+            list.Add(NewRacer("Pepe", RacerType.MARATHON));
+            list.Add(NewRacer("Antonio", RacerType.THIEF));
+            list.Add(NewRacer("Jose", RacerType.SPEEDSTER));
 
             return list;
         }
 
-        public static Racer NewRacer(string name)
+        public static Racer NewRacer(string name, RacerType type)
         {
             Racer r = new Racer();
+
             r.name = name;
             r.position = 0;
+            r.type = type;
+
             return r;
         }
         public static Racer CheckWinner(List<Racer> list)
