@@ -12,23 +12,13 @@ namespace Carrera
         {
             List<Racer> list = new List<Racer> ();
             
-            list.Add(NewRacer("Pepe", RacerType.MARATHON));
-            list.Add(NewRacer("Antonio", RacerType.THIEF));
-            list.Add(NewRacer("Jose", RacerType.SPEEDSTER));
+            list.Add(Racer.NewRacer("Pepe", RacerType.MARATHON));
+            list.Add(Racer.NewRacer("Antonio", RacerType.THIEF));
+            list.Add(Racer.NewRacer("Jose", RacerType.SPEEDSTER));
 
             return list;
         }
-
-        public static Racer NewRacer(string name, RacerType type)
-        {
-            Racer r = new Racer();
-
-            r.name = name;
-            r.position = 0;
-            r.type = type;
-
-            return r;
-        }
+        
         public static Racer CheckWinner(List<Racer> list)
         {
             foreach (Racer r in list)

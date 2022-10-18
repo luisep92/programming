@@ -8,7 +8,7 @@ namespace Carrera
 {
     internal class Utils
     {
-        public static Random random = new Random();
+        private static Random random = new Random();
 
         public static double RandomRange(double min, double max)
         {

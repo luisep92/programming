@@ -27,9 +27,19 @@ namespace Carrera
                     position += Utils.RandomRange(5, 15.5f);
                     break;
                 default:
-                    Console.WriteLine("ERROR CON EL TIPO DEL CORREDOR");
+                    Console.WriteLine("ERROR CON EL TIPO DEL CORREDOR " + this.name);
                     break;
             }
+        }
+        public static Racer NewRacer(string name, RacerType type)
+        {
+            Racer r = new Racer();
+
+            r.name = name;
+            r.position = 0;
+            r.type = type;
+
+            return r;
         }
     }
 }
