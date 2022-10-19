@@ -9,7 +9,7 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Exercises.CalculateMCD(12, 24));
         }
     }
-    
 }

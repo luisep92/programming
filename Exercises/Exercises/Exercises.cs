@@ -167,5 +167,41 @@ namespace Exercises
             return sum;
         }
      
+        //hacer una funcion que devuelva el productorio de un numero
+        public static int CalculateProductory(int n)
+        {
+            int result = 1;
+
+            if (n < 1)
+                return 0;
+
+            for(int i = 2; i <= n; i++)
+            {
+                result *= i;
+            }
+            return result;
+        }
+
+        public static int CalculateMCD(int a, int b)
+        {
+            if (a <= 0 || b <= 0)
+                return -1;
+
+            for (int i = GetMinor(a,b); i > 0; i--)
+            {
+                if(a % i == 0 && b % i == 0)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public static int GetMinor(int a, int b)
+        {
+            if (a <= b)
+                return a;
+            return b;
+        }
     }
 }
