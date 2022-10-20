@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography;
@@ -9,7 +10,7 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.CalculateMCD(12, 24));
+            Console.WriteLine(Exercises.CalculateProductoryRecursive(7));
         }
     }
 }

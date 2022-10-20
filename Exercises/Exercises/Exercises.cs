@@ -182,6 +182,13 @@ namespace Exercises
             return result;
         }
 
+        public static int CalculateProductoryRecursive(int n)
+        {
+            if (n < 1)
+                return 1;
+            return n * CalculateProductoryRecursive(n - 1);
+        }
+
         public static int CalculateMCD(int a, int b)
         {
             if (a <= 0 || b <= 0)
