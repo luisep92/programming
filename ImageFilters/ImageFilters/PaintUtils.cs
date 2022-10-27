@@ -61,6 +61,133 @@ namespace ImageFilters
             return outputImg;
         }
 
+        public static Image RotateHue(Image img, double hueInc)
+        {
+            Image outputImg = new Image();
+            outputImg.Config(img.Width, img.Height);
+
+            for(int i = 0; i < outputImg.Width; i++)
+            {
+                for(int j = 0; j < outputImg.Height; j++)
+                {
+                    RGBA rgbColor = img.GetPixelAt(i, j);
+                    HSLA hslColor = rgbColor.ToHSL();
+                    hslColor.h += hueInc;
+                    hslColor.h = Circular(hslColor.h, 0, 1);
+                    rgbColor = hslColor.ToRGBA();
+                    outputImg.SetPixel(i, j, rgbColor);
+                }
+            }
+            return outputImg;
+        }
+        public static Image RotateSelectedHue(Image img, double hueInc, double minVal, double maxVal)
+        {
+            Image outputImg = new Image();
+            outputImg.Config(img.Width, img.Height);
+
+            for (int i = 0; i < outputImg.Width; i++)
+            {
+                for (int j = 0; j < outputImg.Height; j++)
+                {
+                    RGBA rgbColor = img.GetPixelAt(i, j);
+                    HSLA hslColor = rgbColor.ToHSL();
+
+                    if(hslColor.h > minVal && hslColor.h < maxVal)
+                    {
+                        hslColor.h += hueInc;
+                        hslColor.h = Circular(hslColor.h, 0, 1);
+                        rgbColor = hslColor.ToRGBA();
+                        outputImg.SetPixel(i, j, rgbColor);
+                    }
+                    
+                }
+            }
+            return outputImg;
+        }
+
+        public static Image Discretize(Image img, double hueMin, double hueMax)
+        {
+            Image outputImg = new Image();
+            outputImg.Config(img.Width, img.Height);
+
+            for (int i = 0; i < outputImg.Width; i++)
+            {
+                for (int j = 0; j < outputImg.Height; j++)
+                {
+                    RGBA rgbColor = img.GetPixelAt(i, j);
+                    HSLA hslColor = rgbColor.ToHSL();
+
+                    if (hslColor.h > hueMin && hslColor.h < hueMax)
+                        hslColor.l = 1;
+                    else
+                        hslColor.l = 0;
+
+                    rgbColor = hslColor.ToRGBA();
+                    outputImg.SetPixel(i, j, rgbColor);
+                }
+            }
+            return outputImg;
+        }
+
+        public static Image Blur(Image inputImg)
+        {
+            Image outputImg = new Image();
+            outputImg.Config(inputImg.Width,inputImg.Height);
+
+            for(int i = 0; i < inputImg.Width; i++)
+            {
+                for(int j = 0; j < inputImg.Height; j++)
+                {
+                    RGBA color = AverageColor(inputImg, i, j);
+                    outputImg.SetPixel(i, j, color);
+                }
+            }
+            return outputImg;
+        }
+
+        public static RGBA AverageColor(Image img, int x, int y)
+        {
+           
+            RGBA avgColor = new RGBA(0,0,0,0);
+
+
+            for(int i = x - 1; i <= x+1; i++)
+            {
+                for(int j = y- 1; j <= y+1; j++)
+                {
+                    avgColor = SumColors(avgColor, img.GetPixelAt(i, j));
+                }
+            }
+            
+            return DivideColor(avgColor,9);
+        }
+
+        public static double Circular(double n, double min, double max)
+        {
+            double range = max - min;
+
+            if (n > max)
+                return Circular(n - range, min, max);
+            if (n < min)
+                return Circular(n + range, min, max);
+            return n;
+        }
+
+        public static double Circular2(double n, double min, double max)
+        {
+            double range = max - min;
+
+            while (n < min)
+            {
+                n += range;
+            }
+            while (n > max)
+            {
+                n -= range;
+            }
+            return n;
+        }
+
         public static RGBA MultiplyColors(RGBA c1, RGBA c2)
         {
             RGBA output = new RGBA();
@@ -70,6 +197,25 @@ namespace ImageFilters
             output.a = c1.a * c2.a;
 
             return output;
+        }
+
+        public static RGBA SumColors(RGBA c1, RGBA c2)
+        {
+            RGBA color = new RGBA();
+            color.r = c1.r + c2.r;
+            color.g = c1.g + c2.g;
+            color.b = c1.b + c2.b;
+            color.a = c1.a + c2.a;
+            return color;
+        }
+
+        public static RGBA DivideColor(RGBA color, double value)
+        {
+            color.r /= value;
+            color.g /= value;
+            color.b /= value;
+            color.a /= value;
+            return color;
         }
 
         public static RGBA ColorToGrayScale(RGBA color)

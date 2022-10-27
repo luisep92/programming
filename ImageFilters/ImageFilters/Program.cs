@@ -6,7 +6,7 @@ namespace ImageFilters
     {
         static void Main(string[] args)
         {
-            Test3();
+            Test8();
         }
         static void Test2()
         {
@@ -44,6 +44,43 @@ namespace ImageFilters
             img.Load(path + "pepe.jpg");
             img = PaintUtils.FlipImageFilter(img);
             img.Save(path + "pepe4.jpg");
+        }
+        public static void Test5()
+        {
+            string path = "C:\\Users\\Luis\\Desktop\\Images\\";
+
+            Image img = new Image();
+            img.Load(path + "coche.jpg");
+            img = PaintUtils.RotateHue(img, 0.5);
+            img.Save(path + "coche2.jpg");
+        }
+        public static void Test6()
+        {
+            string path = "C:\\Users\\Luis\\Desktop\\Images\\";
+
+            Image img = new Image();
+            img.Load(path + "coche2.jpg");
+            img = PaintUtils.Discretize(img, 0.4, 0.6);
+            img.Save(path + "coche3.jpg");
+        }
+        public static void Test7()
+        {
+            string path = "C:\\Users\\Luis\\Desktop\\Images\\";
+
+            Image img = new Image();
+            img.Load(path + "coche.jpg");
+            RGBA color = PaintUtils.AverageColor(img, 666, 555);
+            Console.WriteLine(color.r.ToString() + " " + color.g.ToString() + " " + color.b.ToString() + " " + color.a.ToString());
+            
+        }
+        public static void Test8()
+        {
+            string path = "C:\\Users\\Luis\\Desktop\\Images\\";
+
+            Image img = new Image();
+            img.Load(path + "coche.jpg");
+            img = PaintUtils.Blur(img);
+            img.Save(path + "cocheblur.jpg");
         }
     }
 }

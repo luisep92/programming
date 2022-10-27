@@ -210,5 +210,48 @@ namespace Exercises
                 return a;
             return b;
         }
+
+        public static int Saturate(int n, int min, int max)
+        {
+            if (n < min)
+                return min;
+            if(max < n)
+                return max;
+            return n;
+        }
+        public static double Circular(double n, double min, double max)
+        {
+            double range = max - min;
+
+            if(n > max)
+                return Circular(n - range, min, max);
+            if (n < min)
+                return Circular(n + range, min, max);
+            return n ;
+        }
+
+        public static double Circular2(double n, double min, double max)
+        {
+            double range = max - min;
+
+            while(n < min)
+            {
+                n += range;
+            }
+            while(n > max)
+            {
+                n -= range;
+            }
+            return n;
+        }
+
+        public static double Lerp(double t, double min, double max)
+        {
+            return min + (max - min) * t;
+        }
+        public static double ULerp(double val, double min, double max)
+        {
+            return (val-min)/(max-min);
+        }
     }
 }

@@ -235,7 +235,7 @@ namespace DAM
                 return;
             pixels[y * width + x] = value;
         }
-
+        
         public void Save(string path)
         {
             using (Bitmap bm = new Bitmap(Width, Height))

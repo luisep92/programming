@@ -10,7 +10,7 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.CalculateProductoryRecursive(7));
+            Console.WriteLine(Exercises.ULerp(6,2,10));
         }
     }
 }
