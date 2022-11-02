@@ -3,6 +3,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Audio.OpenAL;
+using El_raton_y_el_gato;
 
 namespace DAM
 {
@@ -126,6 +127,7 @@ void main(void)
             PrepareShader(mRectangleBuffer, r, g, b, a);
             GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
         }
+       
 
         public void Clear(float r, float g, float b, float a)
         {
