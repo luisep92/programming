@@ -37,7 +37,7 @@ namespace Exercises
         {
             string result = "";
 
-            for(int i = 1; i <= n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 if (isPrime(i))
                 {
@@ -53,7 +53,7 @@ namespace Exercises
             string result = "0";
             int a = 0, b = 1, t = 0;
 
-            while(a+b <= n)
+            while (a + b <= n)
             {
                 t = a;
                 a = a + b;
@@ -65,7 +65,7 @@ namespace Exercises
         }
         public static string SeparateCharacters(string a)
         {
-            for(int i = 1; i < a.Length; i+= 2)
+            for (int i = 1; i < a.Length; i += 2)
             {
                 a = a.Insert(i, "-");
             }
@@ -82,7 +82,7 @@ namespace Exercises
         {
             int counter = 0;
 
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == c)
                     counter++;
@@ -92,18 +92,18 @@ namespace Exercises
         //Comprueba el caso de .., @., .@
         public static bool ContainsBadSyntax(string text)
         {
-            return text.Contains("..") || 
+            return text.Contains("..") ||
                    text.Contains("@.") ||
                    text.Contains(".@");
         }
         //Comprueba caracteres especiales excepto numeros, "_", "." y "@"
         public static bool ContainsNotValidCharacters(string text)
         {
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                if (!isBetweenChars(text[i],'a', 'z') && 
-                    !isBetweenChars(text[i],'0','9') &&
-                    !isBetweenChars(text[i],'A','Z') &&
+                if (!isBetweenChars(text[i], 'a', 'z') &&
+                    !isBetweenChars(text[i], '0', '9') &&
+                    !isBetweenChars(text[i], 'A', 'Z') &&
                      text[i] != '@' && text[i] != '.' && text[i] != '_')
                 {
                     return true;
@@ -122,7 +122,7 @@ namespace Exercises
         {
             bool gotAtSign = false;
 
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == '@')
                     gotAtSign = true;
@@ -159,14 +159,14 @@ namespace Exercises
         {
             int sum = 0;
 
-            while(n > 0)
+            while (n > 0)
             {
                 sum += n % 10;
                 n /= 10;
             }
             return sum;
         }
-     
+
         //hacer una funcion que devuelva el productorio de un numero
         public static int CalculateProductory(int n)
         {
@@ -175,7 +175,7 @@ namespace Exercises
             if (n < 1)
                 return 0;
 
-            for(int i = 2; i <= n; i++)
+            for (int i = 2; i <= n; i++)
             {
                 result *= i;
             }
@@ -194,9 +194,9 @@ namespace Exercises
             if (a <= 0 || b <= 0)
                 return -1;
 
-            for (int i = GetMinor(a,b); i > 0; i--)
+            for (int i = GetMinor(a, b); i > 0; i--)
             {
-                if(a % i == 0 && b % i == 0)
+                if (a % i == 0 && b % i == 0)
                 {
                     return i;
                 }
@@ -215,7 +215,7 @@ namespace Exercises
         {
             if (n < min)
                 return min;
-            if(max < n)
+            if (max < n)
                 return max;
             return n;
         }
@@ -223,22 +223,22 @@ namespace Exercises
         {
             double range = max - min;
 
-            if(n > max)
+            if (n > max)
                 return Circular(n - range, min, max);
             if (n < min)
                 return Circular(n + range, min, max);
-            return n ;
+            return n;
         }
 
         public static double Circular2(double n, double min, double max)
         {
             double range = max - min;
 
-            while(n < min)
+            while (n < min)
             {
                 n += range;
             }
-            while(n > max)
+            while (n > max)
             {
                 n -= range;
             }
@@ -251,7 +251,151 @@ namespace Exercises
         }
         public static double ULerp(double val, double min, double max)
         {
-            return (val-min)/(max-min);
+            return (val - min) / (max - min);
         }
+
+        public static (double minor, double major) GetMinorAndMajor(double a, double b)
+        {
+            if (a < b)
+                return (a, b);
+            return (b, a);
+        }
+        public static double Compare(double a, double b)
+        {
+            if (a > b)
+                return -1;
+            if (a == b)
+                return 0;
+            return 1;
+        }
+        public static string ToBinary(int n)
+        {
+            string result = "";
+            while (n > 0)
+            {
+                result = (n % 2) + result;
+                n /= 2;
+            }
+            return result;
+        }
+        public static char ToMayus(char c)
+        {
+            string s = c.ToString();
+            s = s.ToUpper();
+            return s[0];
+        }
+        public static double GetAverage(double a, double b)
+        {
+            return (a + b) * 0.5;
+        }
+        public static string ToMorse(string s)
+        {
+            string result = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == 'a' || s[i] == 'A')
+                    result += "·-";
+                else if (s[i] == 'b' || s[i] == 'B')
+                    result += "-···";
+                else if (s[i] == 'c' || s[i] == 'C')
+                    result += "-·-·";
+            }
+            return result;
+        }
+        public static void PrintMuntiplyTable(int n)
+        {
+            for (int i = 0; i < 13; i++)
+            {
+                Console.WriteLine(n + " x " + i + " = " + n * i);
+            }
+        }
+        public static string JaviAlgorythm(int n)
+        {
+            string result = "";
+            int num = -1;
+
+            for (int i = 0; i < n; i++)
+            {
+                result += num;
+                num *= -2;
+
+                if (i != n - 1)
+                    result += ",";
+            }
+            return result;
+        }
+        public static double SumPrimesBetween(int a, int b)
+        {
+            int result = 0;
+
+            for (int i = a; i <= b; i++)
+            {
+                if (isPrime(i))
+                {
+                    result += i;
+                }
+            }
+            return result;
+        }
+        public static string DiscomposePrimeMults(int n)
+        {
+            string result = "";
+
+            for (int i = 2; i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    result += i + "·";
+                    n /= i;
+                    i = 1;
+                }
+            }
+            return result;
+        }
+
+        public static string CollatzSequence(int n)
+        {
+            string result = "";
+            while (n != 1)
+            {
+                result += n + ",";
+                if (isEven(n))
+                    n /= 2;
+                else
+                    n = n * 3 + 1;
+            }
+            return result + "1";
+        }
+        public static (int num, int denom) SimplifyFraction(int n, int d)
+        {
+            int max = GetMinor(n, d) / 2;
+            for (int i = 2; i <= max; i++)
+            {
+                if (n % i == 0 && d % i == 0)
+                {
+                    n /= i;
+                    d /= i;
+                    i--;
+                }
+            }
+            return (n, d);
+        }
+
+        /*try{
+        codigo potencialmente petable
+       }
+        catch
+        {
+            codigo a ejecutar si peta
+        ejemplo
+            Console.Writeline("NO VA" + e.Message);
+            return;
+        }
+        finally
+        {
+            codigo que se ejecuta si o si
+        }
+
+         */
     }
 }

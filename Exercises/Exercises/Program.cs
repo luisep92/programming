@@ -10,7 +10,8 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Exercises.ULerp(6,2,10));
+            
+           Console.WriteLine(Exercises.SimplifyFraction(8,16));
         }
     }
 }
