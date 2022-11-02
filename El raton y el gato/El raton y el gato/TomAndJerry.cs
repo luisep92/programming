@@ -41,8 +41,8 @@ namespace El_raton_y_el_gato
         {
             List<Character> list = new List<Character>();
 
-            list.Add(new Character(Type.CAT, new Vector2(-1f, -0.2f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1)));
-            list.Add(new Character(Type.RAT, new Vector2(0.6f, -0.2f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1)));
+            list.Add(new Character(Type.CAT, new Vector2(-1f, 0f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1)));
+            list.Add(new Character(Type.RAT, new Vector2(1, 0f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1)));
 
             return list;
         }

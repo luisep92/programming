@@ -19,6 +19,8 @@ namespace El_raton_y_el_gato
         {
             Type = type;
             this.position = position;
+            this.position.x = this.position.x - scale.x / 2;
+            this.position.y = this.position.y - scale.y / 2;
             this.scale = scale;
             this.color = color;
         }
