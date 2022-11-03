@@ -27,6 +27,28 @@ namespace El_raton_y_el_gato
             this.speed = speed;
         }
 
+        public Character()
+        {
+
+        }
+
+        public static Character NewChar(Type type, float x, float y, float width, float height, float r, float g, float b, float a, float speed)
+        {
+            Character c = new Character();
+            c.Type = type;
+            c.position.x = x - width/2;
+            c.position.y = y - height/2;
+            c.scale.x = width;
+            c.scale.y = height;
+            c.color.r = r;
+            c.color.g = g;
+            c.color.b = b;
+            c.color.a = a;
+            c.speed = speed;
+
+            return c;
+        }
+
         public void Move()
         {
             if (Type == Type.CAT)
