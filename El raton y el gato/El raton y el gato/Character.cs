@@ -20,8 +20,8 @@ namespace El_raton_y_el_gato
         {
             Type = type;
             this.position = position;
-            this.position.x = this.position.x - scale.x / 2;
-            this.position.y = this.position.y - scale.y / 2;
+            this.position.x = this.position.x;
+            this.position.y = this.position.y;
             this.scale = scale;
             this.color = color;
             this.speed = speed;
@@ -36,8 +36,8 @@ namespace El_raton_y_el_gato
         {
             Character c = new Character();
             c.Type = type;
-            c.position.x = x - width/2;
-            c.position.y = y - height/2;
+            c.position.x = x;
+            c.position.y = y;
             c.scale.x = width;
             c.scale.y = height;
             c.color.r = r;
@@ -49,12 +49,60 @@ namespace El_raton_y_el_gato
             return c;
         }
 
-        public void Move()
+        public void DrawCharacter(ICanvas canvas)
         {
-            if (Type == Type.CAT)
-                this.position.x += 0.001f * speed;
-            else
-                this.position.x -= 0.001f * speed;
+            canvas.FillRectangle(
+                this.position.x - this.scale.x/2,
+                this.position.y - this.scale.y/2,
+                this.scale.x,
+                this.scale.y,
+                (float)this.color.r,
+                (float)this.color.g,
+                (float)this.color.b,
+                (float)this.color.a);
         }
+
+        void LimitMovement()
+        {
+            if (this.position.x > 1 - this.scale.x/2)
+                this.position.x = 1 - this.scale.x/2;
+            if (this.position.x < -1 + this.scale.x / 2)
+                this.position.x = -1 + this.scale.x / 2;
+            if (this.position.y > 1 - this.scale.y / 2)
+                this.position.y = 1 - this.scale.y / 2;
+            if (this.position.y  < -1 + this.scale.y / 2)
+                this.position.y = -1 + this.scale.y / 2;
+        }
+        void MovePosition(IKeyboard keyboard)
+        {
+            if (this.Type == Type.CAT)
+            {
+                if (keyboard.IsKeyDown(Keys.Left))
+                    this.position.x -= 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.Right))
+                    this.position.x += 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.Up))
+                    this.position.y += 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.Down))
+                    this.position.y -= 0.0001f * speed;
+            }
+            else
+            {
+                if (keyboard.IsKeyDown(Keys.A))
+                    this.position.x -= 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.D))
+                    this.position.x += 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.W))
+                    this.position.y += 0.0001f * speed;
+                if (keyboard.IsKeyDown(Keys.S))
+                    this.position.y -= 0.0001f * speed;
+            }
+        }
+        public void Move(IKeyboard keyboard)
+        {
+           MovePosition(keyboard);
+           LimitMovement();
+        }
+        
     }
 }

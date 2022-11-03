@@ -1,4 +1,6 @@
 ﻿using DAM;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +14,24 @@ namespace El_raton_y_el_gato
     {
         public List<Character> characterList;
         
-        public void OnDraw(ICanvas canvas)
+        public void OnDraw(ICanvas canvas) //cada frame
         {
-            canvas.Clear(0, 0, 0, 1);
+            canvas.Clear(0.15f, 0.15f, 0.40f, 1);
             DrawCharacters(characterList, canvas);
         }
 
-        public void OnKeyboard(IWindow window, IKeyboard keyboard, IMouse mouse)
+        public void OnKeyboard(IWindow window, IKeyboard keyboard, IMouse mouse) //cada frame
         {
-            
+            MoveCharacters(keyboard);
         }
 
-        public void OnLoad()
+
+        public void OnLoad() //al iniciar la aplicacion
         {
             characterList = CreateCharacters();
         }
 
-        public void OnUnload()
+        public void OnUnload() //al cerrar la aplicacion
         {
             
         }
@@ -37,30 +40,25 @@ namespace El_raton_y_el_gato
         {
             List<Character> list = new List<Character>();
 
-            list.Add(new Character(Type.CAT, new Vector2(-1f, 0f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1), 2f));
-            list.Add(new Character(Type.RAT, new Vector2(1, 0f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1), 2f));
+            list.Add(new Character(Type.CAT, new Vector2(-1f, -0.5f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1), 2f));
+            list.Add(new Character(Type.RAT, new Vector2(1, 0.5f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1), 4f));
 
             return list;
         }
 
-        public void DrawCharacter(Character c, ICanvas canvas)
-        {
-            canvas.FillRectangle(
-                c.position.x, 
-                c.position.y, 
-                c.scale.x, 
-                c.scale.y, 
-                (float)c.color.r, 
-                (float)c.color.g, 
-                (float)c.color.b, 
-                (float)c.color.a);
-        }
+        
         public void DrawCharacters(List<Character> list, ICanvas canvas)
         {
             foreach (Character c in list)
             {
-                DrawCharacter(c, canvas);
-                c.Move();
+                c.DrawCharacter(canvas);
+            }
+        }
+        public void MoveCharacters(IKeyboard keyboard)
+        {
+            foreach (Character c in characterList)
+            {
+                c.Move(keyboard);
             }
         }
     }
