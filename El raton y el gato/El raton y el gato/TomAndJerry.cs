@@ -15,11 +15,7 @@ namespace El_raton_y_el_gato
         public void OnDraw(ICanvas canvas)
         {
             canvas.Clear(0, 0, 0, 1);
-            foreach(Character c in characterList)
-            {
-                DrawCharacter(c, canvas);
-                c.Move();
-            }
+            DrawCharacters(characterList, canvas);
         }
 
         public void OnKeyboard(IWindow window, IKeyboard keyboard, IMouse mouse)
@@ -41,8 +37,8 @@ namespace El_raton_y_el_gato
         {
             List<Character> list = new List<Character>();
 
-            list.Add(new Character(Type.CAT, new Vector2(-1f, 0f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1)));
-            list.Add(new Character(Type.RAT, new Vector2(1, 0f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1)));
+            list.Add(new Character(Type.CAT, new Vector2(-1f, 0f), new Vector2(0.4f, 0.4f), new RGBA(1, 0, 0, 1), 2f));
+            list.Add(new Character(Type.RAT, new Vector2(1, 0f), new Vector2(0.4f, 0.4f), new RGBA(0, 1, 0, 1), 2f));
 
             return list;
         }
@@ -58,6 +54,14 @@ namespace El_raton_y_el_gato
                 (float)c.color.g, 
                 (float)c.color.b, 
                 (float)c.color.a);
+        }
+        public void DrawCharacters(List<Character> list, ICanvas canvas)
+        {
+            foreach (Character c in list)
+            {
+                DrawCharacter(c, canvas);
+                c.Move();
+            }
         }
     }
 }
