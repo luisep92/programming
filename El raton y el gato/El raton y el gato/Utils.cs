@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using static El_raton_y_el_gato.TomAndJerry;
+using static El_raton_y_el_gato.World;
 
 namespace El_raton_y_el_gato
 {

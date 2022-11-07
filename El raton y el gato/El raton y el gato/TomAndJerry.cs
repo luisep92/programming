@@ -8,28 +8,13 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static El_raton_y_el_gato.World;
 
 namespace El_raton_y_el_gato
 {
     internal class TomAndJerry : IGameDelegate
     {
         public List<Character> characterList;
-
-
-        #region STATIC
-        public static float AspectRatio()
-        {
-            return Utils.AspectRatio(800, 600);
-        }
-        public static Vector2 Dimensions()
-        {
-            return new Vector2(20, 20 / AspectRatio());
-        }
-        public static float Meter(float axis)
-        {
-            return (1f / (axis / 2f));
-        }
-        #endregion
 
         #region DELEGATES
         public void OnDraw(IAssetManager assetManager, IWindow window, ICanvas canvas) //cada frame

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static El_raton_y_el_gato.TomAndJerry;
+using static El_raton_y_el_gato.World;
 
 namespace El_raton_y_el_gato
 {
