@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static El_raton_y_el_gato.TomAndJerry;
 
 namespace El_raton_y_el_gato
 {
@@ -20,9 +21,11 @@ namespace El_raton_y_el_gato
         {
             Type = type;
             this.position = position;
-            this.position.x = this.position.x;
-            this.position.y = this.position.y;
+            this.position.x = (1f / ( Dimensions().x/ 2f)) * position.x;
+            this.position.y = (1f / (Dimensions().y / 2f)) * position.y;
             this.scale = scale;
+            this.scale.x = (1f / (Dimensions().x / 2f)) * scale.x;
+            this.scale.y = (1f / (Dimensions().y / 2f) ) * scale.y;
             this.color = color;
             this.speed = speed;
         }
@@ -49,7 +52,7 @@ namespace El_raton_y_el_gato
             return c;
         }
 
-        public void DrawCharacter(ICanvas canvas)
+        public void Render(ICanvas canvas, IWindow window)
         {
             canvas.FillRectangle(
                 this.position.x - this.scale.x/2,
@@ -68,8 +71,8 @@ namespace El_raton_y_el_gato
                 this.position.x = 1 - this.scale.x/2;
             if (this.position.x < -1 + this.scale.x / 2)
                 this.position.x = -1 + this.scale.x / 2;
-            if (this.position.y > 1 - this.scale.y / 2)
-                this.position.y = 1 - this.scale.y / 2;
+            if (this.position.y > 1 - (this.scale.y / 2))
+                this.position.y = 1 - (this.scale.y / 2);
             if (this.position.y  < -1 + this.scale.y / 2)
                 this.position.y = -1 + this.scale.y / 2;
         }

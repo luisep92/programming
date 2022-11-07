@@ -1,14 +1,8 @@
-﻿using System;
+﻿
+using System.Drawing;
 
 namespace DAM
 {
-    public class Image
-    {
-        private int hash;
-        public int Hash { get { return hash; } }
-        public bool IsValid { get { return hash >= 0; } }
-        public Image(int hash) { this.hash = hash; }
-    }
     public struct RGBA
     {
         public double r, g, b, a;
@@ -20,7 +14,7 @@ namespace DAM
             b = B;
             a = A;
         }
-
+         
         public int IntR
         {
             get
@@ -73,17 +67,17 @@ namespace DAM
             }
         }
 
-        public static RGBA operator +(RGBA a, RGBA b)
+        public static RGBA operator + (RGBA a, RGBA b)
         {
             return new RGBA(a.r + b.r, a.g + b.g, a.b + b.b, a.a + b.a);
         }
 
-        public static RGBA operator *(RGBA a, double b)
+        public static RGBA operator * (RGBA a, double b)
         {
             return new RGBA(a.r + b, a.g + b, a.b + b, a.a + b);
         }
 
-        public static RGBA operator *(RGBA a, RGBA b)
+        public static RGBA operator * (RGBA a, RGBA b)
         {
             return new RGBA(a.r * b.r, a.g * b.g, a.b * b.b, a.a * b.a);
         }
@@ -166,6 +160,115 @@ namespace DAM
                 return p + (q - p) * (2.0 / 3 - t) * 6;
             return p;
         }
+    }
+
+    public class Image
+    {
+        private int width;
+        private int height;
+        private RGBA[] pixels;
+
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
+
+
+        public Image()
+        {
+        }
+
+        public void Config(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            this.pixels = new RGBA[width * height];
+        }
+
+        public void Config(int width, int height, RGBA value)
+        {
+            this.width = width;
+            this.height = height;
+            this.pixels = new RGBA[width * height];
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = value;
+        }
+
+        public RGBA GetPixelAt(int x, int y)
+        {
+            if (pixels == null || pixels.Length == 0)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            if (x < 0)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            if (x >= width)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            if (y < 0)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            if (y >= height)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            return pixels[y * width + x];
+        }
+
+        public RGBA GetPixelAtNearest(int x, int y)
+        {
+            if (pixels == null || pixels.Length == 0)
+                return new RGBA(0.0, 0.0, 0.0, 0.0);
+            if (x < 0)
+                x = 0;
+            else if (x >= width)
+                x = width - 1;
+            if (y < 0)
+                y = 0;
+            else if (y >= height)
+                y = height - 1;
+            return pixels[y * width + x];
+        }
+
+        public void SetPixel(int x, int y, RGBA value)
+        {
+            if (x < 0)
+                return;
+            else if (x >= width)
+                return;
+            if (y < 0)
+                return;
+            else if (y >= height)
+                return;
+            pixels[y * width + x] = value;
+        }
+
+        public void Save(string path)
+        {
+            using (Bitmap bm = new Bitmap(Width, Height))
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    for (int y = 0; y < Height; y++)
+                    {
+                        var p = GetPixelAt(x, y);
+                        Color c = Color.FromArgb(p.IntA, p.IntR, p.IntG, p.IntB);
+                        bm.SetPixel(x, y, c);
+                    }
+                }
+                bm.Save(path);
+            }
+        }
+
+        public void Load(string url)
+        {
+            using (Bitmap bm = new Bitmap(url, false))
+            {
+                Config(bm.Width, bm.Height);
+                for (int x = 0; x < bm.Width; x++)
+                {
+                    for (int y = 0; y < bm.Height; y++)
+                    {
+                        var p = bm.GetPixel(x, y);
+                        RGBA c = new RGBA(p.R / 255.0, p.G / 255.0, p.B / 255.0, p.A / 255.0);
+                        SetPixel(x, y, c);
+                    }
+                }
+            }
+        }
+
     }
 }
 

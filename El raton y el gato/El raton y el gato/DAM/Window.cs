@@ -3,52 +3,23 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Audio.OpenAL;
-using El_raton_y_el_gato;
 
 namespace DAM
 {
     // Be warned, there is a LOT of stuff here. It might seem complicated, but just take it slow and you'll be fine.
     // OpenGL's initial hurdle is quite large, but once you get past that, things will start making more sense.
-    public class Window : GameWindow, ICanvas, IKeyboard, IWindow, IMouse
+    public class Window : GameWindow, ICanvas, IKeyboard, IWindow, IMouse, IAssetManager
     {
-        const string mPixelShader = @"
-#version 330
-out vec4 outputColor;
-uniform vec4 ourColor; 
-void main()
-{
-    outputColor = ourColor;
-}";
-        const string mVertexShader = @"
-#version 330 core
-layout(location = 0) in vec3 aPosition;
-void main(void)
-{
-    gl_Position = vec4(aPosition, 1.0);
-}";
 
-        private readonly float[] mRectangleBuffer = new float[8];
+        private readonly float[] mRectangleBuffer = new float[64];
+
+        private int mVertexBufferObject;
 
 
-        // Create the vertices for our triangle. These are listed in normalized device coordinates (NDC)
-        // In NDC, (0, 0) is the center of the screen.
-        // Negative X coordinates move to the left, positive X move to the right.
-        // Negative Y coordinates move to the bottom, positive Y move to the top.
-        // OpenGL only supports rendering in 3D, so to create a flat triangle, the Z coordinate will be kept as 0.
+        private ColorEffect mColorEffect;
+        private TextureShader mTextureEffect;
 
-        // These are the handles to OpenGL objects. A handle is an integer representing where the object lives on the
-        // graphics card. Consider them sort of like a pointer; we can't do anything with them directly, but we can
-        // send them to OpenGL functions that need them.
-
-        // What these objects are will be explained in OnLoad.
-        private int _vertexBufferObject;
-
-        private int _vertexArrayObject;
-
-        // This class is a wrapper around a shader, which helps us manage it.
-        // The shader class's code is in the Common project.
-        // What shaders are and what they're used for will be explained later in this tutorial.
-        private Shader _shader;
+        private List<Texture?> mTextureList = new List<Texture?>();
 
         private KeyboardState mKeyboardState;
         private MouseState mMouseState;
@@ -68,6 +39,10 @@ void main(void)
         public float ScrollDX => mMouseState.ScrollDelta.X;
         public float ScrollDY => mMouseState.ScrollDelta.Y;
 
+        public int Width => Size.X;
+
+        public int Height => Size.Y;
+
         public Window(IGameDelegate del, GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
             : base(gameWindowSettings, nativeWindowSettings)
         {
@@ -78,38 +53,28 @@ void main(void)
         protected override void OnLoad()
         {
             base.OnLoad();
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            float[] p = null;
-            GL.BufferData(BufferTarget.ArrayBuffer, 2 * 4 * sizeof(float), p, BufferUsageHint.StaticDraw);
-            _vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(_vertexArrayObject);
-            GL.VertexAttribPointer(0, 2, VertexAttribPointerType.Float, false, 2 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(0);
-            //_shader = Shader.CreateFromFiles("Shaders/shader.vert", "Shaders/shader.frag");
-            _shader = Shader.CreateFromStrings(mVertexShader, mPixelShader);
+            mVertexBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ArrayBuffer, mVertexBufferObject);
+            GL.BufferData(BufferTarget.ArrayBuffer, mRectangleBuffer.Length * sizeof(float), IntPtr.Zero, BufferUsageHint.StaticDraw);
+            //GL.BufferStorage(BufferTarget.ArrayBuffer, 2 * 4 * sizeof(float), p, BufferStorageFlags.DynamicStorageBit);
 
-            mDelegate.OnLoad();
+            mColorEffect = new ColorEffect(mVertexBufferObject);
+            mTextureEffect = new TextureShader(mVertexBufferObject);
+
+            mDelegate.OnLoad(this);
         }
 
-        private void PrepareShader(float[] vertices, float r, float g, float b, float a)
+        private void PrepareBuffer(float[] vertices, int byteCount)
         {
-            // Bind the shader
-            _shader.Use();
-            int vertexColorLocation = GL.GetUniformLocation(_shader.Handle, "ourColor");
-            GL.Uniform4(vertexColorLocation, r, g, b, a);
-
             GL.BindVertexArray(0);
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StreamDraw);
-            //GL.BufferSubData(BufferTarget.ArrayBuffer, System.IntPtr.Zero, vertices.Length * sizeof(float), vertices);
-
-            GL.BindVertexArray(_vertexArrayObject);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, mVertexBufferObject);
+            GL.BufferSubData(BufferTarget.ArrayBuffer, IntPtr.Zero, byteCount, vertices);
         }
 
         public void FillConvexPolygon(float[] vertices, float r, float g, float b, float a)
         {
-            PrepareShader(vertices, r, g, b, a);
+            PrepareBuffer(vertices, vertices.Length * sizeof(float));
+            mColorEffect.Use(r, g, b, a);
             GL.DrawArrays(PrimitiveType.Triangles, 0, vertices.Length >> 1);
         }
 
@@ -124,13 +89,51 @@ void main(void)
             mRectangleBuffer[6] = x + w;
             mRectangleBuffer[7] = y + h;
 
-            PrepareShader(mRectangleBuffer, r, g, b, a);
+            PrepareBuffer(mRectangleBuffer, 8 * sizeof(float));
+            mColorEffect.Use(r, g, b, a);
             GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
         }
-       
+
+        public void FillRectangle(float x, float y, float w, float h, Image? image, float ix, float iy, float iw, float ih, float r, float g, float b, float a)
+        {
+            Texture? t = null;
+            if (image != null && image.IsValid)
+            {
+                t = mTextureList[image.Hash];
+            }
+            if (t != null)
+            {
+                mRectangleBuffer[0] = x;
+                mRectangleBuffer[1] = y;
+                mRectangleBuffer[2] = ix;
+                mRectangleBuffer[3] = iy;
+
+                mRectangleBuffer[4] = x;
+                mRectangleBuffer[5] = y + h;
+                mRectangleBuffer[6] = ix;
+                mRectangleBuffer[7] = iy + ih;
+
+                mRectangleBuffer[8] = x + w;
+                mRectangleBuffer[9] = y;
+                mRectangleBuffer[10] = ix + iw;
+                mRectangleBuffer[11] = iy;
+
+                mRectangleBuffer[12] = x + w;
+                mRectangleBuffer[13] = y + h;
+                mRectangleBuffer[14] = ix + iw;
+                mRectangleBuffer[15] = iy + ih;
+
+                PrepareBuffer(mRectangleBuffer, 16 * sizeof(float));
+
+                mTextureEffect.Use(t, r, g, b, a);
+                GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
+            }
+        }
+
 
         public void Clear(float r, float g, float b, float a)
         {
+            GL.Disable(EnableCap.Blend);
             GL.ClearColor(r, g, b, a);
             GL.Clear(ClearBufferMask.ColorBufferBit);
         }
@@ -138,7 +141,7 @@ void main(void)
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
-            mDelegate.OnDraw(this);
+            mDelegate.OnDraw(this, this, this);
             SwapBuffers();
         }
 
@@ -148,44 +151,28 @@ void main(void)
             mKeyboardState = KeyboardState;
             mMouseState = MouseState;
 
-            mDelegate.OnKeyboard(this, this, this);
+            mDelegate.OnKeyboard(this, this, this, this);
         }
 
         protected override void OnResize(ResizeEventArgs e)
         {
             base.OnResize(e);
-
-            // When the window gets resized, we have to call GL.Viewport to resize OpenGL's viewport to match the new size.
-            // If we don't, the NDC will no longer be correct.
-            GL.Viewport(0, 0, Size.X, Size.Y);
+            GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
         }
 
-        // Now, for cleanup.
-        // You should generally not do cleanup of opengl resources when exiting an application
-        // as that is handled by the driver and operating system when the application exits.
-        // 
-        // There are reasons to delete opengl resources but exiting the application is not one of them.
-        // This is provided here as a reference on how resoruce cleanup is done in opengl but
-        // should not be done when exiting the application.
-        //
-        // Places where cleanup is appropriate would be to delete textures that are no
-        // longer used for whatever reason (e.g. a new scene is loaded that doesn't use a texture).
-        // This would free up video ram (VRAM) that can be used for new textures.
-        //
-        // The comming chapters will not have this code.
         protected override void OnUnload()
         {
-            mDelegate.OnUnload();
-            // Unbind all the resources by binding the targets to 0/null.
+            mDelegate.OnUnload(this);
+
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
             GL.UseProgram(0);
 
             // Delete all the resources.
-            GL.DeleteBuffer(_vertexBufferObject);
-            GL.DeleteVertexArray(_vertexArrayObject);
+            GL.DeleteBuffer(mVertexBufferObject);
 
-            GL.DeleteProgram(_shader.Handle);
+            mColorEffect.Dispose();
+            mTextureEffect.Dispose();
 
             base.OnUnload();
         }
@@ -198,6 +185,32 @@ void main(void)
         public bool IsPressed(MouseButton button)
         {
             return mMouseState.IsButtonPressed((OpenTK.Windowing.GraphicsLibraryFramework.MouseButton)button);
+        }
+
+        public Image LoadImage(string path)
+        {
+            var text = Texture.LoadFromFile(path);
+            if (text == null)
+                return new Image(-1);
+            for (int i = 0; i < mTextureList.Count; i++)
+            {
+                if (mTextureList[i] == null)
+                {
+                    mTextureList[i] = text;
+                    return new Image(i);
+                }
+            }
+            mTextureList.Add(text);
+            return new Image(mTextureList.Count - 1);
+        }
+
+        public void RemoveImage(Image image)
+        {
+            if (image.IsValid)
+            {
+                int index = image.Hash;
+                mTextureList[index] = null;
+            }
         }
     }
 }
