@@ -16,5 +16,12 @@ namespace El_raton_y_el_gato
             this.x = x;
             this.y = y;
         }
+
+        public static float Distance(Vector2 a, Vector2 b)
+        {
+            float dx = a.x - b.x;
+            float dy = a.y - b.y;
+            return (float)Math.Sqrt(dx * dx + dy * dy);
+        }
     }
 }

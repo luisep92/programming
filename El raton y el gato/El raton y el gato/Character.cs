@@ -17,15 +17,16 @@ namespace El_raton_y_el_gato
         public RGBA color;
         public float speed;
 
+        #region CONSTRUCTOR
         public Character(Type type, Vector2 position, Vector2 scale, RGBA color, float speed)
         {
             Type = type;
             this.position = position;
-            this.position.x = (1f / ( Dimensions().x/ 2f)) * position.x;
-            this.position.y = (1f / (Dimensions().y / 2f)) * position.y;
+            this.position.x = position.x * Meter(Dimensions().x);
+            this.position.y = position.y * Meter(Dimensions().y);
             this.scale = scale;
-            this.scale.x = (1f / (Dimensions().x / 2f)) * scale.x;
-            this.scale.y = (1f / (Dimensions().y / 2f) ) * scale.y;
+            this.scale.x = scale.x * Meter(Dimensions().x);
+            this.scale.y = scale.y * Meter(Dimensions().y);
             this.color = color;
             this.speed = speed;
         }
@@ -51,20 +52,24 @@ namespace El_raton_y_el_gato
 
             return c;
         }
+        #endregion
 
-        public void Render(ICanvas canvas, IWindow window)
+        #region RENDER
+        public void Render(ICanvas canvas)
         {
             canvas.FillRectangle(
-                this.position.x - this.scale.x/2,
-                this.position.y - this.scale.y/2,
-                this.scale.x,
-                this.scale.y,
-                (float)this.color.r,
-                (float)this.color.g,
-                (float)this.color.b,
-                (float)this.color.a);
+            this.position.x - this.scale.x/2,
+            this.position.y - this.scale.y/2,
+            this.scale.x,
+            this.scale.y,
+            (float)this.color.r,
+            (float)this.color.g,
+            (float)this.color.b,
+            (float)this.color.a);
         }
+        #endregion
 
+        #region MOVEMENT
         void LimitMovement()
         {
             if (this.position.x > 1 - this.scale.x/2)
@@ -106,6 +111,6 @@ namespace El_raton_y_el_gato
            MovePosition(keyboard);
            LimitMovement();
         }
-        
+        #endregion
     }
 }

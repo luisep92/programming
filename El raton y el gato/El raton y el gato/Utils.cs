@@ -11,6 +11,7 @@ namespace El_raton_y_el_gato
 {
     internal class Utils
     {
+        private static Random random = new Random();
         public static float AspectRatio(IWindow window)
         {
             return (float)window.Width / (float)window.Height;
@@ -20,7 +21,7 @@ namespace El_raton_y_el_gato
             return x / y;
         }
 
-        public static void RenderGrid(IWindow window, ICanvas canvas, TomAndJerry game)
+        public static void RenderGrid(ICanvas canvas)
         {
             for (float i = -1; i < Dimensions().x; i += 2 / Dimensions().x)
             {
@@ -30,6 +31,12 @@ namespace El_raton_y_el_gato
             {
                 canvas.FillRectangle(-1, i, 2, 0.003f, 0.7f, 0.7f, 0.7f, 0.5f);
             }
+        }
+        
+
+        public static float RandomRange(float min, float max)
+        {
+            return (float)random.NextDouble() * (max - min) + min;
         }
     }
 }
