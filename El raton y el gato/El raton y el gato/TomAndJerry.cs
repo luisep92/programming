@@ -16,16 +16,21 @@ namespace El_raton_y_el_gato
     {
         public List<Character> characterList;
 
+        public static float time = 0;
+
         int width = 0;
         int height = 0;
         #region DELEGATES
         public void OnDraw(IAssetManager assetManager, IWindow window, ICanvas canvas) //cada frame
         {
+            time += 1f / 60f;
+            canvas.SetCamera(-10,-5,10,5,true);
             canvas.Clear(0.15f, 0.15f, 0.40f, 1);
-            Utils.RenderGrid(canvas);
+            // Utils.RenderGrid(canvas);
+            canvas.FillRectangle(-10, -5, 20, 10, 1.0f, 1.0f, 0.0f, 1.0f);
             DrawCharacters(characterList, canvas);
-            HuntRat(characterList[0], characterList[1]);
-            ResizeCharacters();
+           // HuntRat(characterList[0], characterList[1]);
+           // ResizeCharacters();
         }
 
 
@@ -35,24 +40,26 @@ namespace El_raton_y_el_gato
         }
 
 
-        public void OnLoad(IAssetManager assetManager) //al iniciar la aplicacion
+        public void OnLoad(IAssetManager assetManager, IWindow window) //al iniciar la aplicacion
         {
-            characterList = CreateCharacters();
+            characterList = CreateCharacters(assetManager);
         }
 
-        public void OnUnload(IAssetManager assetManager) //al cerrar la aplicacion
+        public void OnUnload(IAssetManager assetManager, IWindow window) //al cerrar la aplicacion
         {
             
         }
         #endregion
 
         #region LOOPS_CARACTERS
-        public List<Character> CreateCharacters()
+        public List<Character> CreateCharacters(IAssetManager assetManager)
         {
             List<Character> list = new List<Character>();
+            DAM.Image cat = assetManager.LoadImage("C:\\Users\\Luis\\Desktop\\Images\\cat.jpg");
+            DAM.Image rat = assetManager.LoadImage("C:\\Users\\Luis\\Desktop\\Images\\rat.jpg");
 
-            list.Add(new Character(Type.CAT, new Vector2(5, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 1), 80f));
-            list.Add(new Character(Type.RAT, new Vector2(-5, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), 60f));
+            list.Add(new Character(Type.CAT, new Vector2(1, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 1), cat, 80f));
+            list.Add(new Character(Type.RAT, new Vector2(0, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), rat, 60f));
 
             return list;
         }
@@ -72,7 +79,7 @@ namespace El_raton_y_el_gato
         }
         public void HuntRat(Character cat, Character rat)
         {
-            float dist = 1.5f * Meter(Dimensions().x);
+            float dist = cat.initScale.x * Meter(Dimensions().x);
 
             if (Vector2.Distance(cat.position, rat.position) < dist)
             {
@@ -80,7 +87,7 @@ namespace El_raton_y_el_gato
                 float randY = Utils.RandomRange(-Dimensions().y, Dimensions().y)/2;
 
                 characterList.Remove(rat);
-                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), 60f));
+                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), rat.sprite, 60f));
             }
         }
         public void ResizeCharacters()

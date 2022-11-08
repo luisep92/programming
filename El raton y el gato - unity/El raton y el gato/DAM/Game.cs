@@ -1,5 +1,4 @@
 ﻿using System;
-using El_raton_y_el_gato;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -20,7 +19,6 @@ namespace DAM
 
             using (var window = new DAM.Window(del, GameWindowSettings.Default, nativeWindowSettings))
             {
-                World.window = window;
                 window.Run();
             }
 

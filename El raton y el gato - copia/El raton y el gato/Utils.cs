@@ -50,10 +50,5 @@ namespace El_raton_y_el_gato
         {
             canvas.FillRectangle(x, y, w, h, (float)color.r, (float)color.g, (float)color.b, (float)color.a);
         }
-
-        public static float PingPong()
-        {
-            return ((float)Math.Sin(time) + 1f) / 2f;
-        }
     }
 }

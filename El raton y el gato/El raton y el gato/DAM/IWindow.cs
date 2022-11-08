@@ -6,7 +6,9 @@ namespace DAM
     {
         int Width { get; }
         int Height { get; }
+
         void Close();
+        void ToggleFullscreen();
     }
 }
 
