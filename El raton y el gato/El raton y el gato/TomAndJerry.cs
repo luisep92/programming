@@ -15,6 +15,7 @@ namespace El_raton_y_el_gato
     internal class TomAndJerry : IGameDelegate
     {
         public List<Character> characterList;
+
         int width = 0;
         int height = 0;
         #region DELEGATES
@@ -71,7 +72,9 @@ namespace El_raton_y_el_gato
         }
         public void HuntRat(Character cat, Character rat)
         {
-            if (Vector2.Distance(cat.position, rat.position) < 2 * Meter(Dimensions().x))
+            float dist = 1.5f * Meter(Dimensions().x);
+
+            if (Vector2.Distance(cat.position, rat.position) < dist)
             {
                 float randX = Utils.RandomRange(-Dimensions().x, Dimensions().x)/2;
                 float randY = Utils.RandomRange(-Dimensions().y, Dimensions().y)/2;
@@ -82,9 +85,9 @@ namespace El_raton_y_el_gato
         }
         public void ResizeCharacters()
         {
-            foreach (Character c in characterList)
+            if (World.window.Width != width || World.window.Height != height)
             {
-                if (World.window.Width != width || World.window.Height != height)
+                foreach (Character c in characterList)
                 {
                     c.Resize(World.window);
                 }
