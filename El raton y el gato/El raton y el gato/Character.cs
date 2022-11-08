@@ -18,6 +18,8 @@ namespace El_raton_y_el_gato
         public RGBA color;
         public float speed;
 
+        private Vector2 initScale = new Vector2();
+
         #region CONSTRUCTOR
         public Character(Type type, Vector2 position, Vector2 scale, RGBA color, float speed)
         {
@@ -26,6 +28,8 @@ namespace El_raton_y_el_gato
             this.position.x = position.x * Meter(Dimensions().x);
             this.position.y = position.y * Meter(Dimensions().y);
             this.scale = scale;
+            initScale.x = scale.x;
+            initScale.y = scale.y;
             this.scale.x = scale.x * Meter(Dimensions().x);
             this.scale.y = scale.y * Meter(Dimensions().y);
             this.color = color;
@@ -67,6 +71,11 @@ namespace El_raton_y_el_gato
             (float)this.color.g,
             (float)this.color.b,
             (float)this.color.a);
+        }
+        public void Resize(IWindow window)
+        {
+            this.scale.x = initScale.x * Meter(Dimensions().x);
+            this.scale.y = initScale.y * Meter(Dimensions().y);
         }
         #endregion
 

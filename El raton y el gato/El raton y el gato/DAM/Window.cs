@@ -93,6 +93,21 @@ namespace DAM
             mColorEffect.Use(r, g, b, a);
             GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
         }
+        public void FillRectangle(float x, float y, float w, float h, RGBA color)
+        {
+            mRectangleBuffer[0] = x;
+            mRectangleBuffer[1] = y;
+            mRectangleBuffer[2] = x;
+            mRectangleBuffer[3] = y + h;
+            mRectangleBuffer[4] = x + w;
+            mRectangleBuffer[5] = y;
+            mRectangleBuffer[6] = x + w;
+            mRectangleBuffer[7] = y + h;
+
+            PrepareBuffer(mRectangleBuffer, 8 * sizeof(float));
+            mColorEffect.Use((float)color.r, (float)color.g, (float)color.b, (float)color.a);
+            GL.DrawArrays(PrimitiveType.TriangleStrip, 0, 4);
+        }
 
         public void FillRectangle(float x, float y, float w, float h, Image? image, float ix, float iy, float iw, float ih, float r, float g, float b, float a)
         {

@@ -24,13 +24,14 @@ namespace El_raton_y_el_gato
 
         public static void RenderGrid(ICanvas canvas)
         {
-            for (float i = -1; i < Dimensions().x; i += 2 / Dimensions().x)
+            RGBA grey = new RGBA(0.7f, 0.7f, 0.7f, 0.5f);
+            for (float i = -Dimensions().x; i < Dimensions().x; i += Meter(Dimensions().x))
             {
-                canvas.FillRectangle(i, -1, 0.003f, 2, 0.7f, 0.7f, 0.7f, 0.5f);
+                canvas.FillRectangle(i, -Dimensions().y, 0.008f, Dimensions().y*2, grey);
             }
-            for(float i = -1; i < Dimensions().y; i+= 2 / Dimensions().y)
+            for(float i = -Dimensions().y; i < Dimensions().y; i+= Meter(Dimensions().y))
             {
-                canvas.FillRectangle(-1, i, 2, 0.003f, 0.7f, 0.7f, 0.7f, 0.5f);
+                canvas.FillRectangle(-Dimensions().x, i, Dimensions().x*2, 0.008f, grey);
             }
         }
         

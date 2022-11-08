@@ -15,7 +15,8 @@ namespace El_raton_y_el_gato
     internal class TomAndJerry : IGameDelegate
     {
         public List<Character> characterList;
-
+        int width = 0;
+        int height = 0;
         #region DELEGATES
         public void OnDraw(IAssetManager assetManager, IWindow window, ICanvas canvas) //cada frame
         {
@@ -23,6 +24,14 @@ namespace El_raton_y_el_gato
             Utils.RenderGrid(canvas);
             DrawCharacters(characterList, canvas);
             HuntRat(characterList[0], characterList[1]);
+
+            if (World.window.Width != width || World.window.Height != height)
+            {
+                ResizeCharacters();
+                Console.WriteLine(Dimensions().x + " " + Dimensions().y);
+            }
+            width = World.window.Width;
+            height = World.window.Height;
         }
 
 
@@ -76,6 +85,13 @@ namespace El_raton_y_el_gato
 
                 characterList.Remove(rat);
                 characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), 60f));
+            }
+        }
+        public void ResizeCharacters()
+        {
+            foreach (Character c in characterList)
+            {
+                c.Resize(World.window);
             }
         }
         #endregion
