@@ -17,7 +17,6 @@ namespace El_raton_y_el_gato
         public Vector2 scale;
         public RGBA color;
         public float speed;
-
         public Vector2 initScale = new Vector2();
 
         #region CONSTRUCTOR

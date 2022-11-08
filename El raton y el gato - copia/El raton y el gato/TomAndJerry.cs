@@ -72,7 +72,7 @@ namespace El_raton_y_el_gato
         }
         public void HuntRat(Character cat, Character rat)
         {
-            float dist = cat.initScale.x * Meter(Dimensions().x);
+            float dist = 0.2f;
 
             if (Vector2.Distance(cat.position, rat.position) < dist)
             {
