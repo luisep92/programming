@@ -24,14 +24,7 @@ namespace El_raton_y_el_gato
             Utils.RenderGrid(canvas);
             DrawCharacters(characterList, canvas);
             HuntRat(characterList[0], characterList[1]);
-
-            if (World.window.Width != width || World.window.Height != height)
-            {
-                ResizeCharacters();
-                Console.WriteLine(Dimensions().x + " " + Dimensions().y);
-            }
-            width = World.window.Width;
-            height = World.window.Height;
+            ResizeCharacters();
         }
 
 
@@ -91,8 +84,13 @@ namespace El_raton_y_el_gato
         {
             foreach (Character c in characterList)
             {
-                c.Resize(World.window);
+                if (World.window.Width != width || World.window.Height != height)
+                {
+                    c.Resize(World.window);
+                }
             }
+            width = World.window.Width;
+            height = World.window.Height;
         }
         #endregion
     }
