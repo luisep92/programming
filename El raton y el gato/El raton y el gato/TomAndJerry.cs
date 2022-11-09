@@ -1,6 +1,7 @@
 ﻿using DAM;
 using static El_raton_y_el_gato.World;
 using static El_raton_y_el_gato.Utils;
+using static El_raton_y_el_gato.Collision;
 namespace El_raton_y_el_gato
 {
     internal class TomAndJerry : IGameDelegate
@@ -24,14 +25,17 @@ namespace El_raton_y_el_gato
 
         public void OnKeyboard(IAssetManager assetManager, IWindow window, IKeyboard keyboard, IMouse mouse) //cada frame
         {
+            if (keyboard.IsKeyDown(Keys.Escape))
+                CloseGame(window);
             MoveCharacters(keyboard);
             SetDebugMode(keyboard);
         }
 
         public void OnLoad(IAssetManager assetManager, IWindow window) //al iniciar la aplicacion
         {
-            background = assetManager.LoadImage("C:\\Users\\8yuh\\Desktop\\DAM\\programming\\El raton y el gato\\El raton y el gato\\images\\background.jpg");
+            background = assetManager.LoadImage("resources/background.jpg");
             characterList = CreateCharacters(assetManager);
+            //window.ToggleFullScreen();
         }
 
         public void OnUnload(IAssetManager assetManager, IWindow window) //al cerrar la aplicacion
@@ -40,14 +44,21 @@ namespace El_raton_y_el_gato
         }
         #endregion
 
+        #region GAME
+        void CloseGame(IWindow window)
+        {
+            window.Close();
+        }
+        #endregion
+
         #region LOOPS_CHARACTERS
         public List<Character> CreateCharacters(IAssetManager assetManager)
         {
             List<Character> list = new List<Character>();
-            Image cat = assetManager.LoadImage("C:\\Users\\8yuh\\Desktop\\DAM\\programming\\El raton y el gato\\El raton y el gato\\images\\cat.png");
-            Image rat = assetManager.LoadImage("C:\\Users\\8yuh\\Desktop\\DAM\\programming\\El raton y el gato\\El raton y el gato\\images\\rat.png");
+            Image cat = assetManager.LoadImage("resources/cat.png");
+            Image rat = assetManager.LoadImage("resources/rat.png");
 
-            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 0.999f), cat, 800f));
+            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 0.999f), cat, 80f));
             list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 0.999f), rat, 80f));
 
             return list;
@@ -70,13 +81,15 @@ namespace El_raton_y_el_gato
         {
             float dist = cat.size.x;
 
-            if (Vector2.Distance(cat.position, rat.position) < dist)
+            bool col = SquareCollision(cat.position, cat.size, rat.position, rat.size);
+          //  if (Vector2.Distance(cat.position, rat.position) < dist)
+          if(col)
             {
                 float randX = RandomRange(X.Min(), X.Max());
                 float randY = RandomRange(Y.Min(), Y.Max());
 
                 characterList.Remove(rat);
-                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), Color.White(), rat.sprite, 800f));
+                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), Color.White(), rat.sprite, 80f));
             }
         }
         #endregion
