@@ -81,9 +81,8 @@ namespace El_raton_y_el_gato
         {
             float dist = cat.size.x;
 
-            bool col = SquareCollision(cat.position, cat.size, rat.position, rat.size);
-          //  if (Vector2.Distance(cat.position, rat.position) < dist)
-          if(col)
+           // bool col = SquareCollision(cat.position, cat.size, rat.position, rat.size);
+            if (Vector2.Distance(cat.position, rat.position) < dist)
             {
                 float randX = RandomRange(X.Min(), X.Max());
                 float randY = RandomRange(Y.Min(), Y.Max());
