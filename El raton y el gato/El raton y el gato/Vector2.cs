@@ -43,7 +43,7 @@ namespace El_raton_y_el_gato
         }
         #endregion
 
-        #region STATIC
+        #region TOOLS
         public static float Distance(Vector2 a, Vector2 b)
         {
             float dx = a.x - b.x;

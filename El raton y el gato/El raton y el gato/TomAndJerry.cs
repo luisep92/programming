@@ -15,7 +15,7 @@ namespace El_raton_y_el_gato
             time += 1f / 60f;
             canvas.SetCamera(X.Min(), Y.Min(), X.Max(), Y.Max(),true);
             ClearCanvas(canvas, Color.Black());
-            canvas.FillRectangle(X.Min(), Y.Min(), Dimensions().x, Dimensions().y, background, 0,0,1,1, 0.8f,0.8f,0.8f,0.99f);
+            canvas.FillRectangle(X.Min(), Y.Min(), Dimensions().x, Dimensions().y, background, 0,0,1,1, 0.9f,0.9f,0.9f,0.99f);
             if(Utils.isDebugging)
                 RenderGrid(canvas,window, X, Y);
             DrawCharacters(characterList, canvas);

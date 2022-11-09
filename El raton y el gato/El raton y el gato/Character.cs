@@ -59,7 +59,7 @@ namespace El_raton_y_el_gato
        
         public void FlickerEffect()
         {
-            this.color.a = PingPong();
+            this.color.a = PingPong(0.99999f);
         }
         #endregion
 

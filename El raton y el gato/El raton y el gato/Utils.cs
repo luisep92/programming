@@ -42,11 +42,11 @@ namespace El_raton_y_el_gato
 
             for (float i = x.Min(); i <= x.Max(); i += 1)
             {
-                FillRectangle(canvas, i, y.Min(), width, size.y, Color.Grey());
+                FillRectangle(canvas, i, y.Min(), width, size.y, Color.Grey(0.5f));
             }
             for (float i = y.Min(); i <= y.Max(); i += 1)
             {
-                FillRectangle(canvas, x.Min(), i, size.x, width, Color.Grey());
+                FillRectangle(canvas, x.Min(), i, size.x, width, Color.Grey(0.5f));
             }
         }
         public static void SetDebugMode(IKeyboard keyboard)
@@ -70,6 +70,10 @@ namespace El_raton_y_el_gato
         public static float PingPong()
         {
             return ((float)Math.Sin(time) + 1f) / 2f;
+        }
+        public static float PingPong(float maxValue)
+        {
+            return (((float)Math.Sin(time) + 1f) / 2f)*maxValue;
         }
         public static void ClearCanvas(ICanvas canvas, RGBA color)
         {

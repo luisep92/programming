@@ -32,6 +32,10 @@ namespace El_raton_y_el_gato
         public static RGBA Grey()
         {
             return new RGBA(0.7f, 0.7f, 0.7f, 0.99999f);
+        } 
+        public static RGBA Grey(float alpha)
+        {
+            return new RGBA(0.7f, 0.7f, 0.7f, alpha);
         }
         public static RGBA Yellow()
         {
