@@ -1,10 +1,4 @@
 ﻿using DAM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using static El_raton_y_el_gato.TomAndJerry;
 using static El_raton_y_el_gato.World;
 
@@ -13,42 +7,79 @@ namespace El_raton_y_el_gato
     internal class Utils
     {
         private static Random random = new Random();
+        public static bool isDebugging = false;
 
-        public static float AspectRatio(IWindow window)
+        #region DEBUG
+        public static void RenderGrid(ICanvas canvas, IWindow window, float minX, float minY, float maxX, float maxY)
         {
-            return (float)window.Width / (float)window.Height;
-        }
-        public static float AspectRatio(float x, float y)
-        {
-            return x / y;
-        }
-        public static void RenderGrid(ICanvas canvas)
-        {
-            RGBA grey = new RGBA(0.7f, 0.7f, 0.7f, 0.5f);
-            float dimX = Dimensions().x / 2;
-            float dimY = Dimensions().y / 2;
-            float width = 0.005f;
+            float width = 0.03f;
+            float w = maxX - minX;
+            float h = maxY - minY;
 
-            if (World.window.Width < 300 || World.window.Height < 300)
-                width = 0.01f;
+            if (window.Width < 500 || window.Height < 500)
+                width *= 2;
+            if (window.Width < 300 || window.Height < 300)
+                width *= 2;
 
-            for (float i = -dimX; i < dimX; i += Meter(Dimensions().x))
+            for (float i = minX; i <= maxX; i += 1)
             {
-                FillRectangle(canvas, i, -dimY, width, dimY * 2, grey);
+                FillRectangle(canvas, i, minY, width, h, Color.Grey());
             }
-            for(float i = -dimY; i < dimY; i+= Meter(Dimensions().y))
+            for(float i = minY; i <= maxY; i+= 1)
             {
-                FillRectangle(canvas, -dimX, i, dimX * 2, width, grey);
+                FillRectangle(canvas, minX, i, w, width, Color.Grey());
             }
         }
+        public static void RenderGrid(ICanvas canvas, IWindow window, Vector2 x, Vector2 y)
+        {
+            float width = 0.03f;
+            Vector2 size = Vector2.Diference(x, y);
+
+            if (window.Width < 500 || window.Height < 500)
+                width *= 2;
+            if (window.Width < 300 || window.Height < 300)
+                width *= 2;
+
+            for (float i = x.Min(); i <= x.Max(); i += 1)
+            {
+                FillRectangle(canvas, i, y.Min(), width, size.y, Color.Grey(0.5f));
+            }
+            for (float i = y.Min(); i <= y.Max(); i += 1)
+            {
+                FillRectangle(canvas, x.Min(), i, size.x, width, Color.Grey(0.5f));
+            }
+        }
+        public static void SetDebugMode(IKeyboard keyboard)
+        {
+            if (keyboard.IsKeyDown(Keys.LeftShift))
+                isDebugging = true;
+            else
+                isDebugging = false;
+        }
+        #endregion
+
+        #region UTILS
         public static float RandomRange(float min, float max)
         {
             return (float)random.NextDouble() * (max - min) + min;
         }
-
         public static void FillRectangle(ICanvas canvas, float x, float y, float w, float h, RGBA color)
         {
             canvas.FillRectangle(x, y, w, h, (float)color.r, (float)color.g, (float)color.b, (float)color.a);
         }
+        public static float PingPong()
+        {
+            return ((float)Math.Sin(time) + 1f) / 2f;
+        }
+        public static float PingPong(float maxValue)
+        {
+            return (((float)Math.Sin(time) + 1f) / 2f)*maxValue;
+        }
+        public static void ClearCanvas(ICanvas canvas, RGBA color)
+        {
+            canvas.Clear((float)color.r, (float)color.g, (float)color.b, (float)color.a);
+        }
+        
+        #endregion
     }
 }

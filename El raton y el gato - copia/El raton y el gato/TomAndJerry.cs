@@ -1,43 +1,41 @@
 ﻿using DAM;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using static El_raton_y_el_gato.World;
-
+using static El_raton_y_el_gato.Utils;
+using static El_raton_y_el_gato.Collision;
 namespace El_raton_y_el_gato
 {
     internal class TomAndJerry : IGameDelegate
     {
         public List<Character> characterList;
+        public Image background;
+        public static float time = 0;
 
-        int width = 0;
-        int height = 0;
         #region DELEGATES
         public void OnDraw(IAssetManager assetManager, IWindow window, ICanvas canvas) //cada frame
         {
-            canvas.Clear(0.15f, 0.15f, 0.40f, 1);
-            Utils.RenderGrid(canvas);
+            time += 1f / 60f;
+            canvas.SetCamera(X.Min(), Y.Min(), X.Max(), Y.Max(),true);
+            ClearCanvas(canvas, Color.Black());
+            canvas.FillRectangle(X.Min(), Y.Min(), Dimensions().x, Dimensions().y, background, 0,0,1,1, 0.9f,0.9f,0.9f,0.99f);
+            if(Utils.isDebugging)
+                RenderGrid(canvas,window, X, Y);
             DrawCharacters(characterList, canvas);
             HuntRat(characterList[0], characterList[1]);
-            ResizeCharacters();
         }
-
 
         public void OnKeyboard(IAssetManager assetManager, IWindow window, IKeyboard keyboard, IMouse mouse) //cada frame
         {
+            if (keyboard.IsKeyDown(Keys.Escape))
+                CloseGame(window);
             MoveCharacters(keyboard);
+            SetDebugMode(keyboard);
         }
-
 
         public void OnLoad(IAssetManager assetManager, IWindow window) //al iniciar la aplicacion
         {
-            characterList = CreateCharacters();
+            background = assetManager.LoadImage("resources/background.jpg");
+            characterList = CreateCharacters(assetManager);
+            //window.ToggleFullScreen();
         }
 
         public void OnUnload(IAssetManager assetManager, IWindow window) //al cerrar la aplicacion
@@ -46,13 +44,22 @@ namespace El_raton_y_el_gato
         }
         #endregion
 
-        #region LOOPS_CARACTERS
-        public List<Character> CreateCharacters()
+        #region GAME
+        void CloseGame(IWindow window)
+        {
+            window.Close();
+        }
+        #endregion
+
+        #region LOOPS_CHARACTERS
+        public List<Character> CreateCharacters(IAssetManager assetManager)
         {
             List<Character> list = new List<Character>();
+            Image cat = assetManager.LoadImage("resources/cat.png");
+            Image rat = assetManager.LoadImage("resources/rat.png");
 
-            list.Add(new Character(Type.CAT, new Vector2(5, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 1), 80f));
-            list.Add(new Character(Type.RAT, new Vector2(-5, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), 60f));
+            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 0.999f), cat, 80f));
+            list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 0.999f), rat, 80f));
 
             return list;
         }
@@ -72,28 +79,17 @@ namespace El_raton_y_el_gato
         }
         public void HuntRat(Character cat, Character rat)
         {
-            float dist = 0.2f;
+            float dist = cat.size.x;
 
+           // bool col = SquareCollision(cat.position, cat.size, rat.position, rat.size);
             if (Vector2.Distance(cat.position, rat.position) < dist)
             {
-                float randX = Utils.RandomRange(-Dimensions().x, Dimensions().x)/2;
-                float randY = Utils.RandomRange(-Dimensions().y, Dimensions().y)/2;
+                float randX = RandomRange(X.Min(), X.Max());
+                float randY = RandomRange(Y.Min(), Y.Max());
 
                 characterList.Remove(rat);
-                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), new RGBA(0, 1, 0, 1), 60f));
+                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), Color.White(), rat.sprite, 80f));
             }
-        }
-        public void ResizeCharacters()
-        {
-            if (World.window.Width != width || World.window.Height != height)
-            {
-                foreach (Character c in characterList)
-                {
-                    c.Resize(World.window);
-                }
-            }
-            width = World.window.Width;
-            height = World.window.Height;
         }
         #endregion
     }

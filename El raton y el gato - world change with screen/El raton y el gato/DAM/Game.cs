@@ -13,13 +13,14 @@ namespace DAM
             var nativeWindowSettings = new NativeWindowSettings()
             {
                 Size = new Vector2i(800, 600),
-                Title = "La rata y el gato - Luis Escolano",
+                Title = "LearnOpenTK - Creating a Window",
                 // This is needed to run on macos
                 Flags = ContextFlags.ForwardCompatible,
             };
 
             using (var window = new DAM.Window(del, GameWindowSettings.Default, nativeWindowSettings))
             {
+                World.window = window;
                 window.Run();
             }
 

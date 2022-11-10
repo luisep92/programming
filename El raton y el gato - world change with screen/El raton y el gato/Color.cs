@@ -1,56 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace El_raton_y_el_gato
 {
-    public class Color
-    {
-        public static RGBA Red()
-        {
-            return new RGBA(1, 0, 0, 0.99999f);
-        }
-        public static RGBA White()
-        {
-            return new RGBA(1, 1, 1, 0.99999f);
-        }
-        public static RGBA Black()
-        {
-            return new RGBA(0, 0, 0, 0.99999f);
-        }
-        public static RGBA Blue()
-        {
-            return new RGBA(0, 0, 1, 0.99999f);
-        }
-        public static RGBA Green()
-        {
-            return new RGBA(0, 1, 0, 0.99999f);
-        }
-        public static RGBA Grey()
-        {
-            return new RGBA(0.7f, 0.7f, 0.7f, 0.99999f);
-        } 
-        public static RGBA Grey(float alpha)
-        {
-            return new RGBA(0.7f, 0.7f, 0.7f, alpha);
-        }
-        public static RGBA Yellow()
-        {
-            return new RGBA(1, 1, 0, 0.99999f);
-        }
-        public static RGBA Pink()
-        {
-            return new RGBA(1, 0, 1, 0.99999f);
-        }
-        public static RGBA Cyan()
-        {
-            return new RGBA(0, 1, 1, 0.99999f);
-        }
-    }
     public struct RGBA
     {
         public double r, g, b, a;

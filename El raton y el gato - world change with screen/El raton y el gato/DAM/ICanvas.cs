@@ -10,3 +10,4 @@ namespace DAM
         void FillRectangle(float x, float y, float w, float h, Image? image, float ix, float iy, float iw, float ih, float r, float g, float b, float a);
     }
 }
+
