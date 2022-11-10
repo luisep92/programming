@@ -20,6 +20,7 @@ namespace El_raton_y_el_gato
             this.type = type;
             this.position = position;
             this.size = size;
+            this.size.y = size.x / AspectRatio(sprite.Width, sprite.Height);
             this.color = color;
             this.sprite = sprite;
             this.speed = speed;

@@ -58,8 +58,8 @@ namespace El_raton_y_el_gato
             Image cat = assetManager.LoadImage("resources/cat.png");
             Image rat = assetManager.LoadImage("resources/rat.png");
 
-            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), new RGBA(1, 0, 0, 0.999f), cat, 80f));
-            list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), new RGBA(0, 1, 0, 0.999f), rat, 80f));
+            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), Color.Red(), cat, 80f));
+            list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), Color.White(), rat, 80f));
 
             return list;
         }
@@ -88,7 +88,7 @@ namespace El_raton_y_el_gato
                 float randY = RandomRange(Y.Min(), Y.Max());
 
                 characterList.Remove(rat);
-                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), new Vector2(2f, 2f), Color.White(), rat.sprite, 80f));
+                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), rat.size, Color.White(), rat.sprite, 80f));
             }
         }
         #endregion

@@ -79,6 +79,10 @@ namespace El_raton_y_el_gato
         {
             canvas.Clear((float)color.r, (float)color.g, (float)color.b, (float)color.a);
         }
+        public static float AspectRatio(int width, int height)
+        {
+            return (float)width / (float)height;
+        }
         #endregion
     }
 }
