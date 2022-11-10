@@ -1,37 +1,27 @@
 ﻿using DAM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static El_raton_y_el_gato.TomAndJerry;
 using static El_raton_y_el_gato.World;
+using static El_raton_y_el_gato.Utils;
 
 namespace El_raton_y_el_gato
 {
-    public enum Type { CAT, RAT}
+    public enum Type {CAT, RAT}
     internal class Character
     {
-        public Type Type;
+        public Type type;
         public Vector2 position;
-        public Vector2 scale;
+        public Vector2 size;
         public RGBA color;
+        public Image sprite;
         public float speed;
-        public Vector2 initScale = new Vector2();
 
         #region CONSTRUCTOR
-        public Character(Type type, Vector2 position, Vector2 scale, RGBA color, float speed)
+        public Character(Type type, Vector2 position, Vector2 size, RGBA color, Image sprite, float speed)
         {
-            Type = type;
+            this.type = type;
             this.position = position;
-            this.position.x = position.x * Meter(Dimensions().x);
-            this.position.y = position.y * Meter(Dimensions().y);
-            this.scale = scale;
-            initScale.x = scale.x;
-            initScale.y = scale.y;
-            this.scale.x = scale.x * Meter(Dimensions().x);
-            this.scale.y = scale.y * Meter(Dimensions().y);
+            this.size = size;
             this.color = color;
+            this.sprite = sprite;
             this.speed = speed;
         }
 
@@ -39,60 +29,62 @@ namespace El_raton_y_el_gato
         {
 
         }
-
-        public static Character NewChar(Type type, float x, float y, float width, float height, float r, float g, float b, float a, float speed)
-        {
-            Character c = new Character();
-            c.Type = type;
-            c.position.x = x;
-            c.position.y = y;
-            c.scale.x = width;
-            c.scale.y = height;
-            c.color.r = r;
-            c.color.g = g;
-            c.color.b = b;
-            c.color.a = a;
-            c.speed = speed;
-
-            return c;
-        }
         #endregion
 
         #region RENDER
+        public void RenderRectangle(ICanvas canvas)
+        {
+            FillRectangle(
+                canvas,
+                this.position.x - this.size.x/2,
+                this.position.y - this.size.y/2,
+                this.size.x,
+                this.size.y,
+                this.color);
+        }
         public void Render(ICanvas canvas)
         {
             canvas.FillRectangle(
-            this.position.x - this.scale.x/2,
-            this.position.y - this.scale.y/2,
-            this.scale.x,
-            this.scale.y,
-            (float)this.color.r,
-            (float)this.color.g,
-            (float)this.color.b,
-            (float)this.color.a);
+                this.position.x - this.size.x / 2,
+                this.position.y - this.size.y / 2,
+                this.size.x,
+                this.size.y,
+                this.sprite,
+                0f,0f,1f,1f,1f,1f,1f,
+                (float)this.color.a);
+
+            if (this.type == Type.RAT)
+                FlickerEffect();
         }
-        public void Resize(IWindow window)
+       
+        public void FlickerEffect()
         {
-            this.scale.x = initScale.x * Meter(Dimensions().x);
-            this.scale.y = initScale.y * Meter(Dimensions().y);
+            this.color.a = PingPong(0.99999f);
         }
         #endregion
 
         #region MOVEMENT
+        public void Move(IKeyboard keyboard)
+        {
+            MovePosition(keyboard);
+            LimitMovement();
+        }
+
         void LimitMovement()
         {
-            if (this.position.x > 1 - this.scale.x/2)
-                this.position.x = 1 - this.scale.x/2;
-            if (this.position.x < -1 + this.scale.x / 2)
-                this.position.x = -1 + this.scale.x / 2;
-            if (this.position.y > 1 - (this.scale.y / 2))
-                this.position.y = 1 - (this.scale.y / 2);
-            if (this.position.y  < -1 + this.scale.y / 2)
-                this.position.y = -1 + this.scale.y / 2;
+            if (this.position.x > X.Max() - this.size.x / 2)
+                this.position.x = X.Max() - this.size.x / 2;
+            if (this.position.x < X.Min() + this.size.x / 2)
+                this.position.x = X.Min() + this.size.x / 2;
+            if (this.position.y > Y.Max() - this.size.y / 2)
+                this.position.y = Y.Max() - this.size.y / 2;
+            if (this.position.y < Y.Min() + this.size.y / 2)
+                this.position.y = Y.Min() + this.size.y / 2;
         }
+
         void MovePosition(IKeyboard keyboard)
         {
-            if (this.Type == Type.CAT)
+            if (this.type == Type.CAT)
             {
                 if (keyboard.IsKeyDown(Keys.Left))
                     this.position.x -= 0.0001f * speed;
@@ -114,11 +106,6 @@ namespace El_raton_y_el_gato
                 if (keyboard.IsKeyDown(Keys.S))
                     this.position.y -= 0.0001f * speed;
             }
-        }
-        public void Move(IKeyboard keyboard)
-        {
-           MovePosition(keyboard);
-           LimitMovement();
         }
         #endregion
     }

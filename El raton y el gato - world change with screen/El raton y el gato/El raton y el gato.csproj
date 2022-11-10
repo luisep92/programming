@@ -14,7 +14,4 @@
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <none Include="resources/**" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
 </Project>
