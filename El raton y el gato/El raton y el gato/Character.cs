@@ -1,6 +1,7 @@
 ﻿using DAM;
 using static El_raton_y_el_gato.World;
 using static El_raton_y_el_gato.Utils;
+using OpenTK.Graphics.OpenGL;
 
 namespace El_raton_y_el_gato
 {
@@ -14,6 +15,7 @@ namespace El_raton_y_el_gato
         public Image sprite;
         public float speed;
 
+        public List<Image> sprites = new List<Image>();
         private Vector2 direction = new Vector2(0,0);  //Para el movimiento de la rata
 
         #region CONSTRUCTOR
@@ -59,7 +61,33 @@ namespace El_raton_y_el_gato
             if (this.type == Type.RAT)
                 FlickerEffect();
         }
-       
+
+        public void FillSpriteList(IAssetManager am)
+        {
+            if (this.type == Type.CAT)
+            {
+                sprites.Add(am.LoadImage("resources/sprites/catA.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catAD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catBD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catB.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catBI.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catI.png"));
+                sprites.Add(am.LoadImage("resources/sprites/catAI.png"));
+            }
+            else
+            {
+                sprites.Add(am.LoadImage("resources/sprites/ratA.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratAD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratBD.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratB.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratBI.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratI.png"));
+                sprites.Add(am.LoadImage("resources/sprites/ratAI.png"));
+            }
+        }
+
         public void FlickerEffect()
         {
             this.color.a = PingPong(0.99999f);
@@ -71,6 +99,28 @@ namespace El_raton_y_el_gato
         {
             MovePosition(keyboard);
             LimitMovement();
+        }
+
+        public void SetSprite()
+        {
+            if (direction.x == 0 && direction.y > 0)
+                sprite = sprites[0];
+            else if (direction.x > 0 && direction.y > 0)
+                sprite = sprites[1];
+            else if (direction.x > 0 && direction.y == 0)
+                sprite = sprites[2];
+            else if (direction.x > 0 && direction.y < 0)
+                sprite = sprites[3];
+            else if (direction.x == 0 && direction.y < 0)
+                sprite = sprites[4];
+            else if (direction.x < 0 && direction.y < 0)
+                sprite = sprites[5];
+            else if (direction.x < 0 && direction.y == 0)
+                sprite = sprites[6];
+            else if (direction.x < 0 && direction.y > 0)
+                sprite = sprites[7];
+            else
+                sprite = sprites[6];
         }
 
         void LimitMovement()
@@ -85,36 +135,40 @@ namespace El_raton_y_el_gato
                 this.position.y = Y.Min() + this.size.y / 2;
         }
 
-        void MovePosition(IKeyboard keyboard)
+        public void SetDirection(IKeyboard keyboard)
         {
-            if (this.type == Type.CAT)
+            if(this.type == Type.CAT)
             {
                 if (keyboard.IsKeyDown(Keys.Left))
-                    this.position.x -= 0.0001f * speed;
-                if (keyboard.IsKeyDown(Keys.Right))
-                    this.position.x += 0.0001f * speed;
+                    this.direction.x = -0.0001f * speed;
+                else if (keyboard.IsKeyDown(Keys.Right))
+                    this.direction.x = 0.0001f * speed;
+                else direction.x = 0;
+
                 if (keyboard.IsKeyDown(Keys.Up))
-                    this.position.y += 0.0001f * speed;
-                if (keyboard.IsKeyDown(Keys.Down))
-                    this.position.y -= 0.0001f * speed;
+                    this.direction.y = 0.0001f * speed;
+                else if (keyboard.IsKeyDown(Keys.Down))
+                    this.direction.y = -0.0001f * speed;
+                else
+                    direction.y = 0;
             }
             else
             {
-                int seed = (int)(TomAndJerry.time * 10) % 10;
-                
-                if (seed == 0f)
+                int seed = (int)(TomAndJerry.time * 10) % 25;
+                if(seed == 0)
                 {
                     direction.x = 0.0001f * speed * (int)RandomRange(-1.99999f, 1.99999f);
                     direction.y = 0.0001f * speed * (int)RandomRange(-1.99999f, 1.99999f);
-                    this.position.x += direction.x;
-                    this.position.y += direction.y;
-                }
-                else
-                {
-                    this.position.x += direction.x;
-                    this.position.y += direction.y;
                 }
             }
+        }
+
+        void MovePosition(IKeyboard keyboard)
+        {
+            SetDirection(keyboard);
+            SetSprite();
+            this.position.x += direction.x;
+            this.position.y += direction.y;
         }
         #endregion
     }

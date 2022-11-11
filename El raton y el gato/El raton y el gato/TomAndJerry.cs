@@ -35,6 +35,8 @@ namespace El_raton_y_el_gato
         {
             background = assetManager.LoadImage("resources/background.jpg");
             characterList = CreateCharacters(assetManager);
+            characterList[0].FillSpriteList(assetManager);
+            characterList[1].FillSpriteList(assetManager);
             //window.ToggleFullscreen();
         }
 
@@ -58,8 +60,8 @@ namespace El_raton_y_el_gato
             Image cat = assetManager.LoadImage("resources/cat.png");
             Image rat = assetManager.LoadImage("resources/rat.png");
 
-            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), Color.red, cat, 600f));
-            list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), Color.white, rat, 600f));
+            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), Color.red, cat, 60f));
+            list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), Color.white, rat, 60f));
 
             return list;
         }
@@ -88,7 +90,8 @@ namespace El_raton_y_el_gato
                 float randY = RandomRange(Y.Min(), Y.Max());
 
                 characterList.Remove(rat);
-                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), rat.size, Color.white, rat.sprite, 600f));
+                characterList.Add(new Character(Type.RAT, new Vector2(randX, randY), rat.size, Color.white, rat.sprite, 60f));
+                characterList[1].sprites = rat.sprites;
                 Sound.PlayRandom(Sound.ratSounds);
             }
         }
