@@ -22,8 +22,9 @@ namespace El_raton_y_el_gato
         }
         public static void PlayRandom(string[] array)
         {
-            int n = (int)Utils.RandomRange(0, (float)array.Length);
-            Play(ratSounds[n]);
+            int n = (int)Utils.RandomRange(0, (float)array.Length - 0.00001f);
+                Play(ratSounds[n]);
+            
         }
 
     }

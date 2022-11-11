@@ -49,6 +49,7 @@ namespace El_raton_y_el_gato
         }
         public void Render(ICanvas canvas)
         {
+            SetSprite();
             canvas.FillRectangle(
                 this.position.x - this.size.x / 2,
                 this.position.y - this.size.y / 2,
@@ -154,7 +155,7 @@ namespace El_raton_y_el_gato
             }
             else
             {
-                int seed = (int)(TomAndJerry.time * 10) % 25;
+                int seed = (int)(TomAndJerry.time * 10) % 250;
                 if(seed == 0)
                 {
                     direction.x = 0.0001f * speed * (int)RandomRange(-1.99999f, 1.99999f);
@@ -166,7 +167,6 @@ namespace El_raton_y_el_gato
         void MovePosition(IKeyboard keyboard)
         {
             SetDirection(keyboard);
-            SetSprite();
             this.position.x += direction.x;
             this.position.y += direction.y;
         }
