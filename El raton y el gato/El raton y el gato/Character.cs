@@ -14,6 +14,8 @@ namespace El_raton_y_el_gato
         public Image sprite;
         public float speed;
 
+        private Vector2 direction = new Vector2(0,0);  //Para el movimiento de la rata
+
         #region CONSTRUCTOR
         public Character(Type type, Vector2 position, Vector2 size, RGBA color, Image sprite, float speed)
         {
@@ -98,14 +100,20 @@ namespace El_raton_y_el_gato
             }
             else
             {
-                if (keyboard.IsKeyDown(Keys.A))
-                    this.position.x -= 0.0001f * speed;
-                if (keyboard.IsKeyDown(Keys.D))
-                    this.position.x += 0.0001f * speed;
-                if (keyboard.IsKeyDown(Keys.W))
-                    this.position.y += 0.0001f * speed;
-                if (keyboard.IsKeyDown(Keys.S))
-                    this.position.y -= 0.0001f * speed;
+                int seed = (int)(TomAndJerry.time * 10) % 10;
+                
+                if (seed == 0f)
+                {
+                    direction.x = 0.0001f * speed * (int)RandomRange(-1.99999f, 1.99999f);
+                    direction.y = 0.0001f * speed * (int)RandomRange(-1.99999f, 1.99999f);
+                    this.position.x += direction.x;
+                    this.position.y += direction.y;
+                }
+                else
+                {
+                    this.position.x += direction.x;
+                    this.position.y += direction.y;
+                }
             }
         }
         #endregion
