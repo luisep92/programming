@@ -9,7 +9,6 @@ namespace El_raton_y_el_gato
 {
     internal class Component
     {
-        
         public virtual void Render(ICanvas canvas, GameObject obj)
         {
             Console.WriteLine("ERROR: Has accedido a un componente que no es un renderer y has hecho Render();");

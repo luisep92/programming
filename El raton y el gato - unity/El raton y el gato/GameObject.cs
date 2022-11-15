@@ -41,5 +41,15 @@ namespace El_raton_y_el_gato
             return null;
         }
 
+        public Component GetComponent2<T>()
+        {
+            foreach (Component c in components)
+            {
+                var type = c.GetType();
+                if (type == typeof(T))
+                    return c;
+            }
+            return null;
+        }
     }
 }

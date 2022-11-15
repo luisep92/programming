@@ -52,6 +52,7 @@ namespace El_raton_y_el_gato
             
             foreach (Character c in list)
             {
+                var ccc = c.GetComponent2<SpriteRenderer>();
                 foreach(SpriteRenderer sRen in c.components)
                 {
                     sRen.Render(canvas,c);
