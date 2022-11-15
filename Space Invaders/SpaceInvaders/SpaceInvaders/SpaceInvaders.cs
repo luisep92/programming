@@ -8,6 +8,7 @@ namespace SpaceInvaders
         Image img;
         public void OnDraw(IAssetManager manager, IWindow window, ICanvas canvas)
         {
+            Time.CountTime();
             canvas.SetCamera(World.X.Min(), World.Y.Min(), World.X.Max(), World.Y.Max(), true);
             ClearCanvas(canvas, black);
             if (isDebugging)
@@ -21,7 +22,7 @@ namespace SpaceInvaders
 
         public void OnLoad(IAssetManager manager, IWindow window)
         {
-            img = manager.LoadImage("resources/fire1");
+            img = manager.LoadImage("resources/fire1.png");
         }
 
         public void OnUnload(IAssetManager manager, IWindow window)

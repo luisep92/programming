@@ -8,28 +8,25 @@ namespace SpaceInvaders
 {
     internal class Time
     {
-        static int currentMs = MiliSeconds();
-        int s = 0;
+        public static int currentMs = MiliSeconds();
+        public static int second = 0;
         
         public static void CountTime()
         {
-
-            for (int i = 0; i < 10000000; i++)
+            if (currentMs != MiliSeconds())
             {
-                if (currentMs != MiliSeconds())
+               
+                currentMs = MiliSeconds();
+
+                if (currentMs == 0)
                 {
-                    Console.Write(MiliSeconds());
-                    currentMs = MiliSeconds();
+                    second++;
                 }
-                Console.WriteLine(MiliSeconds());
             }
         }
         public static int MiliSeconds()
         {
             return DateTime.UtcNow.Millisecond;
         }
-    }
-
-        
-    
+    } 
 }
