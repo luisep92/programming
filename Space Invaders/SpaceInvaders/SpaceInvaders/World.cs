@@ -6,10 +6,13 @@ namespace SpaceInvaders
     {
         public static Vector2 X = new Vector2(-5, 5);
         public static Vector2 Y = new Vector2(-10, 10);
+        public List<GameObject> WorldObjects = new List<GameObject>();
 
         public static Vector2 Dimensions()
         {
             return Vector2.Diference(X, Y);
         }
+
+
     }
 }

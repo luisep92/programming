@@ -8,25 +8,23 @@ namespace SpaceInvaders
 {
     internal class Time
     {
-        public static int currentMs = MiliSeconds();
-        public static int second = 0;
-        
+        static float _dTime = 0;
+        static DateTime time1 = DateTime.Now;
+        static  DateTime time2 = DateTime.Now;
+
+        public static float dTime { get { return _dTime; } }
+
         public static void CountTime()
         {
-            if (currentMs != MiliSeconds())
-            {
-               
-                currentMs = MiliSeconds();
-
-                if (currentMs == 0)
-                {
-                    second++;
-                }
-            }
+            _dTime += (float)DeltaTime();
         }
-        public static int MiliSeconds()
+
+        public static double DeltaTime()
         {
-            return DateTime.UtcNow.Millisecond;
+            time2 = DateTime.Now;
+            float deltaTime = (time2.Ticks - time1.Ticks) / 10000000f;
+            time1 = time2;
+            return deltaTime;
         }
     } 
 }

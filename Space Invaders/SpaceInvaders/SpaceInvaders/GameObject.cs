@@ -8,7 +8,7 @@ namespace SpaceInvaders
 {
     internal class GameObject
     {
-        Transform transform;
+        public Transform transform;
         List<Component> components = new List<Component>();
         public GameObject(Transform transform)
         {
