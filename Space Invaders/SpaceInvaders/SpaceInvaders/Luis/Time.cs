@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceInvaders
+namespace Luis
 {
     internal class Time
     {
         static float _dTime = 0;
         static DateTime time1 = DateTime.Now;
-        static  DateTime time2 = DateTime.Now;
+        static DateTime time2 = DateTime.Now;
 
         public static float dTime { get { return _dTime; } }
 

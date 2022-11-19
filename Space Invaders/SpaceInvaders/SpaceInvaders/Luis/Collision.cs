@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceInvaders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,16 @@ namespace Luis
             if (pos2.x + size2.x < pos1.x)
                 return false;
             return true;
+        }
+
+        public static GameObject GetObjectCollisioning(Transform obj, List<GameObject> tag)
+        {
+            foreach (GameObject go in tag)
+            {
+                if (SquareCollision(obj.position, obj.size, go.transform.position, go.transform.size))
+                    return go;
+            }
+            return null;
         }
     }
 }

@@ -34,6 +34,13 @@ namespace Luis
                 return x;
             return y;
         }
+        public static Vector2 Zero => new Vector2(0.0f, 0.0f);
+        public string ToString()
+        {
+            string vx = x.ToString("F2");
+            string vy = y.ToString("F2");
+            return "(" + vx + ", " + vy + ")";
+        }
         #endregion
 
         #region TOOLS
