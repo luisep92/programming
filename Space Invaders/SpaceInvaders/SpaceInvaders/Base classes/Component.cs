@@ -26,7 +26,7 @@ namespace SpaceInvaders
                 Behavior(canvas);
             }
         }
-        public virtual void DoInput(IKeyboard keyboard)
+        public void DoInput(IKeyboard keyboard)
         {
             if (this.isEnabled)
             {

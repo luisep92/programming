@@ -1,9 +1,4 @@
 ﻿using SpaceInvaders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Luis
 {
@@ -11,13 +6,18 @@ namespace Luis
     {
         public static bool SquareCollision(Vector2 pos1, Vector2 size1, Vector2 pos2, Vector2 size2)
         {
-            if(pos2.x > pos1.x + size1.x) 
+            float posi1x = pos1.x - size1.x / 2; 
+            float posi1y = pos1.y - size1.y / 2;
+            float posi2x = pos2.x - size2.x / 2;
+            float posi2y = pos2.y - size2.y / 2;
+
+            if(posi1x > posi2x + size2.x) 
                 return false;
-            if (pos2.y > pos1.y + size1.y)
+            if (posi1y > posi2y + size2.y)
                 return false;
-            if (pos2.y + size2.y < pos1.y)
+            if (posi1y + size1.y < posi2y)
                 return false;
-            if (pos2.x + size2.x < pos1.x)
+            if (posi1x + size1.x < posi2x)
                 return false;
             return true;
         }

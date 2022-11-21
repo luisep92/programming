@@ -20,7 +20,11 @@ namespace SpaceInvaders
 
         public override void OnCollision(GameObject go)
         {
-            Console.WriteLine(go.tag);
+            if(go.tag == Tag.ENEMY)
+            {
+                GameObject.Destroy(go);
+                GameObject.Destroy(this.gameObject);
+            }
         }
 
         void Move()
@@ -28,6 +32,7 @@ namespace SpaceInvaders
             gameObject.transform.position.y += 15f * Time.deltaTime;
         }
 
+      
 
         
         public static GameObject prefab(Tag tag)

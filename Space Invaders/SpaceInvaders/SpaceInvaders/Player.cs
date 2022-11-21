@@ -35,11 +35,8 @@ namespace SpaceInvaders
         {
             Move(keyboard);
             Shoot(keyboard);
-            if(Input.GetKeyDown(keyboard, Keys.F))
-                Console.WriteLine(gameObject.components);
         }
         #endregion
-
         #region METHODS
         public void Shoot(IKeyboard k)
         {
@@ -131,7 +128,7 @@ namespace SpaceInvaders
             GameObject go = new GameObject();
             Renderer ren = new Renderer(go);
             Vector2 size = new Vector2(2, 2);
-            Player player = new Player(7f, size, go, manager);
+            Player player = new Player(10f, size, go, manager);
 
             player.ren = ren;
 
@@ -147,7 +144,7 @@ namespace SpaceInvaders
         {
             GameObject go = new GameObject();
             Renderer ren = new Renderer(go);
-            Animator anim = new Animator(ren, 0.4f, go);
+            Animator anim = new Animator(ren, 0.2f, go);
 
             go.transform.size.x = 0.5f;
 

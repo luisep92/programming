@@ -5,10 +5,10 @@ namespace SpaceInvaders
 {
     internal class Animator : Component
     {
-        float t = 0;
-        int i = 0;
         public float time;
         public Renderer ren;
+        float t = 0;
+        int i = 0;
 
         public Animator(Renderer renderer, float time, GameObject parent)
         {
