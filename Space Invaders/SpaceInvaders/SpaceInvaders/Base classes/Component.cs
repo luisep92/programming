@@ -33,5 +33,10 @@ namespace SpaceInvaders
                 Inputs(keyboard);
             }
         }
+
+        public virtual void OnCollision(GameObject gameObject)
+        {
+
+        }
     }
 }

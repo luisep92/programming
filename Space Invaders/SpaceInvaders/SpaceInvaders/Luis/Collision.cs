@@ -22,12 +22,15 @@ namespace Luis
             return true;
         }
 
-        public static GameObject GetObjectCollisioning(Transform obj, List<GameObject> tag)
+        public static GameObject GetObjectCollisioning(Transform obj, List<GameObject> objects)
         {
-            foreach (GameObject go in tag)
+            foreach (GameObject go in objects)
             {
-                if (SquareCollision(obj.position, obj.size, go.transform.position, go.transform.size))
-                    return go;
+                if(obj != go.transform)
+                {
+                    if (SquareCollision(obj.position, obj.size, go.transform.position, go.transform.size))
+                        return go;
+                }
             }
             return null;
         }

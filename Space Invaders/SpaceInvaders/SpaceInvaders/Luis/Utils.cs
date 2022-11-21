@@ -1,4 +1,5 @@
 ﻿using DAM;
+using SpaceInvaders;
 
 namespace Luis
 {
@@ -10,7 +11,7 @@ namespace Luis
         #region DEBUG
         public static void RenderGrid(ICanvas canvas, IWindow window, float minX, float minY, float maxX, float maxY)
         {
-            float width = 0.03f;
+            float width = 0.08f;
             float w = maxX - minX;
             float h = maxY - minY;
 
@@ -21,16 +22,16 @@ namespace Luis
 
             for (float i = minX; i <= maxX; i += 1)
             {
-                FillRectangle(canvas, i, minY, width, h, Color.grey);
+                FillRectangle(canvas, i, minY, width, h, Color.Grey(0.6f));
             }
             for(float i = minY; i <= maxY; i+= 1)
             {
-                FillRectangle(canvas, minX, i, w, width, Color.grey);
+                FillRectangle(canvas, minX, i, w, width, Color.Grey(0.6f));
             }
         }
         public static void RenderGrid(ICanvas canvas, IWindow window, Vector2 x, Vector2 y)
         {
-            float width = 0.03f;
+            float width = 0.08f;
             Vector2 size = Vector2.Diference(x, y);
 
             if (window.Width < 500 || window.Height < 500)
@@ -40,11 +41,11 @@ namespace Luis
 
             for (float i = x.Min(); i <= x.Max(); i += 1)
             {
-                FillRectangle(canvas, i, y.Min(), width, size.y, Color.Grey(0.7f));
+                FillRectangle(canvas, i, y.Min(), width, size.y, Color.Grey(0.6f));
             }
             for (float i = y.Min(); i <= y.Max(); i += 1)
             {
-                FillRectangle(canvas, x.Min(), i, size.x, width, Color.Grey(0.7f));
+                FillRectangle(canvas, x.Min(), i, size.x, width, Color.Grey(0.6f));
             }
         }
         public static void SetDebugMode(IKeyboard keyboard)
@@ -53,6 +54,11 @@ namespace Luis
                 isDebugging = true;
             else
                 isDebugging = false;
+        }
+        public static void Debug(ICanvas canvas, IWindow window)
+        {
+            if (isDebugging)
+                RenderGrid(canvas, window, World.X, World.Y);
         }
         #endregion
 

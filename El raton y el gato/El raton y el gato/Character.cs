@@ -153,7 +153,7 @@ namespace El_raton_y_el_gato
                 else
                     direction.y = 0;
             }
-            else
+            else //random
             {
                 int seed = (int)(TomAndJerry.time * 10) % 250;
                 if(seed == 0)

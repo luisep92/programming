@@ -60,7 +60,7 @@ namespace El_raton_y_el_gato
             Image cat = assetManager.LoadImage("resources/cat.png");
             Image rat = assetManager.LoadImage("resources/rat.png");
 
-            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), Color.red, cat, 60f));
+            list.Add(new Character(Type.CAT, new Vector2(2, 0), new Vector2(2f,2f), Color.red, cat, 600f));
             list.Add(new Character(Type.RAT, new Vector2(-2, 0), new Vector2(2f, 2f), Color.white, rat, 60f));
 
             return list;

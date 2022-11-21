@@ -1,6 +1,5 @@
 ﻿using DAM;
 using Luis;
-using OpenTK.Graphics.OpenGL;
 using static Luis.Utils;
 
 namespace SpaceInvaders
@@ -10,10 +9,13 @@ namespace SpaceInvaders
         public Image sprite;
         public List<Image> sprites = new List<Image>();
         public float opacity = 0.99999f;
+        public RGBA color = Color.white;
 
         public Renderer(GameObject parent)
         {
             gameObject = parent;
+
+            parent.AddComponent(this);
         }
         public void RenderRectangle(ICanvas canvas, GameObject go, RGBA color)
         {
@@ -50,7 +52,10 @@ namespace SpaceInvaders
 
         public override void Behavior(ICanvas canvas)
         {
-            Render(canvas);
+            if (sprite != null)
+                Render(canvas);
+            else
+                RenderRectangle(canvas, gameObject, color);
         }
     }
 }
