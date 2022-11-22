@@ -12,29 +12,29 @@ namespace SpaceInvaders
         public GameObject gameObject;
         public bool isEnabled = true;
 
-        public virtual void Behavior(ICanvas canvas)
+        public virtual void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
         }
-        public virtual void Inputs(IKeyboard keyboard)
+        public virtual void Inputs(IKeyboard keyboard, IAssetManager manager, World world)
         {
         }
 
-        public void DoBehavior(ICanvas canvas)
+        public void DoBehavior(ICanvas canvas,IAssetManager manager, World world)
         {
             if (this.isEnabled)
             {
-                Behavior(canvas);
+                Behavior(canvas, manager, world);
             }
         }
-        public void DoInput(IKeyboard keyboard)
+        public void DoInput(IKeyboard keyboard, IAssetManager manager, World world)
         {
             if (this.isEnabled)
             {
-                Inputs(keyboard);
+                Inputs(keyboard, manager, world);
             }
         }
 
-        public virtual void OnCollision(GameObject gameObject)
+        public virtual void OnCollision(GameObject gameObject,IAssetManager manager, World world)
         {
 
         }

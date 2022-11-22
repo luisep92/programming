@@ -13,29 +13,43 @@ namespace SpaceInvaders
             gameObject.AddComponent(this);
         }
 
-        public override void Behavior(ICanvas canvas)
+        public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
-            Move();
+            Move(world);
         }
 
-        public override void OnCollision(GameObject go)
+        public override void OnCollision(GameObject go, IAssetManager manager, World world)
         {
             if(go.tag == Tag.ENEMY)
             {
-                GameObject.Destroy(go);
-                GameObject.Destroy(this.gameObject);
+                go.GetComponent<Enemy>().GetDamage(world, manager);
+                DestroyBullet(world);
             }
-        }
+        }       
 
-        void Move()
+        void Move(World world)
         {
             gameObject.transform.position.y += 15f * Time.deltaTime;
+            LimitMovement(world);
         }
 
-      
+        void LimitMovement(World world)
+        {
+            Transform thisT = this.gameObject.transform;
+            float limit = world.Y.Max() + thisT.size.y / 2;
+            if (thisT.position.y > limit)
+            {
+                DestroyBullet(world);
+            } 
+        }
 
+        void DestroyBullet(World world)
+        {
+            world.Destroy(this.gameObject, world.bulletPool);
+        }
+      
         
-        public static GameObject prefab(Tag tag)
+        public static GameObject Prefab(Tag tag)
         {
             GameObject go = new GameObject();
             Renderer ren = new Renderer(go);

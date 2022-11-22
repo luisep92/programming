@@ -15,17 +15,17 @@ namespace SpaceInvaders.Base_classes
             thisTransform = gameObject.transform;
         }
 
-        public override void Behavior(ICanvas canvas)
+        public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
-            DetectCollision();
+            DetectCollision(manager, world);
         }
 
-        public void DetectCollision()
+        public void DetectCollision(IAssetManager manager, World world)
         {
-            GameObject go = Collision.GetObjectCollisioning(thisTransform, World.WorldObjects);
+            GameObject go = Collision.GetObjectCollisioning(thisTransform, world.WorldObjects);
             if (go != null)
             {
-                comp.OnCollision(go);
+                comp.OnCollision(go, manager, world);
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using DAM;
 using Luis;
-using OpenTK.Graphics.OpenGL;
-using static SpaceInvaders.World;
+
 
 namespace SpaceInvaders
 {
@@ -26,25 +25,25 @@ namespace SpaceInvaders
         }
         #endregion
         #region BEHAVIOR
-        public override void Behavior(ICanvas canvas)
+        public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
-            SetFire(canvas);
+            SetFire(canvas, manager, world);
         }
 
-        public override void Inputs(IKeyboard keyboard)
+        public override void Inputs(IKeyboard keyboard, IAssetManager manager, World world)
         {
-            Move(keyboard);
-            Shoot(keyboard);
+            Move(keyboard, world);
+            Shoot(keyboard, world, manager);
         }
         #endregion
         #region METHODS
-        public void Shoot(IKeyboard k)
+        public void Shoot(IKeyboard k, World world, IAssetManager manager)
         {
             if(Input.GetKeyDown(k, Keys.Space))
             {
                 Transform thisT = this.gameObject.transform;
                 Vector2 shootPos = new Vector2(thisT.position.x, thisT.position.y + thisT.size.y / 2) ;
-                GameObject.Instantiate(Bullet.prefab(Tag.PLAYER), shootPos);
+                world.Instantiate(shootPos, world.bulletPool, manager);
             }
         }
         public void SetDirection(IKeyboard keyboard)
@@ -57,11 +56,11 @@ namespace SpaceInvaders
             else direction.x = 0;
         }
 
-        public void Move(IKeyboard keyboard)
+        public void Move(IKeyboard keyboard, World world)
         {
             MovePosition(keyboard);
             SetSprite();
-            LimitMovement();
+            LimitMovement(world);
         }
         void MovePosition(IKeyboard keyboard)
         {
@@ -69,27 +68,27 @@ namespace SpaceInvaders
             SetDirection(keyboard);
             t.position.x += direction.x;
         }
-        void LimitMovement()
+        void LimitMovement(World world)
         {
             Transform t = this.gameObject.transform;
-            if (t.position.x > X.Max() - t.size.x / 2)
-                t.position.x = X.Max() - t.size.x / 2;
-            if (t.position.x < X.Min() + t.size.x / 2)
-                t.position.x = X.Min() + t.size.x / 2;
-            if (t.position.y > Y.Max() - t.size.y / 2)
-                t.position.y = Y.Max() - t.size.y / 2;
-            if (t.position.y < Y.Min() + t.size.y / 2)
-                t.position.y = Y.Min() + t.size.y / 2;
+            if (t.position.x > world.X.Max() - t.size.x / 2)
+                t.position.x = world.X.Max() - t.size.x / 2;
+            if (t.position.x < world.X.Min() + t.size.x / 2)
+                t.position.x = world.X.Min() + t.size.x / 2;
+            if (t.position.y > world.Y.Max() - t.size.y / 2)
+                t.position.y = world.Y.Max() - t.size.y / 2;
+            if (t.position.y < world.Y.Min() + t.size.y / 2)
+                t.position.y = world.Y.Min() + t.size.y / 2;
         }
        
-        private void SetFire(ICanvas canvas)
+        private void SetFire(ICanvas canvas,IAssetManager manager, World world)
         {
             Transform thisT = gameObject.transform;
             float offsetX = FireDist() * thisT.size.x / 2;
             SetFirePos(fireR, offsetX);
             SetFirePos(fireL, -offsetX);
-            fireR.Behavior(canvas);
-            fireL.Behavior(canvas);
+            fireR.Behavior(canvas, manager, world);
+            fireL.Behavior(canvas, manager, world);
 
 
             void SetFirePos(GameObject go, float offsetX)

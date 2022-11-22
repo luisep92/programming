@@ -5,20 +5,20 @@ namespace SpaceInvaders
 {
     internal class Spawner
     {
-        static float time = 2;
+        static float time = 3f;
         static float timeToSpawn = 5f;
-        public static void SpawnEnemies(IAssetManager manager)
+        public static void SpawnEnemies(IAssetManager manager, World world)
         {
             time += Time.deltaTime;
             if(time >= timeToSpawn)
             {
-                for (int i = (int)World.X.Min() + 3; i <= World.X.Max() - 3; i += 3)
+                for (int i = (int)world.X.Min() + 3; i <= world.X.Max() - 3; i += 3)
                 {
-                    GameObject.Instantiate(Enemy.Prefab(manager), new Vector2(i, World.Y.Max() - 2));
+                    Vector2 spawnPos = new Vector2(i, world.Y.Max() - 2);
+                    world.Instantiate(spawnPos, world.enemyPool, manager);
                 }
                 time = 0;
             }
-                
         }
     }
 }

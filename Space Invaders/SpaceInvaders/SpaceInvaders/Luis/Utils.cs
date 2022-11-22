@@ -55,10 +55,10 @@ namespace Luis
             else
                 isDebugging = false;
         }
-        public static void Debug(ICanvas canvas, IWindow window)
+        public static void Debug(ICanvas canvas, IWindow window, World world)
         {
             if (isDebugging)
-                RenderGrid(canvas, window, World.X, World.Y);
+                RenderGrid(canvas, window, world.X, world.Y);
         }
         #endregion
 

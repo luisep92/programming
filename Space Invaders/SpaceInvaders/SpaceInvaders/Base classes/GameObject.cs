@@ -29,26 +29,31 @@ namespace SpaceInvaders
         { 
             isActive = active;
         }
-        public void Behavior(ICanvas canvas)
+        #region BEHAVIOR
+        //Comportamiento en OnDraw
+        public void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
             if (this.isActive)
             {
                 foreach (Component c in components)
                 {
-                    c.DoBehavior(canvas);
+                    c.DoBehavior(canvas, manager, world);
                 }
             }
         }
-        public void Behavior(IKeyboard keyboard)
+        //Comportamiento en OnKeyboard
+        public void Behavior(IKeyboard keyboard, IAssetManager manager, World world)
         {
             if (this.isActive)
             {
                 foreach (Component c in components)
                 {
-                    c.DoInput(keyboard);
+                    c.DoInput(keyboard, manager, world);
                 }
             }
         }
+        #endregion
+
         public static GameObject Instantiate(GameObject go, Vector2 position)
         {
             toInstance.Add(go);
@@ -56,31 +61,32 @@ namespace SpaceInvaders
             go.transform.position.y = position.y;
             return go;
         }
-        public static void Destroy(GameObject gameObject)
+        public static void Destroy(GameObject gameObject,World world)
         {
-            foreach(GameObject go in World.WorldObjects)
+            foreach(GameObject go in world.WorldObjects)
             {
                 if(go == gameObject)
                     toDestroy.Add(go);
             }
         }
-        public static void InstanceAndDestroyObjects()
+        public static void InstanceAndDestroyObjects(World world)
         {
-            InstanceObjects();
-            DestroyObjects();
+            InstanceObjects(world);
+            DestroyObjects(world);
         }
-        static void InstanceObjects()   //COMENTAR, tuve que hacerlo porque no puedo modificar una lista mientras la itero
+        static void InstanceObjects(World world)   //COMENTAR, tuve que hacerlo porque no puedo modificar una lista mientras la itero
         {
             foreach(GameObject go in toInstance)
-                World.WorldObjects.Add(go);
+                world.WorldObjects.Add(go);
             toInstance.Clear();
         }
-        static void DestroyObjects()
+        static void DestroyObjects(World world)
         {
             foreach (GameObject go in toDestroy)
-                World.WorldObjects.Remove(go);
+                world.WorldObjects.Remove(go);
             toDestroy.Clear();
         }
+
         /*  public Component GetComponent<T>()    COMENTAR A JAVI - lo tuve que cambiar para que devolviese el tipo del que es, no un COMPONENT
           {
               foreach (Component c in components)
@@ -92,6 +98,7 @@ namespace SpaceInvaders
               }
               return null;
           }*/
+        #region COMPONENTS
         public T GetComponent<T>()
         {
             foreach (Component c in components)
@@ -126,5 +133,6 @@ namespace SpaceInvaders
                     components.Remove(comp);
             }
         }
+        #endregion
     }
 }

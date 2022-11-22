@@ -50,7 +50,7 @@ namespace SpaceInvaders
                 opacity);
         }
 
-        public override void Behavior(ICanvas canvas)
+        public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
             if (sprite != null)
                 Render(canvas);
