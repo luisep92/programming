@@ -87,17 +87,6 @@ namespace SpaceInvaders
             toDestroy.Clear();
         }
 
-        /*  public Component GetComponent<T>()    COMENTAR A JAVI - lo tuve que cambiar para que devolviese el tipo del que es, no un COMPONENT
-          {
-              foreach (Component c in components)
-              {
-                  var type = c.GetType();
-                  if(type == typeof(T))
-                      return c;
-
-              }
-              return null;
-          }*/
         #region COMPONENTS
         public T GetComponent<T>()
         {

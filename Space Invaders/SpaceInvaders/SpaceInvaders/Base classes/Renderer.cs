@@ -8,7 +8,6 @@ namespace SpaceInvaders
     {
         public Image sprite;
         public List<Image> sprites = new List<Image>();
-        public float opacity = 0.99999f;
         public RGBA color = Color.white;
 
         public Renderer(GameObject parent)
@@ -46,8 +45,8 @@ namespace SpaceInvaders
                 t.size.x,
                 t.size.y,
                 this.sprite,
-                0f, 0f, 1f, 1f, 1f, 1f, 1f,
-                opacity);
+                0f, 0f, 1f, 1f, (float)color.r, (float)color.g, (float)color.b,
+                (float)color.a);
         }
 
         public override void Behavior(ICanvas canvas, IAssetManager manager, World world)

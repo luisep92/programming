@@ -71,14 +71,14 @@ namespace Luis
         {
             canvas.FillRectangle(x, y, w, h, (float)color.r, (float)color.g, (float)color.b, (float)color.a);
         }
-      /*  public static float PingPong()
+        public static float PingPong(float incrementalValue)
         {
-            return ((float)Math.Sin(time) + 1f) / 2f;
+            return ((float)Math.Sin(SpaceInvaders.SpaceInvaders.time) + 1f) / 2f;
         }
-        public static float PingPong(float maxValue)
+        public static float PingPong(float incrementalValue, float maxValue)
         {
-            return (((float)Math.Sin(time) + 1f) / 2f)*maxValue;
-        }*/
+            return (((float)Math.Sin(incrementalValue) + 1f) / 2f)*maxValue;
+        }
         public static void ClearCanvas(ICanvas canvas, RGBA color)
         {
             canvas.Clear((float)color.r, (float)color.g, (float)color.b, (float)color.a);

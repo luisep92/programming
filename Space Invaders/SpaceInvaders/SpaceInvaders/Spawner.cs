@@ -12,7 +12,7 @@ namespace SpaceInvaders
             time += Time.deltaTime;
             if(time >= timeToSpawn)
             {
-                for (int i = (int)world.X.Min() + 3; i <= world.X.Max() - 3; i += 3)
+                for (float i = (int)world.X.Min() + 2; i <= world.X.Max() - 2; i += world.Dimensions().x/5)
                 {
                     Vector2 spawnPos = new Vector2(i, world.Y.Max() - 2);
                     world.Instantiate(spawnPos, world.enemyPool, manager);

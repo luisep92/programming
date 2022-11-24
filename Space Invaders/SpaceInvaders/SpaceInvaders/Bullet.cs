@@ -22,10 +22,11 @@ namespace SpaceInvaders
         {
             if(go.tag == Tag.ENEMY)
             {
-                go.GetComponent<Enemy>().GetDamage(world, manager);
+                Enemy.GetEnemyType(go).GetDamage(world, manager);
                 DestroyBullet(world);
             }
         }       
+
 
         void Move(World world)
         {

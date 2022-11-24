@@ -1,13 +1,16 @@
 ﻿using DAM;
 using Luis;
-using System.Runtime.CompilerServices;
+using System.Drawing.Drawing2D;
 
 namespace SpaceInvaders
 {
     internal class Enemy : Component
     {
-        public float health = 1;
-        float speed;
+        public float health = 3;
+        public float speed;
+        public static List<Image> enemySprites = new List<Image>();
+        public float damageTime = 5f;
+        Renderer ren = null;
         
         public Enemy(float speed, GameObject parent)
         {
@@ -18,14 +21,20 @@ namespace SpaceInvaders
 
         public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
+            damageTime += Time.deltaTime;
             Move(world);
+            GetDamageAnim();
         }
 
-        private void Move(World world)
+    
+
+        public virtual void Move(World world)
         {
             this.gameObject.transform.position.y -= speed * Time.deltaTime;
             LimitMovement(world);
         }
+
+       
 
         private void LimitMovement(World world)
         {
@@ -38,34 +47,70 @@ namespace SpaceInvaders
         public void GetDamage(World world, IAssetManager manager)
         {
             health -= 1;
+            damageTime = 0;
             if (health <= 0)
                 Die(world, manager);
+        }
+
+
+        public void GetDamageAnim()
+        {
+            if(ren != null)
+            {
+                if (damageTime < 0.15f)
+                    ren.color = Color.red;
+                else
+                    ren.color = Color.white;
+            }
+            else
+            {
+                ren = this.gameObject.GetComponent<Renderer>();
+            }
         }
 
         private void Die(World world, IAssetManager manager)
         {
             this.gameObject.GetComponent<Animator>().Reset();
             DestroyEnemy(world);
-            GameObject.Instantiate(Particles.Explosion(manager), this.gameObject.transform.position);
+            GameObject.Instantiate(Particles.RandomExplosion(), this.gameObject.transform.position);
+           
         }
 
-        void DestroyEnemy(World world)
+        public virtual void DestroyEnemy(World world)
         {
+            damageTime = 5f;
             world.Destroy(this.gameObject, world.enemyPool);
+        }
+
+
+        public static void FillImageList(IAssetManager manager)
+        {
+            enemySprites.Add(manager.LoadImage("resources/enemy.png"));
+            enemySprites.Add(manager.LoadImage("resources/enemy2.png"));
+        }
+
+        public static Enemy GetEnemyType(GameObject go)
+        {
+            foreach(Component c in go.components)
+            {
+                Type type = c.GetType();
+                if (type == typeof(Enemy) || type == typeof(EnemyMad))
+                    return c as Enemy;
+            }
+            return null;
         }
 
         public static GameObject Prefab(IAssetManager manager)
         {
             GameObject go = new GameObject();
+            Enemy enemy = new Enemy(3f, go);
             Renderer ren = new Renderer(go);
-            Enemy enemy = new Enemy(1.5f,go);
             Animator anim = new Animator(ren, 0.5f, go);
 
             go.transform.size = new Vector2(1, 2);
             go.tag = Tag.ENEMY;
 
-            ren.sprites.Add(manager.LoadImage("resources/enemy.png"));
-            ren.sprites.Add(manager.LoadImage("resources/enemy2.png"));
+            ren.sprites = enemySprites;
             ren.sprite = ren.sprites[0];
 
             go.transform.size.x = go.transform.size.y * Utils.AspectRatio(ren.sprite.Width, ren.sprite.Height);
