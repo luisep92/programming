@@ -5,7 +5,14 @@ namespace SpaceInvaders
 {
     internal class Particles
     {
-
+        static List<Image> explosionImages = new List<Image>();
+        public static void ChargeExplostionSprites(IAssetManager manager)
+        {
+            for (int i = 1; i < 20; i++)
+            {
+                explosionImages.Add(manager.LoadImage("resources/Explosion/" + i + ".png"));
+            }
+        }
         public static GameObject Explosion(IAssetManager manager)
         {
             GameObject go = new GameObject();
@@ -16,7 +23,7 @@ namespace SpaceInvaders
 
             for(int i = 1; i < 20; i++)
             {
-                ren.sprites.Add(manager.LoadImage("resources/Explosion/" + i + ".png"));
+                ren.sprites = explosionImages;
             }
             ren.sprite = ren.sprites[0];
 

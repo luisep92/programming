@@ -35,6 +35,7 @@ namespace SpaceInvaders
         {
             Vector2 playerPos = new Vector2(0, world.Y.Min() + 3f);
             GameObject.Instantiate(Player.prefab(manager), playerPos);
+            Particles.ChargeExplostionSprites(manager);
         }
 
         public void OnUnload(IAssetManager manager, IWindow window)
