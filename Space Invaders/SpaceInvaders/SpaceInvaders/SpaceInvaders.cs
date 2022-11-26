@@ -37,12 +37,15 @@ namespace SpaceInvaders
 
         public void OnLoad(IAssetManager manager, IWindow window)
         {
+            world.background = manager.LoadImage("resources/background.jpg");
+            GameObject.Instantiate(Parallax.Background(world), Vector2.Zero);
             Vector2 playerPos = new Vector2(0, world.Y.Min() + 3f);
             GameObject.Instantiate(Player.prefab(manager), playerPos);
             Enemy.FillImageList(manager);
             Particles.FillSpriteList(manager);
             EnemyMad.FillSpriteList(manager);
-            world.background = manager.LoadImage("resources/background.jpg");
+            
+            
         }
 
         public void OnUnload(IAssetManager manager, IWindow window)

@@ -5,10 +5,12 @@ namespace SpaceInvaders
 {
     internal class World
     {
-        public Vector2 X = new Vector2(-20, 20);
-        public Vector2 Y = new Vector2(-25, 25);
+        public Vector2 X = new Vector2(-15, 15);
+        public Vector2 Y = new Vector2(-20, 20);
         public List<GameObject> WorldObjects = new List<GameObject>();
         public Image background;
+        float noiseTime = 5f;
+
 
         public Vector2 Dimensions()
         {
@@ -17,7 +19,19 @@ namespace SpaceInvaders
 
         public void SetCamera(ICanvas canvas, World world)
         {
-            canvas.SetCamera(world.X.Min(), world.Y.Min(), world.X.Max(), world.Y.Max(), true);
+            canvas.SetCamera(world.X.Min() + Noise(), world.Y.Min() + Noise(), world.X.Max() + Noise(), world.Y.Max() + Noise(), true);
+        }
+
+        public void Shake()
+        {
+            noiseTime = 0;
+        }
+        float Noise()
+        {
+            if (noiseTime < 0.35f)
+                return Utils.RandomRange(-0.3f, 0.3f);
+            else
+                return 0;
         }
 
         #region POOLING SYSTEM
@@ -81,7 +95,7 @@ namespace SpaceInvaders
 
         public void OnDrawBehavior(ICanvas canvas, IAssetManager manager, World world)
         {
-            canvas.FillRectangle(world.X.Min(), world.Y.Min(), world.Dimensions().x, world.Dimensions().y, world.background, 0, 0, 1, 1, 1, 1, 1, 1);
+            noiseTime += Time.deltaTime;
             foreach (GameObject go in WorldObjects)
             {
                 go.Behavior(canvas, manager, world);

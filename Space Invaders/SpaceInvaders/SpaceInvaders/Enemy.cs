@@ -72,6 +72,7 @@ namespace SpaceInvaders
         {
             this.gameObject.GetComponent<Animator>().Reset();
             DestroyEnemy(world);
+            world.Shake();
             GameObject.Instantiate(Particles.RandomExplosion(), this.gameObject.transform.position);
            
         }
@@ -79,6 +80,7 @@ namespace SpaceInvaders
         public virtual void DestroyEnemy(World world)
         {
             damageTime = 5f;
+            health = 3;
             world.Destroy(this.gameObject, world.enemyPool);
         }
 
@@ -103,7 +105,7 @@ namespace SpaceInvaders
         public static GameObject Prefab(IAssetManager manager)
         {
             GameObject go = new GameObject();
-            Enemy enemy = new Enemy(3f, go);
+            Enemy enemy = new Enemy(2f, go);
             Renderer ren = new Renderer(go);
             Animator anim = new Animator(ren, 0.5f, go);
 

@@ -87,7 +87,7 @@ namespace SpaceInvaders
         public static GameObject Prefab(IAssetManager manager)
         {
             GameObject go = new GameObject();
-            EnemyMad enemy = new EnemyMad(3f, go);
+            EnemyMad enemy = new EnemyMad(2f, go);
             Renderer ren = new Renderer(go);
             Animator anim = new Animator(ren, 0.5f, go);
 
