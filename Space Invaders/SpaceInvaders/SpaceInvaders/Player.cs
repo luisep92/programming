@@ -129,6 +129,7 @@ namespace SpaceInvaders
             Vector2 size = new Vector2(2, 2);
             Player player = new Player(10f, size, go, manager);
 
+            ren.paintTrail = true;
             player.ren = ren;
 
             ren.sprites.Add(manager.LoadImage("resources/ship2.png"));

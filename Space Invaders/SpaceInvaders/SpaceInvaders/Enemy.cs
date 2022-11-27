@@ -10,7 +10,7 @@ namespace SpaceInvaders
         public float speed;
         public static List<Image> enemySprites = new List<Image>();
         public float damageTime = 5f;
-        Renderer ren = null;
+        Renderer renderer = null;
         
         public Enemy(float speed, GameObject parent)
         {
@@ -55,32 +55,31 @@ namespace SpaceInvaders
 
         public void GetDamageAnim()
         {
-            if(ren != null)
+            if(renderer != null)
             {
                 if (damageTime < 0.15f)
-                    ren.color = Color.red;
+                    renderer.color = Color.red;
                 else
-                    ren.color = Color.white;
+                    renderer.color = Color.white;
             }
             else
             {
-                ren = this.gameObject.GetComponent<Renderer>();
+                renderer = this.gameObject.GetComponent<Renderer>();
             }
         }
 
         private void Die(World world, IAssetManager manager)
         {
-            this.gameObject.GetComponent<Animator>().Reset();
             DestroyEnemy(world);
             world.Shake();
             GameObject.Instantiate(Particles.RandomExplosion(), this.gameObject.transform.position);
-           
         }
 
         public virtual void DestroyEnemy(World world)
         {
             damageTime = 5f;
             health = 3;
+            this.gameObject.GetComponent<Animator>().Reset();
             world.Destroy(this.gameObject, world.enemyPool);
         }
 

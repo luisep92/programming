@@ -63,7 +63,7 @@ namespace SpaceInvaders
             {
                 time = 0;
                 isSpinning = false;
-                cooldown = Utils.RandomRange(1.25f, 5f);
+                cooldown = Utils.RandomRange(1.25f, 3.5f);
                 int ran = (int)Utils.RandomRange(1f, 2.99999f);
                 if (ran == 1)
                     reverse = false;
