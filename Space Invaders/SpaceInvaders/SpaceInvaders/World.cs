@@ -71,7 +71,7 @@ namespace SpaceInvaders
             else
             {
                 if (pool == bulletPool)
-                    GameObject.Instantiate(Bullet.Prefab(Tag.PLAYER), position);
+                    GameObject.Instantiate(Bullet.Prefab(Tag.DEFAULT), position);
                 else
                 {
                     if((int)Utils.RandomRange(1f, 2.99f) == 1)

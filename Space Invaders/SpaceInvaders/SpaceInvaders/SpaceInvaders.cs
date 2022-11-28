@@ -30,7 +30,7 @@ namespace SpaceInvaders
             if (Input.GetKeyDown(keyboard, Keys.F)) //TEST ENEMIGOS
             {
                 float posX = RandomRange(world.X.Min() + 2, world.X.Max() - 2);
-                GameObject.Instantiate(Enemy.Prefab(manager), new Vector2(0, 5));
+                GameObject.Instantiate(PowerUp.SpeedPrefab(), new Vector2(0, 5));
             }
             
         }
@@ -44,7 +44,7 @@ namespace SpaceInvaders
             Enemy.FillImageList(manager);
             Particles.FillSpriteList(manager);
             EnemyMad.FillSpriteList(manager);
-            
+            PowerUp.SetSprites(manager);
             
         }
 

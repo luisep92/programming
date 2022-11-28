@@ -7,7 +7,7 @@ namespace SpaceInvaders
     internal class Player : Component
     {
         Vector2 direction = new Vector2();
-        float speed;
+        public float speed;
         GameObject fireR;
         GameObject fireL;
         Renderer ren;
@@ -129,7 +129,6 @@ namespace SpaceInvaders
             Vector2 size = new Vector2(2, 2);
             Player player = new Player(10f, size, go, manager);
 
-            ren.paintTrail = true;
             player.ren = ren;
 
             ren.sprites.Add(manager.LoadImage("resources/ship2.png"));
