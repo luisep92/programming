@@ -18,7 +18,7 @@ namespace SpaceInvaders
             ClearCanvas(canvas, black);
             Debug(canvas, window, world);
             world.OnDrawBehavior(canvas, manager, world);
-            Spawner.SpawnEnemies(manager, world);
+            Spawner.SpawnObjects(manager, world);
             world.PoolObjects();
             GameObject.InstanceAndDestroyObjects(world);
         }
@@ -40,12 +40,13 @@ namespace SpaceInvaders
             world.background = manager.LoadImage("resources/background.jpg");
             GameObject.Instantiate(Parallax.Background(world), Vector2.Zero);
             Vector2 playerPos = new Vector2(0, world.Y.Min() + 3f);
-            GameObject.Instantiate(Player.prefab(manager), playerPos);
+            GameObject player =  GameObject.Instantiate(Player.prefab(manager), playerPos);
             Enemy.FillImageList(manager);
             Particles.FillSpriteList(manager);
             EnemyMad.FillSpriteList(manager);
             PowerUp.SetSprites(manager);
-            
+            GameObject hud = GameObject.Instantiate(Overlay.HUD(player), new Vector2(world.X.Max() + 2, 0));
+            hud.GetComponent<Overlay>().Init(world, manager);
         }
 
         public void OnUnload(IAssetManager manager, IWindow window)

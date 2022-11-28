@@ -122,6 +122,16 @@ namespace SpaceInvaders
                     components.Remove(comp);
             }
         }
+
+        public static T FindObjectsOfType<T>(World world)
+        {
+            foreach(GameObject go in world.WorldObjects)
+            {
+                if (go.GetComponent<T>() != null)
+                    return go.GetComponent<T>();
+            }
+            return default;
+        }
         #endregion
     }
 }

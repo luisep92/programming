@@ -11,6 +11,7 @@ namespace SpaceInvaders
         GameObject fireR;
         GameObject fireL;
         Renderer ren;
+        public int health = 5;
 
         #region CONSTRUCTOR
         public Player(float speed, Vector2 size, GameObject parent, IAssetManager manager)
@@ -34,6 +35,8 @@ namespace SpaceInvaders
         {
             Move(keyboard, world);
             Shoot(keyboard, world, manager);
+            if (Input.GetKeyDown(keyboard, Keys.G))
+                GetDamage(world);
         }
         #endregion
         #region METHODS
@@ -81,6 +84,12 @@ namespace SpaceInvaders
                 t.position.y = world.Y.Min() + t.size.y / 2;
         }
        
+        public void GetDamage(World world)
+        {
+            health -= 1;
+            Overlay ol = GameObject.FindObjectsOfType<Overlay>(world);
+            ol.Update();
+        }
         private void SetFire(ICanvas canvas,IAssetManager manager, World world)
         {
             Transform thisT = gameObject.transform;

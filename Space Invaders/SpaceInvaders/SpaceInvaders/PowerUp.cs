@@ -34,7 +34,7 @@ namespace SpaceInvaders
         {
             Vector2 pos = this.gameObject.transform.position;
             pos.y -= 10 * Time.deltaTime;
-            pos.x += (float)Math.Sin(time * 5) * 0.1f;
+            pos.x += (float)Math.Sin(time * 5) * 20 * Time.deltaTime;
         }
 
         public static void SetSprites(IAssetManager manager)
