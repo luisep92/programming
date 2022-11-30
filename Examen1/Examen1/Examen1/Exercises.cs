@@ -46,6 +46,8 @@ namespace Examen1
         }
         #endregion
         #region EXERCISE 4
+
+        // Pensaba que por el numero del medio te referías a "b", por eso lo hice así
         public static int GetMinor(int a, int b)
         {
             if (a < b)
