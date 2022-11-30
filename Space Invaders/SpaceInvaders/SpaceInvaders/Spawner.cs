@@ -25,7 +25,7 @@ namespace SpaceInvaders
             if(timePowerUpSpawn >= nextPowerUp)
             {
                 Vector2 pos = new Vector2(Utils.RandomRange(world.X.Min() + 3, world.X.Max() - 3), world.Y.Max() - 2);
-                GameObject.Instantiate(PowerUp.SpeedPrefab(), pos);
+                GameObject.Instantiate(PowerUp.RandomPowerUp(), pos);
                 timePowerUpSpawn = 0;
                 nextPowerUp = Utils.RandomRange(5f, 14f);
             }

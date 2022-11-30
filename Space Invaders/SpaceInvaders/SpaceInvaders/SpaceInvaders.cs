@@ -30,9 +30,8 @@ namespace SpaceInvaders
             if (Input.GetKeyDown(keyboard, Keys.F)) //TEST ENEMIGOS
             {
                 float posX = RandomRange(world.X.Min() + 2, world.X.Max() - 2);
-                GameObject.Instantiate(PowerUp.SpeedPrefab(), new Vector2(0, 5));
+                GameObject.Instantiate(PowerUp.RandomPowerUp(), new Vector2(0, 5));
             }
-            
         }
 
         public void OnLoad(IAssetManager manager, IWindow window)
