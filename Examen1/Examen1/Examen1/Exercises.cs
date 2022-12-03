@@ -8,19 +8,26 @@ namespace Examen1
 {
     internal class Exercises
     {
+        // Venga, ..., como veo que insiste, explicaré esto en clase para que todo el mundo lo haga
+        // porque es una buena idea
         #region EXERCISE 1
+        // Nota: 2
         public static double Exercise1 (int a, int b)
         {
+            // Te colaste aquí
             return (a + 1) / b;
         }
         #endregion
         #region EXERCISE 2
+        // Nota: 4
         public static double Exercise2 (double a, double b, double c, double d, double e, double x)
         {
+            // Hombre, ya de paso, podías haberlo optimizado un poco
             return a * (x * x * x * x) + b * (x * x * x) + c * (x * x) + d * (x) + e;
         }
         #endregion
         #region EXERCISE 3
+        // Nota: 4
         public static int GetMinor(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)
         {
             int result = a;
@@ -60,6 +67,7 @@ namespace Examen1
                 return b;
             return a;
         }
+        // Nota: 0, ..., esto no era lo que pedía el ejercicio
         public static int Exercise4(int a, int b, int c)
         {
             int dist1, dist2;
@@ -75,6 +83,7 @@ namespace Examen1
         }
         #endregion
         #region EXERCISE 5
+        // Nota: 4
         public static int GetDigits(int n)
         {
             int digits = 1;
@@ -88,6 +97,7 @@ namespace Examen1
         }
         #endregion
         #region EXERCISE 6
+        // Nota: 4
         public static int Exercise6(int n)
         {
             if (n <= 0)
@@ -105,6 +115,7 @@ namespace Examen1
             }
             return false;
         }
+        // Nota: 4
         public static (int, int) Exercise7(string s)
         {
             int min = int.MinValue;
@@ -136,6 +147,7 @@ namespace Examen1
         #region EXERCISE 8
         public static bool IsPrime(int n)
         {
+            // Muy bien
             if (n <= 1)
                 return false;
 
@@ -146,6 +158,7 @@ namespace Examen1
             }
             return true;
         }
+        // Nota: 4
         public static int GetPrimePosition(int n)
         {
             if (IsPrime(n))
@@ -174,6 +187,7 @@ namespace Examen1
                 return state.ENDED;
             return state.PREPARED;
         }
+        // Nota: 4, muy bien!!!!!!!!
         public static state Exercise9(state s, bool next)
         {
             if(next)
@@ -182,6 +196,7 @@ namespace Examen1
         }
         #endregion
         #region EXERCISE 10
+        // Nota: 4
         public static int SumDivisors(int n)
         {
             int result = 0;
@@ -195,6 +210,7 @@ namespace Examen1
         }
         #endregion
         #region EXERCISE 11
+        // Nota: 4
         public static double Exercise11(double a, double b, double c, double d, double e,
                                         double xMin, double xMax, double sampler)
         {
