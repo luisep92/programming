@@ -74,7 +74,7 @@ namespace SpaceInvaders
             InstanceObjects(world);
             DestroyObjects(world);
         }
-        static void InstanceObjects(World world)   //COMENTAR, tuve que hacerlo porque no puedo modificar una lista mientras la itero
+        static void InstanceObjects(World world)
         {
             foreach(GameObject go in toInstance)
                 world.WorldObjects.Add(go);
@@ -83,7 +83,10 @@ namespace SpaceInvaders
         static void DestroyObjects(World world)
         {
             foreach (GameObject go in toDestroy)
+            {
+                go.components.Clear();
                 world.WorldObjects.Remove(go);
+            }
             toDestroy.Clear();
         }
 

@@ -1,6 +1,6 @@
 ﻿using DAM;
 using Luis;
-
+using SpaceInvaders.Base_classes;
 
 namespace SpaceInvaders
 {
@@ -11,7 +11,22 @@ namespace SpaceInvaders
         GameObject fireR;
         GameObject fireL;
         Renderer ren;
-        public int health = 5;
+        int _health = 5;
+
+        public static Player instance;
+
+        public int health
+        {
+            get { return _health; }
+            set
+            {
+                _health = value;
+                if (_health < 0)
+                    _health = 0;
+                if(_health > 5)
+                    _health = 5;
+            }
+        }
 
         #region CONSTRUCTOR
         public Player(float speed, Vector2 size, GameObject parent, IAssetManager manager)
@@ -36,7 +51,15 @@ namespace SpaceInvaders
             Move(keyboard, world);
             Shoot(keyboard, world, manager);
             if (Input.GetKeyDown(keyboard, Keys.G))
-                GetDamage(world);
+                GetDamage(world, 1);
+        }
+        public override void OnCollision(GameObject gameObject, IAssetManager manager, World world)
+        {
+            if(gameObject.tag == Tag.ENEMY)
+            {
+                GetDamage(world, 2);
+                Enemy.GetEnemyType(gameObject).GetDamage(world, manager, 15);
+            }
         }
         #endregion
         #region METHODS
@@ -84,11 +107,9 @@ namespace SpaceInvaders
                 t.position.y = world.Y.Min() + t.size.y / 2;
         }
        
-        public void GetDamage(World world)
+        public void GetDamage(World world, int quantity)
         {
-            health -= 1;
-            Overlay ol = GameObject.FindObjectsOfType<Overlay>(world);
-            ol.Update();
+            health -= quantity;
         }
         private void SetFire(ICanvas canvas,IAssetManager manager, World world)
         {
@@ -137,6 +158,7 @@ namespace SpaceInvaders
             Renderer ren = new Renderer(go);
             Vector2 size = new Vector2(2, 2);
             Player player = new Player(10f, size, go, manager);
+            Collider col = new Collider(player, go);
 
             player.ren = ren;
 

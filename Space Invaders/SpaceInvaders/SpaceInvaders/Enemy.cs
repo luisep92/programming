@@ -36,17 +36,20 @@ namespace SpaceInvaders
 
        
 
-        private void LimitMovement(World world)
+        protected void LimitMovement(World world)
         {
             Transform thisT = this.gameObject.transform;
             float limit = world.Y.Min() - thisT.size.y / 2;
             if (thisT.position.y < limit)
+            {
                 DestroyEnemy(world);
+                Player.instance.GetDamage(world, 1);
+            }
         }
 
-        public void GetDamage(World world, IAssetManager manager)
+        public void GetDamage(World world, IAssetManager manager, int quantity)
         {
-            health -= 1;
+            health -= quantity;
             damageTime = 0;
             if (health <= 0)
                 Die(world, manager);

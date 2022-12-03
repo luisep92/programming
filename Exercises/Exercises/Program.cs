@@ -10,8 +10,9 @@ namespace Exercises
     {
         static void Main(string[] args)
         {
-            
-           Console.WriteLine(Exercises.SimplifyFraction(8,16));
+
+            ClassA a = new ClassC();
+            a.M1();
         }
     }
 }

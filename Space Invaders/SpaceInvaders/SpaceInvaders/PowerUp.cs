@@ -62,8 +62,6 @@ namespace SpaceInvaders
                 else if(this.type == PowerUpType.HEAL)
                 {
                     gameObject.GetComponent<Player>().health += 1;
-                    Overlay ol = GameObject.FindObjectsOfType<Overlay>(world);
-                    ol.Update();
                 }
                 GameObject.Destroy(this.gameObject, world);
             }

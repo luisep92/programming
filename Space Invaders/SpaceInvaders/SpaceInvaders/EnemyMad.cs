@@ -15,7 +15,7 @@ namespace SpaceInvaders
         public EnemyMad(float speed, GameObject parent) : base(speed, parent)
         {
         }
-
+       
         public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
             damageTime += Time.deltaTime;
@@ -31,6 +31,7 @@ namespace SpaceInvaders
         {
             center.y -= speed * Time.deltaTime;
             DoCircles(5f, 5f);
+            LimitMovement(world);
         }
 
         private void DoCircles(float speed, float radius)

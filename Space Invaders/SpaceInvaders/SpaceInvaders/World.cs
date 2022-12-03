@@ -6,7 +6,7 @@ namespace SpaceInvaders
     internal class World
     {
         public Vector2 X = new Vector2(-15, 15);
-        public Vector2 Y = new Vector2(-25, 25);
+        public Vector2 Y = new Vector2(-20, 20);
         public List<GameObject> WorldObjects = new List<GameObject>();
         public Image background;
         float noiseTime = 5f;
