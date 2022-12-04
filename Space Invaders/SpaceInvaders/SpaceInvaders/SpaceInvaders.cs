@@ -32,14 +32,6 @@ namespace SpaceInvaders
         {
             SetDebugMode(keyboard);
             world.InputBehavior(keyboard, manager, world);
-
-         /*   if (Input.GetKeyDown(keyboard, Keys.F)) //TEST ENEMIGOS
-            {
-                float posX = RandomRange(world.X.Min() + 2, world.X.Max() - 2);
-                GameObject m = GameObject.Instantiate(Meteor.Prefab(), new Vector2(world.X.Min()-3, 0));
-                if (m.GetComponent<Meteor>().reverse)
-                    m.transform.position.x *= -1;
-            }*/
         }
 
         public void OnLoad(IAssetManager manager, IWindow window)
