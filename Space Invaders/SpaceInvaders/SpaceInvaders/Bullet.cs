@@ -49,7 +49,10 @@ namespace SpaceInvaders
             world.Destroy(this.gameObject, world.bulletPool);
         }
       
-        
+      
+        // Interesante, ...., de esto tenemos que hablar, ..., segun entiendo por tu código, en Unity el concepto de GameObject es sólo
+        // un punto de anclaje entre otra entidad superior y el mundo. Esa entidad superior puede ser una cosa como un Bullet, que es el que tiene
+        // semántica, ... Entonces, ..., un humano es tambien un componente?
         public static GameObject Prefab(Tag tag)
         {
             GameObject go = new GameObject();
