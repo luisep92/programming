@@ -4,7 +4,7 @@ namespace Luis
 {
     internal class Time
     {
-          
+          // Yo no hubiese puesto estas cosas como variables de clase
          static DateTime time1 = DateTime.Now;
          static DateTime time2 = DateTime.Now;
 
