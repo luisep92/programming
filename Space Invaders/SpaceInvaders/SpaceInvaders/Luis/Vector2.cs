@@ -50,6 +50,7 @@ namespace Luis
             float dy = a.y - b.y;
             return (float)Math.Sqrt(dx * dx + dy * dy);
         }
+        // Esto tenías que haberlo puesto con sobrecarga de operadores
         public static Vector2 Diference(Vector2 vec1, Vector2 vec2)
         {
             return new Vector2(vec1.Max() - vec1.Min(), vec2.Max() - vec2.Min());
