@@ -8,6 +8,7 @@ namespace SpaceInvaders
     {
         public float health = 3;
         public float speed;
+        // Podrías intentar enfocar esto a una variable que no sea static?
         public static List<Image> enemySprites = new List<Image>();
         public float damageTime = 5f;
         Renderer renderer = null;
