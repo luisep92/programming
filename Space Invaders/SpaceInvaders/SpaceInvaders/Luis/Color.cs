@@ -9,6 +9,7 @@ namespace Luis
 {
     public class Color
     {
+        // Esto es muy buena idea, coméntamelo en clase, ..., en verdad deberían ser const
         public static RGBA red = new RGBA(1, 0, 0, 0.99999f);
         public static RGBA white = new RGBA(1, 1, 1, 0.99999f);
         public static RGBA black = new RGBA(0, 0, 0, 0.99999f);
