@@ -53,6 +53,7 @@ namespace SpaceInvaders
         }
 
 
+        // A esto no tenías que llamarlo prefab??
         static GameObject Images(Image img, World world)
         {
             GameObject go = new GameObject();
