@@ -3,6 +3,7 @@ using Luis;
 
 namespace SpaceInvaders
 {
+    // Yo la hubiese llamado SpriteAnimator
     internal class Animator : Component
     {
         float time;
@@ -26,6 +27,11 @@ namespace SpaceInvaders
             gameObject.AddComponent(this);
             this.destroyOnEnd = destroyOnEnd;
         }
+        // Esto se podría y se debería hacer así
+        // public Animator(Renderer renderer, float time, GameObject parent, bool destroyOnEnd) : base(renderer, time, GameObject parent)
+        // {
+        //     this.destroyOnEnd = destroyOnEnd;
+        // }
 
         public override void Behavior(ICanvas canvas, IAssetManager manager, World world)
         {
