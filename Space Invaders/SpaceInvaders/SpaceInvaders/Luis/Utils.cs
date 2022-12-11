@@ -9,6 +9,7 @@ namespace Luis
         public static bool isDebugging = false;
 
         #region DEBUG
+        // Muy bueno esto, voy a ver si lo puedo añadir también a la librería de DAM
         public static void RenderGrid(ICanvas canvas, IWindow window, float minX, float minY, float maxX, float maxY)
         {
             float width = 0.08f;
