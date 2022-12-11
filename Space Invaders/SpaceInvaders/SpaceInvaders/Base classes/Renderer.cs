@@ -72,6 +72,7 @@ namespace SpaceInvaders
 
         void UpdateTrailPos()
         {
+            // Quizás para esto me hubiese hecho otro componente
             if(trail >= 0.05f)
             {
                 trail = 0;
