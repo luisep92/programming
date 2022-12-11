@@ -61,6 +61,8 @@ namespace SpaceInvaders
             go.transform.position.y = position.y;
             return go;
         }
+        // Tienes que explicarme por qué usas el mundo aquí, ..., en clase haremos la semana que viene cosas con árboles
+        // ,..., no has querido meterte con eso, verdad?
         public static void Destroy(GameObject gameObject,World world)
         {
             foreach(GameObject go in world.WorldObjects)
