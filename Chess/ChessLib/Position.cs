@@ -19,7 +19,6 @@ namespace ChessLib
 
         public bool operator == (Position pos1, Position pos2)
         {
-
         }
     }
 }
