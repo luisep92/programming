@@ -181,7 +181,12 @@ namespace Exercises
             }
             return result;
         }
-
+        int[] arr = { 1, 2, 2, 2, 3, 4, 5, 5 };
+        Vector3[] arr2 = new Vector3[5];
+        int[,] TABLERO =    { { 1, 2, 3, 4 },
+                              { 1, 2, 3, 4 },
+                              { 1, 2, 3, 4 },
+                              { 1, 2, 3, 4 }};
         public static int CalculateProductoryRecursive(int n)
         {
             if (n < 1)
@@ -229,7 +234,30 @@ namespace Exercises
                 return Circular(n + range, min, max);
             return n;
         }
+        public static int Circular(int n, int min, int max)
+        {
+            int range = max - min;
 
+            if (n > max)
+                return Circular(n - range, min, max);
+            if (n < min)
+                return Circular(n + range, min, max);
+            return n;
+        }
+        public static void RotateLeft(int[] arr, int displacement)
+        {
+            for(int i = 0; i < arr.Length; i++)
+            {
+                int t1 = Circular((arr.Length - displacement + i), 0 , (arr.Length));
+                int t2 = Circular(arr.Length - displacement - displacement + i, 0, arr.Length);
+                int te1 = arr[t1];
+                int te2 = arr[t2];
+
+                arr[t1] = arr[i];
+                arr[t2] = te1;
+
+            }
+        }
         public static double Circular2(double n, double min, double max)
         {
             double range = max - min;

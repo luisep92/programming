@@ -20,8 +20,6 @@ namespace ChessLib
 
         public static Position operator +(Position pos1, Position pos2)
         {
-<<<<<<< Updated upstream
-=======
             int x = pos1.x + pos2.x;
             int y = pos1.y + pos2.y;
             return new Position(x, y);
@@ -40,7 +38,6 @@ namespace ChessLib
         public override string ToString()
         {
             return "(" + this.x + ", " + this.y + ")";
->>>>>>> Stashed changes
         }
     }
 }

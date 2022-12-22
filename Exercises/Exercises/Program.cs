@@ -3,6 +3,7 @@ using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace Exercises
 {
@@ -11,6 +12,7 @@ namespace Exercises
         static int[] asd = { 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11};
         static void Main(string[] args)
         {
+<<<<<<< Updated upstream
             RotateLeft(asd, 3);
             string au = "";
             for(int i = 0; i < asd.Length; i++)
@@ -51,6 +53,30 @@ namespace Exercises
         
         public static void RotateLeft2(int[] arr, int disp)
         {
+=======
+            Console.WriteLine("sadf");
+            Console.ReadKey();
+            Console.WriteLine("asfas");
+        }
+        
+
+
+            
+            
+            
+            
+            
+            
+            
+        public static bool Exists<T>(T[] array, T item)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i].Equals(item))
+                    return true;
+            }
+            return false;
+>>>>>>> Stashed changes
         }
     }
 }
