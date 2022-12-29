@@ -4,22 +4,24 @@ using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Exercises
 {
     internal class Program
     {
-        static int[] asd = { 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11};
+        static int[] asd = { 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12};
+        static int[] assd = { 1, 2};
         static void Main(string[] args)
         {
-<<<<<<< Updated upstream
-            RotateLeft(asd, 3);
-            string au = "";
+            RotateLeft3(asd, 3);
+
+            string fin = "";
             for(int i = 0; i < asd.Length; i++)
             {
-                au += asd[i] + ", ";
+                fin += asd[i] + ", ";
             }
-            Console.WriteLine(au);
+            Console.WriteLine(fin);
         }
         public static int Circular(int n, int min, int max)
         {
@@ -50,24 +52,24 @@ namespace Exercises
                 arr[arr.Length - disp - 2] = aux;
             }
         }
-        
-        public static void RotateLeft2(int[] arr, int disp)
+       
+        public static void Flip(int[] arr, int max)
         {
-=======
-            Console.WriteLine("sadf");
-            Console.ReadKey();
-            Console.WriteLine("asfas");
+            for (int i = 0; i < max >> 1; i++)
+            {
+                int tmp = arr[i];
+                arr[i] = arr[max - i - 1];
+                arr[max - i - 1] = tmp;
+            }
         }
-        
+        public static void RotateLeft3(int[] arr, int disp)
+        {
+           Flip(arr, disp );
+           Flip(arr, arr.Length);
+           Flip(arr, arr.Length - disp);
+        }
 
 
-            
-            
-            
-            
-            
-            
-            
         public static bool Exists<T>(T[] array, T item)
         {
             for (int i = 0; i < array.Length; i++)
@@ -76,7 +78,6 @@ namespace Exercises
                     return true;
             }
             return false;
->>>>>>> Stashed changes
         }
     }
 }
