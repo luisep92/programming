@@ -36,5 +36,10 @@ namespace Exercises
 
             return Math.Sqrt(distX + distY + distZ);
         }
+        public override string ToString()
+        {
+            return x.ToString();
+        }
+        
     }
 }
