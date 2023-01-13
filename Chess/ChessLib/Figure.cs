@@ -24,18 +24,14 @@ namespace ChessLib
                 LimitPosition(_position);
             }
         }
-        
-
         public Figure(int x, int y, Color color)
         {
             SetPosition = new Position(x, y);
             _color = color;
         }
-
         public abstract FigureType GetFigureType();
         public delegate bool Validator(Position position, Color color);
-        public abstract List<Position> GetAvailablePositions(Validator isValidPosition);
-        
+        public abstract List<Position> GetAvailablePositions(IBoard board);
         void LimitPosition(Position pos)
         {
             if (pos.x < 1)
@@ -48,5 +44,15 @@ namespace ChessLib
                 pos.y = 8;
         }
 
+        public virtual bool IsValidPosition(Position nextPos, IBoard board)
+        {
+            Figure figureAtPos = board.GetFigureAt(nextPos);
+            if (nextPos.x < 1 || nextPos.y < 1 || nextPos.x > 8 || nextPos.y > 8)
+                return false;
+            if (board.IsOccupedBySameColor(nextPos, this.Color))
+                return false;
+
+            return true;
+        }
     }
 }

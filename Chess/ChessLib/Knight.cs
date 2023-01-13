@@ -15,14 +15,14 @@ namespace ChessLib
         {
             return FigureType.KNIGHT;
         }
-        public override List<Position> GetAvailablePositions(Validator isValidPosition)
+        public override List<Position> GetAvailablePositions(IBoard board)
         {
             List<Position> positions = new List<Position>();
 
             for(int i = 0; i < 8; i++)
             {
                 Position pos = AvailablePosition(i);
-                if (isValidPosition(pos, this.Color))
+                if (IsValidPosition(pos, board))
                     positions.Add(pos);
             }
             return positions;

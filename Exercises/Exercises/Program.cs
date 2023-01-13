@@ -19,7 +19,7 @@ namespace Exercises
         static void Main(string[] args)
         {
             #region SORT
-            /*GenericArray<int> arr = new GenericArray<int>(6);
+            GenericArray<int> arr = new GenericArray<int>(6);
 
              arr.SetItem(0, 1);
              arr.SetItem(1, 35);
@@ -28,46 +28,52 @@ namespace Exercises
              arr.SetItem(4, 5);
              arr.SetItem(5, 6);
 
-            /*GenericArray<Vector3> arr2 = new GenericArray<Vector3>(4);
+            GenericArray<Vector3> arr2 = new GenericArray<Vector3>(4);
 
             arr2.SetItem(0, new Vector3(32, 0, 23));
             arr2.SetItem(1, new Vector3(22, 0, 23));
             arr2.SetItem(2, new Vector3(78, 0, 23));
             arr2.SetItem(3, new Vector3(10, 0, 23));
 
-            Orderer<int> ord = (int a, int b) =>
+            Comparator<int> ord = (int a, int b) =>
             {
                 if (a > b) return 1;
                 if (a == b) return 0;
                     return -1;
             };
-            Orderer<Vector3> ord2 = (Vector3 a, Vector3 b) =>
+            Comparator<string> ordStr = (string a, string b) =>
+            {
+                if (a.Length > b.Length) return 1;
+                if (a == b) return 0;
+                return -1;
+            };
+            Comparator<Vector3> ord2 = (Vector3 a, Vector3 b) =>
             {
                 if (a.x > b.x) return 1;
                 if (a.x == b.x) return 0;
                 return -1;
             };
             
-            Console.WriteLine(arr.IndexOf(325).ToString());*/
+            Console.WriteLine(arr.IndexOf(325).ToString());
             #endregion
             #region BINARYSEARCH
-            /* GenericArray<int> arr = new GenericArray<int>(6);
+             GenericArray<int> arr3 = new GenericArray<int>(6);
 
-             arr.SetItem(0, 1);
-             arr.SetItem(1, 2);
-             arr.SetItem(2, 3);
-             arr.SetItem(3, 4);
-             arr.SetItem(4, 5);
-             arr.SetItem(5, 6);
+             arr3.SetItem(0, 1);
+             arr3.SetItem(1, 2);
+             arr3.SetItem(2, 3);
+             arr3.SetItem(3, 4);
+             arr3.SetItem(4, 5);
+             arr3.SetItem(5, 6);
 
-             Comparator<int> ord = (int a, int b) =>
+             Comparator<int> ord3 = (int a, int b) =>
              {
                  if (a > b) return 1;
                  if (a == b) return 0;
                  return -1;
              };
 
-             Console.WriteLine(arr.BinarySearch(5, ord));*/
+             Console.WriteLine(arr.BinarySearch(5, ord3));
             #endregion
             /* GenericArray<string> ads = new GenericArray<string>() { "3", "2", "3" , "4"};
              string asd = "asd";

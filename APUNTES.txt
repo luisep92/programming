@@ -1,0 +1,4 @@
+ref int -> pasar vaor por referencia
+in int -> pasar valor por referencia pero solo permite lextura
+out int -> pasar valor por referencia pero solo permite escritura
+objetos se guardan en el heap, lo demas en el stack

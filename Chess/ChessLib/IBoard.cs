@@ -9,8 +9,11 @@ namespace ChessLib
     public interface IBoard
     {
         Figure GetFigureAt(Position position);
+        Figure GetFigureAt(int x, int y);
         void MoveFigures(Figure figure, Position position);
-        bool IsValidPosition(Position position, Color color);
+        bool IsOccupedBySameColor(Position position, Color color);
+        bool IsOccuped(Position position);
+        bool IsCheck(Position position, Color color);
 
     }
 }

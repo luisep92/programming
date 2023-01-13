@@ -54,7 +54,7 @@ namespace SpaceInvaders
         }
         #endregion
 
-        public static GameObject Instaantiate(GameObject go, Vector2 position)
+        public static GameObject Instantiate(GameObject go, Vector2 position)
         {
             toInstance.Add(go);
             go.transform.position.x = position.x;
