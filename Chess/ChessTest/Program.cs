@@ -20,7 +20,14 @@ namespace ChessTest
             {
                 Console.WriteLine(position.ToString());
             }
-
+            Console.WriteLine(f.GetPosition + "a");
+            board.MoveFigures(f, f.GetAvailablePositions(board)[1]);
+            Console.WriteLine(f.GetPosition + "a");
+            positions = f.GetAvailablePositions(board);
+            foreach (Position position in positions)
+            {
+                Console.WriteLine(position.ToString());
+            }
         }
     }
 }
