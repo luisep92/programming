@@ -6,7 +6,7 @@ namespace ChessGame
     {
         static void Main(string[] args)
         {
-            DAM.Game.Launch(new Sample_FillImage());
+            DAM.Game.Launch(new Game());
         }
     }
 }
