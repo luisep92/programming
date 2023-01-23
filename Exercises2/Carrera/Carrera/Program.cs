@@ -4,10 +4,10 @@
     {
         static void Main(string[] args)
         {
-             for(int i = 0;i < 20; i++)
-             {
-                SimulateRace();
-             }
+            Punt2D puntoA = new Punt2D(1,1);
+            Punt2D puntoB = new Punt2D(2, 2);
+
+            Segment2D segment = new Segment2D(puntoA, puntoB);
         }
 
         public static void SimulateRace()
