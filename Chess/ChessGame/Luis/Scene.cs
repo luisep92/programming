@@ -94,12 +94,12 @@ namespace Luis
            }
        }
   
-       public void OnDrawBehavior(ICanvas canvas, IAtomicDecoder manager, Scene world)
+       public void OnDrawBehavior(ICanvas canvas, IAtomicDecoder manager)
        {
            noiseTime += Time.deltaTime;
            foreach (GameObject go in WorldObjects)
            {
-               go.Behavior(canvas, manager, world);
+               go.Behavior(canvas, manager, this);
            }
        }
        #endregion

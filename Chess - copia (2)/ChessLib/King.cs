@@ -22,7 +22,7 @@ namespace ChessLib
             for (int i = 0; i < 8; i++)
             {
                 Position pos = AvailablePosition(i);
-                if (IsValidPosition(pos, board) && !board.IsCheck(pos,this.Color))
+                if (IsValidPosition(pos, board) && !board.IsCheck(this,pos))
                     positions.Add(pos);
             }
             return positions;

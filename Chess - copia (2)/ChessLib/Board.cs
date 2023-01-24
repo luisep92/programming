@@ -48,23 +48,19 @@ namespace ChessLib
         {
             _figures.Add(f);
         }
-        public bool IsCheck(Position pos, Color color)
+        public bool IsCheck(Figure fig, Position pos)
         {
-            for(int i = 0; i < _figures.Count; i++)
+            Position aux = fig.GetPosition;
+            fig.SetPosition = pos;
+            foreach(Figure f in _figures)
             {
-                Figure f = _figures[i];
-                if (f.Color == color)
-                    continue;
-
-                List<Position> positions = _figures[i].GetAvailablePositions(this);
-                for (int j = 0; j < positions.Count; j++)
+                if(f.Color != fig.Color && f.IsInList(pos, this))
                 {
-                    if(positions[j] == pos)
-                    {
-                        return true;
-                    }
+                    fig.SetPosition = aux;
+                    return true;
                 }
             }
+            fig.SetPosition = aux;
             return false;
         }
     }

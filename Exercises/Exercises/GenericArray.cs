@@ -209,5 +209,4 @@ namespace Exercises
             return _array.GetEnumerator();
         }
     }
-
 }

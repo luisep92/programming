@@ -13,7 +13,6 @@ namespace ChessLib
         void MoveFigures(Figure figure, Position position);
         bool IsOccupedBySameColor(Position position, Color color);
         bool IsOccuped(Position position);
-        bool IsCheck(Position position, Color color);
-
+        bool IsCheck(Figure fig, Position pos);
     }
 }
