@@ -1,4 +1,5 @@
 ﻿using DAM;
+using OpenTK.Windowing.Common.Input;
 
 namespace Luis
 {
@@ -74,6 +75,10 @@ namespace Luis
         public static float AspectRatio(int width, int height)
         {
             return (float)width / (float)height;
+        }
+        public static IBuffer LoadImage(string path, GameDelegateEvent gameEvent)
+        {
+            return IAtomicDecoder.LoadFromFile(path).CloneToBuffer(gameEvent.canvasContext, new CreateBufferParams(), true);
         }
         #endregion
     }
