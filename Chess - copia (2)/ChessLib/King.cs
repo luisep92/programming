@@ -51,6 +51,23 @@ namespace ChessLib
                     return new Position(x, y - 1);
             }
         }
-       
+        public override bool IsInList(Position position, IBoard board)
+        {
+            List<Position> positions = new List<Position>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                Position pos = AvailablePosition(i);
+                if (IsValidPosition(pos, board))
+                    positions.Add(pos);
+            }
+            
+            foreach(Position p in positions)
+            {
+                if (p == position)
+                    return true;
+            }
+            return false;
+        }
     }
 }

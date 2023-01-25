@@ -13,7 +13,7 @@ namespace ChessLib
     {
         public Position _position;
         private Color _color;
-        IDrawable renderer;
+        public IDrawable? renderer;
 
         public Position GetPosition => _position;
         public Color Color => _color;
@@ -56,7 +56,7 @@ namespace ChessLib
             return true;
         }
 
-        public bool IsInList(Position pos, IBoard board)
+        public virtual bool IsInList(Position pos, IBoard board)
         {
             foreach(Position position in GetAvailablePositions(board))
             {

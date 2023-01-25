@@ -8,6 +8,6 @@ namespace ChessLib
 {
     public interface IDrawable
     {
-        public void Render(Figure figure);
+        public void RenderFigure(Figure figure);
     }
 }

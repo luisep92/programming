@@ -48,9 +48,8 @@ namespace ChessLib
 
         bool IsAtStart()
         {
-            return (this.GetPosition.y == 2 && this.Color == Color.WHITE) || (this.GetPosition.x == 7 && this.Color == Color.BLACK);
+            return (this.GetPosition.y == 2 && this.Color == Color.WHITE) ||
+                   (this.GetPosition.y == 7 && this.Color == Color.BLACK);
         }
-        
-
     }
 }
