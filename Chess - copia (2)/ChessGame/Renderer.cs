@@ -76,16 +76,20 @@ namespace ChessGame
             canvas.Transform.SetTranslation(pos.x, pos.y);
             canvas.FillRectangle(new Rect2D(0, 0, 1, 1));
         }
-        public static IBuffer? LoadImage(string path, GameDelegateEvent gameEvent)
+        public static IBuffer LoadImage(string path, GameDelegateEvent gameEvent)
         {
             try
             {
-                return IAtomicDecoder.LoadFromFile(path).CloneToBuffer(gameEvent.canvasContext, new CreateBufferParams(), true);
+                IBuffer? img = IAtomicDecoder.LoadFromFile(path).CloneToBuffer(gameEvent.canvasContext, new CreateBufferParams(), true);
+                if (img != null)
+                    return img;
+                else
+                    throw new Exception("Error al cargar la imagen con ruta: " + path);
             }
             catch
             {
                 Console.WriteLine("Error al cargar la imagen con ruta: " + path);
-                return null;
+                throw new NullReferenceException();
             }
         }
 
@@ -102,6 +106,9 @@ namespace ChessGame
         }
         public static IBuffer AssignImage(Figure fig)
         {
+            if (FigureImages == null)
+                return null;
+
             if(fig.GetFigureType() == FigureType.BISHOP)
             {
                 if (fig.Color == ChessLib.Color.WHITE)
