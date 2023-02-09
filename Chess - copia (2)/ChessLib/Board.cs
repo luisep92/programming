@@ -40,7 +40,12 @@ namespace ChessLib
             Figure fig = GetFigureAt(position);
             figure.SetPosition = position;
             if (fig != null)
+            {
                 _figures.Remove(fig);
+                if (fig.GetFigureType() == FigureType.KING)
+                    _figures.Clear();
+            }
+                
             CrownPawn(figure);
         }
 
@@ -85,6 +90,8 @@ namespace ChessLib
         }
         void GenerateFigures()
         {
+            _figures.Add(new King(5, 1, Color.WHITE));
+            _figures.Add(new King(4, 8, Color.BLACK));
             _figures.Add(new Tower(1,1,Color.WHITE));
             _figures.Add(new Tower(8,1,Color.WHITE));
             _figures.Add(new Tower(1,8,Color.BLACK));
@@ -99,8 +106,6 @@ namespace ChessLib
             _figures.Add(new Bishop(6,8,Color.BLACK));
             _figures.Add(new Queen(4,1,Color.WHITE));
             _figures.Add(new Queen(5,8,Color.BLACK));
-            _figures.Add(new King(5,1,Color.WHITE));
-            _figures.Add(new King(4,8,Color.BLACK));
             GeneratePawns();
         }
         void GeneratePawns()
