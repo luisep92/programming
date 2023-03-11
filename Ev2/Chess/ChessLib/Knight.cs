@@ -19,6 +19,7 @@ namespace ChessLib
         {
             List<Position> positions = new List<Position>();
 
+            // Javi: He visto este algoritmo en varias clases tuyas, ..., no hubiera sido mejor hacerte una funcion clases arriba?
             for(int i = 0; i < 8; i++)
             {
                 Position pos = AvailablePosition(i);
