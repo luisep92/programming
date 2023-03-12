@@ -13,10 +13,11 @@ namespace ChessLib
     {
         public Position _position;
         private Color _color;
-        public IDrawable? renderer;
-
+        
+        // Javi: Nombre horrible
         public Position GetPosition => _position;
-        public Color Color => _color;
+        internal Color Color => _color;
+        // Javi: Nombre igual de horrible
         internal Position SetPosition
         {
             set

@@ -16,7 +16,8 @@ namespace Tree
                 collection.Add (value);
                 return;
             }
-
+            
+            // Javi: Mal, usar GetIndexOf, ..., aparte, ..., no sé qué estás haciendo aquí
             for (int i = 0; i < collection.Count; i++)
             {
                 if (c(collection[i], value) == 1)

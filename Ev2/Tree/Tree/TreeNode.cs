@@ -30,6 +30,7 @@ namespace Tree
         {
         }
 
+        // Javi: Ufff!!! este constructor, .., y público, tiene mucho peligro, ..., está mal
         public TreeNode(TreeNode<T> parent, List<TreeNode<T>> children, T item)
         {
             _parent = new WeakReference<TreeNode<T>>(parent);
@@ -57,6 +58,7 @@ namespace Tree
         {
             if (child == null)
                 return;
+            // Javi: Mal!!!, Primero tienes que deslikar al hijo de su antiguo padre
             child._parent = new WeakReference<TreeNode<T>>(this);
             _children.Add(child);
         }
@@ -67,6 +69,7 @@ namespace Tree
             if (p == null)
                 return;
 
+            // Javi: MAL!!! es p.GetIndexOf(this)
             int index = GetIndexOf(this);
             p._children.RemoveAt(index);
             _parent = null;

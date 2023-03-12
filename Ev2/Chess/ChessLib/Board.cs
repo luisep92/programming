@@ -37,6 +37,7 @@ namespace ChessLib
 
         public void MoveFigures(Figure figure, Position position)
         {
+            // Javi: No entiendo, ..., está función por fuerza tiene que estar mal
             Figure fig = GetFigureAt(position);
             figure.SetPosition = position;
             if (fig != null)
