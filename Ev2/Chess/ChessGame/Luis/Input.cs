@@ -4,7 +4,6 @@ namespace Luis
 {
     internal class Input
     {
-        // Gracias Luís, esto lo voy a incluir en la siguiente Release de la librería de DAM
         static List<Keys> pressedKeys = new List<Keys>();
         static List<Keys> PressedKeysUp = new List<Keys>();
 

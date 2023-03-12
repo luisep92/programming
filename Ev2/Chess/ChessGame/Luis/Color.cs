@@ -13,7 +13,8 @@ namespace Luis
         public static RGBA yellow = new RGBA(1, 1, 0, 0.99999f);
         public static RGBA pink = new RGBA(1, 0, 1, 0.99999f);
         public static RGBA cyan = new RGBA(0, 1, 1, 0.99999f);
-        public static RGBA brown = new RGBA(0.82f, 0.41f, 0.12f, 0.99999f);
+        public static RGBA brown = new RGBA(0.7f, 0.41f, 0.0f, 0.99999f);
+        public static RGBA lightBrown = new RGBA(1f, 0.9f, 0.8f, 0.99999f);
 
         public static RGBA Red(float alpha)
         {

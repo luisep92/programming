@@ -11,11 +11,12 @@ namespace ChessLib
     public enum Color { BLACK, WHITE }
     public abstract class Figure
     {
-        private Position _position;
+        public Position _position;
         private Color _color;
-        
+        public IDrawable? renderer;
+
         public Position GetPosition => _position;
-        internal Color Color => _color;
+        public Color Color => _color;
         internal Position SetPosition
         {
             set
@@ -54,5 +55,18 @@ namespace ChessLib
 
             return true;
         }
+
+        public virtual bool IsInList(Position pos, IBoard board)
+        {
+            foreach(Position position in GetAvailablePositions(board))
+            {
+                if(position == pos)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
