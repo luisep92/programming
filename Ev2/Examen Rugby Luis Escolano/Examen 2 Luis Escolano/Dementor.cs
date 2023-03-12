@@ -22,6 +22,7 @@ namespace Examen_2_Luis_Escolano
         public override void Execute(Partido p)
         {
             double prob = Utils.RandomRange(0, 100);
+            // Javi: Aquí hubiese agradecido que llamaras a dos funciones como has hecho con el defensa
             if (prob < 50)
             {
                 List<Player> l = GetPlayersAround(p, 1);
