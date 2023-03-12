@@ -84,7 +84,7 @@ namespace Examen_2_Luis_Escolano
             if (_teamUp.Score < _teamDown.Score)
                 return _teamDown;
             else
-                return new Team("EMPATE", TeamSide.UP);
+                return new Team("EMPATE", TeamSide.UP); // Javi: Podrías haber puesto un valor en el enum que fuese UNKNOWN
         }
 
         public bool IsInside(Vector2 pos)
