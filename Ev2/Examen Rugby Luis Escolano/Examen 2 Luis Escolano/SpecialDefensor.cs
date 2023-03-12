@@ -26,6 +26,7 @@ namespace Examen_2_Luis_Escolano
             DisableCharacterAround(partido);            
         }
 
+        // Javi: Mejor, try to disable
         void DisableCharacterAround(Partido partido)
         {
             foreach (Player p in GetPlayersAround(partido, 1))
