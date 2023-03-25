@@ -17,10 +17,14 @@ namespace MineSweeperLib
 
         public Board(int width, int height, int bombs)
         {
+            if (width <= 0)
+                width = 1;
+            if(height <= 0)
+                height = 1;
+
             _cells = new Cell[width, height];
             _bombs = bombs;
             _openCells = 0;
-            FillWithCells();
         }
 
         public void DeleteFlagAt(int x, int y)
@@ -77,6 +81,7 @@ namespace MineSweeperLib
         //Al hacer click en la primera celda
         public void Init(int x, int y)
         {
+            FillWithCells();
             int maxBombs = GetWidth() * GetHeight() - 1;
             if (_bombs < maxBombs)
                 _bombs = maxBombs;
@@ -129,22 +134,29 @@ namespace MineSweeperLib
 
         public bool IsBombAt(int x, int y)
         {
-            return _cells[x, y].Content == CellContent.BOMB;
+            if(IsInside(x, y))
+                return _cells[x, y].Content == CellContent.BOMB;
+            return false;
         }
 
         public bool IsFlagAt(int x, int y)
         {
-            return _cells[x, y].HasFlag;
+            if(IsInside(x,y))
+                return _cells[x, y].HasFlag;
+            return false;
         }
 
         public bool IsOpenCell(int x, int y)
         {
-            return _cells[x, y].IsOpen;
+            if(IsInside(x,y))
+                return _cells[x, y].IsOpen;
+            return false;
         }
 
         public void OpenCell(int x, int y)
         {
-            _cells[x, y].Open(this);
+            if(IsInside(x,y))
+                _cells[x, y].Open(this);
         }
 
         public void PutFlagAt(int x, int y)
@@ -166,7 +178,7 @@ namespace MineSweeperLib
             }
         }
 
-        private bool IsInside(int x, int y)
+        public bool IsInside(int x, int y)
         {
             return (x >= 0 && x < GetWidth() && y >= 0 && y < GetHeight());
         }

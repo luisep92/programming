@@ -31,6 +31,7 @@ namespace MineSweeperLib
             }
             return true;
         }
+        bool IsInside(int x, int y);
         Cell GetCellAt(int x, int y);
         bool IsOpenCell(int x, int y);
         void OpenCell(int x, int y);

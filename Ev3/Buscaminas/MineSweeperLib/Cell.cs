@@ -50,13 +50,15 @@ namespace MineSweeperLib
             }
             else
             {
-
+                IBoard b = (IBoard)board;
+                if(b.HasWin())
+                    Console.WriteLine("EGANAO");
             }
         }
 
         public void SetBombsAround(int x, int y, IBoard board)
         {
-            _bombsAround = board.GetBombsAround(x, y);
+             _bombsAround = board.GetBombsAround(x, y);
         }
 
         private void Explode()

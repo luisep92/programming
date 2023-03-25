@@ -52,7 +52,7 @@ namespace MineSweeper2
             {
                 for(int j = Position.y - 1; j <= yMax; j++)
                 {
-                    if (i == thisX && j == thisY)
+                    if (i == thisX && j == thisY || !board.IsInside(new Vector2(i, j)))
                         continue;
                     if(board.GetCellAt(new Vector2(i, j)).Content == CellContent.BOMB)
                         counter++;
