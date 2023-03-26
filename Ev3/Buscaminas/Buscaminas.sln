@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSweeperLib", "MineSweeperLib\MineSweeperLib.csproj", "{FC2A40C0-3DED-49BB-915A-1E2805BE5D75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MineSweeperApp", "MineSweeperApp\MineSweeperApp.csproj", "{A0D3F244-66A6-4370-8100-A19D619FABFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSweeperApp", "MineSweeperApp\MineSweeperApp.csproj", "{A0D3F244-66A6-4370-8100-A19D619FABFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{DED8C819-D76E-4883-B118-4796E485726C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DED8C819-D76E-4883-B118-4796E485726C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luisbreria", "Luisbreria\Luisbreria.csproj", "{3F918648-4AEA-4B6D-B32F-137B903FE090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSweeper2", "MineSweeper2\MineSweeper2.csproj", "{6BA9A767-1171-4E20-A2B3-1D689E3CA7C4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luisbreria", "Luisbreria\Luisbreria.csproj", "{3F918648-4AEA-4B6D-B32F-137B903FE090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuscaminasLib", "BuscaminasLib\BuscaminasLib.csproj", "{45A96F2D-7D8B-4822-B2DB-E989ACB50C93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FC2A40C0-3DED-49BB-915A-1E2805BE5D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC2A40C0-3DED-49BB-915A-1E2805BE5D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC2A40C0-3DED-49BB-915A-1E2805BE5D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC2A40C0-3DED-49BB-915A-1E2805BE5D75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A0D3F244-66A6-4370-8100-A19D619FABFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0D3F244-66A6-4370-8100-A19D619FABFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D3F244-66A6-4370-8100-A19D619FABFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,14 +25,14 @@ Global
 		{DED8C819-D76E-4883-B118-4796E485726C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DED8C819-D76E-4883-B118-4796E485726C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DED8C819-D76E-4883-B118-4796E485726C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BA9A767-1171-4E20-A2B3-1D689E3CA7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BA9A767-1171-4E20-A2B3-1D689E3CA7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BA9A767-1171-4E20-A2B3-1D689E3CA7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BA9A767-1171-4E20-A2B3-1D689E3CA7C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F918648-4AEA-4B6D-B32F-137B903FE090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F918648-4AEA-4B6D-B32F-137B903FE090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F918648-4AEA-4B6D-B32F-137B903FE090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F918648-4AEA-4B6D-B32F-137B903FE090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A96F2D-7D8B-4822-B2DB-E989ACB50C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A96F2D-7D8B-4822-B2DB-E989ACB50C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A96F2D-7D8B-4822-B2DB-E989ACB50C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A96F2D-7D8B-4822-B2DB-E989ACB50C93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

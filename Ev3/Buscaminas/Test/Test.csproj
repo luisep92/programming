@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuscaminasLib\BuscaminasLib.csproj" />
     <ProjectReference Include="..\Luisbreria\Luisbreria.csproj" />
     <ProjectReference Include="..\MineSweeperApp\MineSweeperApp.csproj" />
-    <ProjectReference Include="..\MineSweeperLib\MineSweeperLib.csproj" />
   </ItemGroup>
 
 </Project>

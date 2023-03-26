@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Luisbreria\Luisbreria.csproj" />
-    <ProjectReference Include="..\MineSweeper2\MineSweeper2.csproj" />
-    <ProjectReference Include="..\MineSweeperLib\MineSweeperLib.csproj" />
   </ItemGroup>
 
 </Project>
