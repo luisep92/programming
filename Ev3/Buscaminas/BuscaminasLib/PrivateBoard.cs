@@ -3,7 +3,7 @@
 namespace BuscaminasLib
 {
     /// <summary>
-    /// Boards that use cells as information source should use this, then just have to define how to access a cell.
+    /// Boards that use cells as information source should inherit from this, then just have to define how to access a cell.
     /// </summary>
     public abstract class PrivateBoard : IBoard
     {
