@@ -72,7 +72,7 @@ namespace BuscaminasLib
         /// <summary>
         /// Get a list of filtered cells of the board.
         /// </summary>
-        /// <param name="filter">A delegate bool/lambda that filters anything you want. Receives a cell as parameter.</param>
+        /// <param name="filter">A delegate bool/lambda that filters anything you want. Receives a cell as parameter. No need to use but it's cool :D</param>
         /// <returns>A list of filtered cells</returns>
         protected List<Cell> FilterCells(CellFilter filter)
         {
