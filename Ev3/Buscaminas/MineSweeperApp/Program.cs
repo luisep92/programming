@@ -1,4 +1,6 @@
-﻿using DAM;
+﻿
+
+using UDK;
 
 namespace MineSweeperApp
 {
@@ -6,7 +8,7 @@ namespace MineSweeperApp
     {
         static void Main(string[] args)
         {
-            DAM.Game.Launch(new Game());
+           UDK.Game.Launch(new MineSweeper());
         }
     }
 }

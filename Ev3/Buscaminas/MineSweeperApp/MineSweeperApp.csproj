@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DAMGL" Version="1.0.0" />
+    <None Include="resources/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OpenAL.Soft" Version="1.19.1" />
     <PackageReference Include="OpenTK" Version="4.7.7" />
+    <PackageReference Include="UDK" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
