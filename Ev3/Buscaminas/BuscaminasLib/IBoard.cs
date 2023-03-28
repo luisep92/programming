@@ -115,9 +115,9 @@
         public void DrawOnConsole()
         {
             Console.ForegroundColor = ConsoleColor.Black;
-            for(int i = 0; i < GetWidth(); i++)
+            for(int j = 0; j < GetHeight(); j++)
             {
-                for(int j = 0; j < GetHeight(); j++)
+                for(int i = 0; i < GetWidth(); i++)
                 {
                     if (IsFlagAt(i, j))
                     {
