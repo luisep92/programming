@@ -9,7 +9,7 @@ namespace MineSweeperApp
     internal class MineSweeper : IGameDelegate
     {
         IFontFace? font;
-        IBoard board = new Board2(15, 15, 2);
+        IBoard board = new Board2(15, 20, 30);
 
         public void OnDraw(GameDelegateEvent gameEvent, ICanvas canvas)
         {
@@ -36,8 +36,8 @@ namespace MineSweeperApp
                     canvas.Transform.SetTranslation(i,board.GetHeight() - 1 - j);
                     canvas.DrawRectangle(cellRect);
 
-                    canvas.Transform.Translate(0.3, 0.3);
-                    canvas.FillShader.SetColor(new rgba_f64(1, 1, 1, 1));
+                    canvas.Transform.Translate(0.4, 0.35);
+                    canvas.FillShader.SetColor(new rgba_f64(0, 0, 0, 1));
                     canvas.DrawText(new vec2d_f64(0, 0), SetText(i, j), font, new TextMode() { height = 0.5, bottomCoords = false });
 
                 }
