@@ -87,7 +87,7 @@
             {
                 for (int j = 0; j < GetHeight(); j++)
                 {
-                    if (IsBombAt(i, j) && !IsOpenCell(i, j))
+                    if (!IsBombAt(i, j) && !IsOpenCell(i, j))
                         return false;
                 }
             }
