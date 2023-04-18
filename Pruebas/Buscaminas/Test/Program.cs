@@ -1,5 +1,4 @@
 ﻿using BuscaminasLib;
-using Luisbreria;
 namespace Test
 {
     internal class Program

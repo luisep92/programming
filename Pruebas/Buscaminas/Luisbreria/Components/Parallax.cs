@@ -4,7 +4,7 @@ namespace Luisbreria
 {
     public class Parallax : Component
     {
-        IBuffer img;
+        IImage img;
 
         GameObject img1;
         GameObject img2;
