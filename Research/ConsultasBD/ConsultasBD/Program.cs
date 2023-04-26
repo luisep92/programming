@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient; 
 
 namespace ConsultasBD
 {
@@ -9,10 +9,60 @@ namespace ConsultasBD
         {
             try
             {
-                using (SqlConnection c = new SqlConnection("server = DESKTOP-9F8GPDG\\SQLEXPRESS; database = JARDINERIA; integrated security = true"))
+                //anterior: "server = DESKTOP-9F8GPDG\\SQLEXPRESS; database = JARDINERIA; integrated security = true"
+                var builder = new SqlConnectionStringBuilder();
+                #region ASSIGN DATA
+                builder.DataSource = "lep-server.database.windows.net";
+                builder.UserID = "deir";
+                #region PASSWORD
+                #region QUE NO MIRES COÑO
+                #region COJONES
+                #region Y SERA VERDAD
+                #region QUE NO
+                builder.Password = "G0rr@Monster712";
+                #endregion
+                #endregion
+                #endregion
+                #endregion
+                #endregion
+                builder.InitialCatalog = "TinDB";
+                #endregion
+
+                using (SqlConnection c = new SqlConnection(builder.ConnectionString))
                 {
                     c.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT dbo.getUserName(1)", c);
+                    /*SqlCommand cmd = new SqlCommand("SELECT dbo.getUserName(1)", c);*/
+                     //SqlCommand cmd = new SqlCommand("dbo.removeUser", c);
+                     //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                     //cmd.Parameters.AddWithValue("@idUser", 3);
+
+                     //SqlCommand cmd = new SqlCommand("dbo.addUser", c);
+                     //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                     //cmd.Parameters.AddWithValue("@name", "Alba");
+                     //cmd.Parameters.AddWithValue("@age", "27");
+                     //cmd.Parameters.AddWithValue("@image", "");
+                     //cmd.Parameters.AddWithValue("@gender", "Mujer");
+                     //cmd.Parameters.AddWithValue("@description", "La alba");
+
+                    //cmd.ExecuteNonQuery();
+
+                    var cmd = new SqlCommand("SELECT * FROM APPUSER", c);
+
+                    
+                    //cmd.ExecuteNonQuery();
+
+                    //cmd = new SqlCommand("SELECT dbo.getUserName(2)", c);
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            for (int i = 0; i < r.FieldCount; i++)
+                            {
+                                Console.Write(r[i] + "    ");
+                            }
+                            Console.WriteLine();
+                        }
+                    }
 
 
                     /*      PROCEDURE
@@ -28,22 +78,8 @@ namespace ConsultasBD
                     cmd.Parameters.AddWithValue("@dir2", "Prueba");
                     cmd.Parameters.AddWithValue("@ciudad", "Alicante");
                     cmd.Parameters.AddWithValue("@cod_rep_ventas", 19);
+                    executenonquery
                     */
-                    // cmd.ExecuteNonQuery();
-                    
-                    cmd = new SqlCommand("SELECT dbo.getUserName(2)", c);
-                    using (SqlDataReader r = cmd.ExecuteReader())
-                    {
-                        while (r.Read())
-                        {
-                            for (int i = 0; i < r.FieldCount; i++)
-                            {
-                                Console.Write(r[i] + "    ");
-                            }
-                            Console.WriteLine();
-                        }
-                    }
-                    
                     /*
                     //Insert(c, "CLIENTES", "501, 'Prueba1', 'Prueba2', 'Prueba3', '654654654', '654654654', 'Prueba4', NULL, 'Alicante', NULL, NULL, NULL, 19, 3000");
                     using (SqlDataReader rdr = cmd.ExecuteReader())
@@ -73,13 +109,13 @@ namespace ConsultasBD
             
         }
 
+        //esto hay que cambiarlo por placeholders
         private static SqlCommand Select(SqlConnection connection, string columns, string table, string condition = "")
         {
             if (condition != "")
                 condition = " WHERE " + condition;
             return new SqlCommand("SELECT " + columns + " FROM " + table + condition, connection);
         }
-
         private static SqlCommand Insert(SqlConnection connection, string table, string values)
         {
             try
