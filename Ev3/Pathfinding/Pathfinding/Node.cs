@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pathfinding
+﻿namespace Pathfinding
 {
+    //Stores the information about the nodes
     public class Node
     {
-        string _name;
-        List<Edge> _edges = new();
+        #region ATTRIBUTES
+        private List<Edge> _edges = new();
+        #endregion
+        #region PROPERTIES
+        public string? Name { get; init; }
+        #endregion
 
-        public void AddEdge(Edge edge)
-        {
-            if (edge != null)
-                _edges.Add(edge);
-        }
+        #region FUNCTIONS
+        //Returns a copy of the list of edges, as IEnumerable
+        public IEnumerable<Edge> GetEdges => from e in _edges select e;
 
-        public IEnumerable<Edge> Execute => from e in _edges
-                                            select e;
-        
-        public override string ToString() => _name;
+        //Adds an edge to the edge list
+        public void AddEdge(Edge e) => _edges.Add(e);
+
+        public override string ToString() => Name == null ? "_" : Name;
+        #endregion
     }
 }

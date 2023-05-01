@@ -1,21 +1,24 @@
 ﻿namespace Pathfinding
 {
+    //Stores the information about the edges that connect nodes
     public class Edge
     {
+        #region PROPERTIES
         public Node NodeA { get; init; }
         public Node NodeB { get; init; }
         public int Weight { get; init; }
+        #endregion
 
-        public Edge(int weight, Node nodeA, Node nodeB)
+        #region CONSTRUCTOR
+        public Edge(Node nodeA, Node nodeB, int weight)
         {
-            Weight = weight;
             NodeA = nodeA;
             NodeB = nodeB;
-        }
-        public void teste()
-        {
+            Weight = weight;
 
+            NodeA.AddEdge(this);
+            NodeB.AddEdge(this);
         }
-
+        #endregion
     }
 }

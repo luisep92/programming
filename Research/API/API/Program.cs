@@ -62,7 +62,7 @@
                 throw new Exception();
             }*/
 
-            Poligono p = new();
+            test();
 
         }
     
@@ -82,7 +82,7 @@
             var t = DateTime.UtcNow;
             for (int i = 0; i < 2000000; i++)
             {
-                var l = new List<int>();
+                var l = new List<int>(); 
                 foreach(int n in arr)
                 {
                     if (n % 2 == 0)
@@ -98,7 +98,7 @@
                 for (int j = 0; j < arr.Length; j++)
                 {
                     if (arr[j] % 2 == 0)
-                        l.Add(j);
+                        l.Add(arr[j]);
                 }
             }
             Console.WriteLine("Tiempo en filtrar pares con for: " + (DateTime.UtcNow - t));

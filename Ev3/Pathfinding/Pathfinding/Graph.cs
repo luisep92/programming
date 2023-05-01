@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pathfinding
+﻿namespace Pathfinding
 {
+    //Stores the information about the graph
     public class Graph
     {
+        #region ATTRIBUTES
         private List<Node> _nodes = new();
+        #endregion
 
-        public Graph(List<Node> nodes)
+        #region CONSTRUCTOR
+        public Graph (List<Node> nodes)
         {
             _nodes = nodes;
         }
+        #endregion
 
-        public IEnumerable<Node> GetNodes(Predicate<Node> filter) => from n in _nodes
-                                                                     where filter(n)
-                                                                     select n;
+        #region FUNCTIONS
+        //Returns a copy of the list of nodes
+        public List<Node> GetNodes() => (from n in _nodes select n).ToList();
+        #endregion
     }
 }
