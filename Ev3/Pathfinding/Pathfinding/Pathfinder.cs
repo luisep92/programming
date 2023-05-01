@@ -23,7 +23,7 @@ namespace Pathfinding
                 _wayInfo[n] = way;
         }
 
-        //Calculate all available ways from a node.
+        //Calculate all available ways from a node and update ways if neccesary
         private void SetWays(Node node)
         {
             var edges = from e in node.GetEdges
