@@ -100,5 +100,11 @@ namespace Tinder
                     where u.Id == id
                     select u).First();
         }
+
+        //Just didn't want to make an utils class just for this
+        public static string AdaptStringToFloat(string s)
+        {
+            return s.Replace('.', ',');
+        }
     }
 }

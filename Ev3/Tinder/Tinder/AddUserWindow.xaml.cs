@@ -35,7 +35,7 @@ namespace Tinder
                                             TextBoxDescription.Text, 
                                             TextBoxImage.Text, 
                                             TextBoxGender.Text, 
-                                            Convert.ToSingle(TextBoxValoration.Text));
+                                            Convert.ToSingle(AppManager.AdaptStringToFloat(TextBoxValoration.Text)));
                 
                 AppManager.Instance.FilterUsers("");
                 Close();

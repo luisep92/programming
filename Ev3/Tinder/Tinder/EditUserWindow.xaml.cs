@@ -48,7 +48,7 @@ namespace Tinder
                             TextBoxDescription.Text,
                             TextBoxImage.Text,
                             TextBoxGender.Text,
-                            Convert.ToSingle(TextBoxValoration.Text));
+                            Convert.ToSingle(AppManager.AdaptStringToFloat(TextBoxValoration.Text)));
 
                 am.FilterUsers("");
                 am.UpdateSelectedUser(_user.Id);
@@ -58,6 +58,8 @@ namespace Tinder
             {
                 MessageBox.Show("Ha ocurrido un error. Revisa los campos antes de insertarlos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            
         }
     }
 }
