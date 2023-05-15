@@ -69,7 +69,7 @@ namespace Tinder
             OnUserChange();
         }
         
-        //Calls the DBManager to add an user todo
+        //Calls the DBManager to add an user
         public void AddUser(string name, int age, string description, string image, string gender, float valoration)
         {
             DBManager.AddUser(name, age, description, image, gender, valoration);
