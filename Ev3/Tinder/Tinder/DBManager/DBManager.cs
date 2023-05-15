@@ -63,6 +63,7 @@ namespace Tinder
             }
         }
 
+        //Edit an user from the database
         public static void EditUser(int id, string name, int age, string description, string image, string gender, float valoration)
         {
             try
@@ -88,7 +89,7 @@ namespace Tinder
             }
         }
 
-        //Delete user from database
+        //Delete an user from database
         public static void DeleteUser(int id)
         {
             try

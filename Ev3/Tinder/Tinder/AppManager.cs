@@ -88,6 +88,7 @@ namespace Tinder
             DBManager.Filter(keyword);
         }
 
+        //Calls the DBManager to edit an user
         public void EditUser(int id,string name, int age, string description, string image, string gender, float valoration)
         {
             DBManager.EditUser(id, name, age, description, image, gender, valoration);

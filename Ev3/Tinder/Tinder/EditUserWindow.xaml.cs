@@ -17,15 +17,21 @@ namespace Tinder
     //A windows where we can edit an user
     public partial class EditUserWindow : Window
     {
+        #region VARIABLES
         private User _user;
+        #endregion
 
+        #region CONSTRUCTOR
         public EditUserWindow(int id)
         {
             InitializeComponent();
             _user = AppManager.Instance.GetUserById(id);
             Init(_user);
         }
+        #endregion
 
+        #region FUNCTIONS
+        //Sets up all the text boxes with the current info
         private void Init(User user)
         {
             TextBoxName.Text = user.Name;
@@ -36,6 +42,7 @@ namespace Tinder
             TextBoxDescription.Text = user.Description;
         }
 
+        //Applies cthe changes we made to the user
         private void ButtonEditUser_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -58,8 +65,7 @@ namespace Tinder
             {
                 MessageBox.Show("Ha ocurrido un error. Revisa los campos antes de insertarlos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            
         }
+        #endregion
     }
 }
