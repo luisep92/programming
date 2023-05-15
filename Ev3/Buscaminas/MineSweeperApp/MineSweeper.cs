@@ -84,6 +84,8 @@ namespace MineSweeperApp
 
         }
 
+
+        //Define the inputs of the game
         void GameInputs(GameDelegateEvent gameEvent, IKeyboard keyboard, IMouse mouse)
         {
             var pos = gameEvent.coordinateConversor.ViewToWorld(mouse.X, mouse.Y);
@@ -115,6 +117,7 @@ namespace MineSweeperApp
             }
         }
 
+        //Set color of a cell depending of its state
         void SetColor(int x, int y, ICanvas canvas)
         {
             if (board.IsBombAt(x, y) && board.IsOpenCell(x, y))
@@ -126,6 +129,8 @@ namespace MineSweeperApp
             else
                 canvas.FillShader.SetColor(new rgba_f64(0.3, 0.3, 0.3, 1));
         }
+
+        //Set the text of a cell depending of its state
         string SetText(int x, int y)
         {
             if (board.IsBombAt(x, y) && board.IsOpenCell(x, y))

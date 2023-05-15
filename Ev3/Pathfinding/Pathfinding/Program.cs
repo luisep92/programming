@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            //HAY UNA CAPTURA DEL GRAFO QUE HE USADO AQUI EN LA MISMA CARPETA DEL PROYECTO
             #region CREATE GRAPH INFORMATION
             List<Node> nodes = new List<Node>()
             {
@@ -29,11 +30,11 @@
 
             Pathfinder pf = new();
 
-            var list = pf.GetPath(graph, nodes[4], nodes[1]);
+            var list = pf.GetPath(graph, nodes[0], nodes[6]);
             string path = "";
             foreach(var n in list)
             {
-                path = n + " -> " + path;
+                path = n == list[0] ? path = n.ToString() : path + " -> " + n;
             }
 
             Console.WriteLine(path);

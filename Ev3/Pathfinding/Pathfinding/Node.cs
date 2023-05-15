@@ -17,7 +17,7 @@
         //Adds an edge to the edge list
         public void AddEdge(Edge e) => _edges.Add(e);
 
-        public override string ToString() => Name == null ? "_" : Name;
+        public override string ToString() => Name ?? "_";
         #endregion
     }
 }

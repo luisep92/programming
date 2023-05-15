@@ -29,7 +29,7 @@ namespace Pathfinding
         #endregion
 
         #region FUNCTIONS
-        //Needed to put this to get an ordered dictionary
+        //Needed to put this to implement IComparable interface, so we can get an ordered dictionary
         public int CompareTo(Way w)
         {
             if (this.Weight < w.Weight) return -1;
