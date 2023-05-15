@@ -74,5 +74,11 @@ namespace Tinder
             addWindow.Show();
         }
         #endregion
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window w = new EditUserWindow(AppManager.Instance.SelectedUser.Id);
+            w.Show();
+        }
     }
 }

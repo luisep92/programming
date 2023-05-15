@@ -63,6 +63,31 @@ namespace Tinder
             }
         }
 
+        public static void EditUser(int id, string name, int age, string description, string image, string gender, float valoration)
+        {
+            try
+            {
+                using (SqlConnection c = new SqlConnection(ConnectionBuilder.ConnectionString))
+                {
+                    c.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.editUser", c);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@age", age);
+                    cmd.Parameters.AddWithValue("@image", image);
+                    cmd.Parameters.AddWithValue("@gender", gender);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@valoration", valoration);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                throw new Exception("Error trying to add user");
+            }
+        }
+
         //Delete user from database
         public static void DeleteUser(int id)
         {

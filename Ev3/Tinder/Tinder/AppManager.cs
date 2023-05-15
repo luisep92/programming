@@ -44,6 +44,7 @@ namespace Tinder
             await Task.Delay(1000);
             DBManager.Filter("");
             SelectedUser = UserList[0];
+            OnUserChange();
         }
 
         //Invokes the event that we set up for a change of the selected user
@@ -57,9 +58,7 @@ namespace Tinder
         {
             try
             {
-                User u = (from user in UserList
-                          where user.Id == id
-                          select user).First();
+                User u = GetUserById(id);
                 SelectedUser = u;
             }
             catch
@@ -79,9 +78,7 @@ namespace Tinder
         public void RemoveUser(int id)
         {
             DBManager.DeleteUser(id);
-            User usr = (from u in UserList
-                      where u.Id == id
-                      select u).First();
+            User usr = GetUserById(id);
             UserList.Remove(usr);
         }
 
@@ -89,6 +86,19 @@ namespace Tinder
         public void FilterUsers(string keyword)
         {
             DBManager.Filter(keyword);
+        }
+
+        public void EditUser(int id,string name, int age, string description, string image, string gender, float valoration)
+        {
+            DBManager.EditUser(id, name, age, description, image, gender, valoration);
+        }
+
+        //Returns user by its id
+        public User GetUserById(int id)
+        {
+            return (from u in UserList
+                    where u.Id == id
+                    select u).First();
         }
     }
 }

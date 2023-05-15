@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Tinder para caballos" Height="450" Width="800">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -69,6 +69,7 @@
                         </Image.OpacityMask>
                     </Image>
                 </Grid>
+                <Button HorizontalAlignment="Center" MinWidth="100" MinHeight="40" Margin="0,30,0,0" Content="Editar Usuario" Background="#FFFAFFAA" Click="Button_Click_1"/>
             </StackPanel>
         </Grid>
         <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
