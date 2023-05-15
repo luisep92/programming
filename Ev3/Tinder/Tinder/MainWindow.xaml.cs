@@ -26,21 +26,30 @@ namespace Tinder
             User u = AppManager.Instance.SelectedUser;
             if (u == null)
                 return;
-            SetImage(ImgSelectedUser, new Uri(AppManager.Instance.SelectedUser.Image));
+            
             TextSelectedName.Text = u.Name;
             TextSelectedAgeAndGender.Text = u.Age + " años, " + u.Gender;
             TextSelectedDescription.Text = u.Description;
             ValorationGradient.EndPoint = u.ValorationEndPoint;
+            try
+            {
+                SetImage(ImgSelectedUser, new Uri(AppManager.Instance.SelectedUser.Image));
+            }
+            catch //When uri is invalid, default image
+            {
+
+                SetImage(ImgSelectedUser, new Uri("https://static.vecteezy.com/system/resources/previews/000/440/531/original/question-mark-vector-icon.jpg"));
+            }
         }
 
         //Updates the data source of an image, need to recieve an URI
         public void SetImage(Image img, Uri uri)
         {
-            BitmapImage bi = new();
-            bi.BeginInit();
-            bi.UriSource = uri;
-            bi.EndInit();
-            img.Source = bi;
+                BitmapImage bi = new();
+                bi.BeginInit();
+                bi.UriSource = uri;
+                bi.EndInit();
+                img.Source = bi;
         }
 
         //This is called when the filter textbox content is changed
