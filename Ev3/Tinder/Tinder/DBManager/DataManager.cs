@@ -19,7 +19,7 @@ namespace DBManagement
 
         #region FUNCTIONS
         //Gets the password of the database, that is serialized in JSON, in bytes
-        //Sé que no se le puede ni si quiera llamar encriptado, pero al menos no aparece la contraseña a cañón y no me quería comer mucho la cabeza
+        //**Sé que no se le puede ni si quiera llamar encriptado, pero al menos no aparece la contraseña a cañón y a menos que se toque codigo no se puede ver **
         [DebuggerHidden]
         private static string DeserializePwd()
         {
@@ -38,6 +38,7 @@ namespace DBManagement
             return ret;
         }
 
+        //Set up the connection string
         [DebuggerHidden]
         internal static void SetBuilder()
         {
