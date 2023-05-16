@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Diagnostics;
 using Tinder;
 
 namespace DBManagement
@@ -9,30 +10,24 @@ namespace DBManagement
     {
         #region VARIABLES
         private static readonly string _selectString = "SELECT * FROM APPUSER WHERE name LIKE '%{0}%'";
-        public static SqlConnectionStringBuilder ConnectionBuilder;
+
         #endregion
 
         #region CONSTRUCTOR
         static DBManager()
         {
-            var builder = new SqlConnectionStringBuilder();
-            #region ASSIGN DATA
-            builder.DataSource = "lep-server.database.windows.net";
-            builder.UserID = "deir";
-            builder.Password = DataSerializer.DeserializePwd();
-            builder.InitialCatalog = "TinDB";
-            #endregion
-            ConnectionBuilder = builder;
+            DataManager.SetBuilder();
         }
         #endregion
 
         #region FUNCTIONS
         //Add user to the database
+        [DebuggerHidden]
         public static void AddUser(string name, int age, string description, string image, string gender, float valoration)
         {
             try
             {
-                using (SqlConnection c = new SqlConnection(ConnectionBuilder.ConnectionString))
+                using (SqlConnection c = new SqlConnection(DataManager.ConnectionString))
                 {
                     c.Open();
                     SqlCommand cmd = new SqlCommand("dbo.AddUser", c);
@@ -53,11 +48,12 @@ namespace DBManagement
         }
 
         //Edit an user from the database
+        [DebuggerHidden]
         public static void EditUser(int id, string name, int age, string description, string image, string gender, float valoration)
         {
             try
             {
-                using (SqlConnection c = new SqlConnection(ConnectionBuilder.ConnectionString))
+                using (SqlConnection c = new SqlConnection(DataManager.ConnectionString))
                 {
                     c.Open();
                     SqlCommand cmd = new SqlCommand("dbo.editUser", c);
@@ -79,11 +75,12 @@ namespace DBManagement
         }
 
         //Delete an user from database
+        [DebuggerHidden]
         public static void DeleteUser(int id)
         {
             try
             {
-                using (SqlConnection c = new SqlConnection(ConnectionBuilder.ConnectionString))
+                using (SqlConnection c = new SqlConnection(DataManager.ConnectionString))
                 {
                     c.Open();
                     SqlCommand cmd = new SqlCommand("dbo.removeUser", c);
@@ -97,15 +94,16 @@ namespace DBManagement
                 throw new Exception("Error trying to delete user");
             }
         }
-      
+
         //Update the list of users. Can't return a list because it does not update the itemscontroller, so it directly updates the existing one.
+        [DebuggerHidden]
         public static void Filter(string keyword)
         {
             
             var list = AppManager.Instance.UserList;
             try
             {
-                using (SqlConnection c = new SqlConnection(ConnectionBuilder.ConnectionString))
+                using (SqlConnection c = new SqlConnection(DataManager.ConnectionString))
                 {
                     c.Open();
                     string select = string.Format(_selectString, keyword);
