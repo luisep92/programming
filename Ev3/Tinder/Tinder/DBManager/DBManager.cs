@@ -1,9 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Tinder;
 
-namespace Tinder
+namespace DBManagement
 {
     //Class in charge of connecting and executing commands from the database
     public class DBManager
@@ -20,17 +19,7 @@ namespace Tinder
             #region ASSIGN DATA
             builder.DataSource = "lep-server.database.windows.net";
             builder.UserID = "deir";
-            #region PASSWORD
-            #region QUE NO MIRES COÑO
-            #region COJONES
-            #region Y SERA VERDAD
-            #region QUE NO
-            builder.Password = "G0rr@Monster712";
-            #endregion
-            #endregion
-            #endregion
-            #endregion
-            #endregion
+            builder.Password = DataSerializer.DeserializePwd();
             builder.InitialCatalog = "TinDB";
             #endregion
             ConnectionBuilder = builder;
