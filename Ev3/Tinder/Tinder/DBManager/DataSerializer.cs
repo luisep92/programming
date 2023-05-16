@@ -9,7 +9,7 @@ namespace DBManagement
     internal class DataSerializer
     {
         #region VARIABLES
-        private static string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
+        private static string path = "resources/Data";
         #endregion
 
         #region FUNCTIONS
