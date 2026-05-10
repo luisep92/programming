@@ -22,6 +22,18 @@ I had a couple of years of Unity under my belt when I wrote this, which is why a
 
 Around 42 source files built on the GameObject system: particles, sprite animations, screen shake, parallax, multiple enemy types, power-ups. The piece I pushed hardest because I already knew the toolbox.
 
+### Chess
+
+`Ev2/Chess/`
+
+A playable chess game built on the same GameObject + Component system. Six piece types with per-piece move generation, mouse-driven turn loop, available-move highlighting, check detection, pawn promotion. Around 1100 lines of source plus piece sprites. The teacher's code-review comments are still embedded in some files — for example, `ChessLib/Board.cs:40`:
+
+```cs
+// Javi: No entiendo, ..., está función por fuerza tiene que estar mal
+```
+
+I left them because they're part of the artifact.
+
 ### Minesweeper with three implementations behind one interface
 
 `Ev3/Buscaminas/`
@@ -43,7 +55,6 @@ SQL Server with stored procedures + XAML. The fun bit lives in `Tinder/UserCell.
 ## Also in here, briefly
 
 - **Monty Hall (Java, Maven)** — `Ev3/MontyHall/`. 1M-iteration simulation to confirm the paradox.
-- **Chess** — `Ev2/Chess/`. Reuses the GameObject system, with a generic `Board` and a piece hierarchy. **Incomplete** — the teacher's review comments are still in the code (sample from `ChessLib/Board.cs`: `// Javi: No entiendo, ..., está función por fuerza tiene que estar mal`). Kept for honesty, not as a portfolio piece.
 - Plus exam folders, exercises, scratch experiments, and three iterations of the "ratón y gato" toy that the GameObject system grew out of. Worth ignoring.
 
 ## About the graphics library
